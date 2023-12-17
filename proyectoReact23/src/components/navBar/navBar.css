@@ -1,0 +1,8 @@
+@font-face {
+    font-family: Tungsten-bold;
+    src: url(../../assets/fonts/FontsFree-Net-Tungsten-Bold.ttf);
+}
+
+.item-list{
+    font-family: Tungsten-bold;
+}
