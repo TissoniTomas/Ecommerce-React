@@ -1,35 +1,39 @@
-import React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import ItemCount from "../itemCount/itemCount";
+import React, { useState, useEffect } from "react";
+import ItemCard from "../ItemCard/ItemCard"
+import "./itemListContainer.css"
 
-import "./itemListContainer.css";
+const MainCardProducts = () => {
+  const [data, setData] = useState([]);
 
-const MainCardProducts = ({ imgCard, titleCard, textCard }) => {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("../../../remeras.json");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const jsonData = await response.json();
+      setData(jsonData);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
   
- 
+    }
+  };
 
   return (
-    <Card className=" w-64 relative" style={{height: "700px"}}>
-      <CardMedia className="" style={{backgroundColor:"white"}} component="img" alt="boca-titular" image={imgCard} />
-      <CardContent>
-        <h3 className="titleCard mb-6 text-xl text-center">{titleCard}</h3>
-        <Typography variant="body2" color="text.secondary">
-          {textCard}
-        </Typography>
-      </CardContent>
-      <CardActions className="absolute bottom-1 flex flex-col" >
-        <Button className="botonesCard" color="inherit" size="small">Ver mas</Button>
-        <ItemCount />
-        <Button className="botonesCard" color="inherit" size="small">Añadir al Carrito</Button>
-      </CardActions>
-    </Card>
+    <div className="card-container">
+      {data.map((item) => (
+        <div key={item.id}>
+          <ItemCard data={item} />
+        </div>
+      ))}
+    </div>
   );
 };
 
 export default MainCardProducts;
-

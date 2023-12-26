@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "image": "./src/assets/remera-velez.jpg",
+        "title": "Velez"
+    },
+    {
+        "id": 2,
+        "image": "./src/assets/camiseta_boca.jpg",
+        "title": "Boca"
+    },
+    {
+        "id": 3,
+        "image": "./src/assets/nueva-camiseta-River-Armani-Scocco-Pratto-1920.jpg",
+        "title": "River"
+    }
+]
