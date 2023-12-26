@@ -11,7 +11,8 @@
             "XL": 3,
             "XXL" :2
         },
-        "isDestacado" : "true"
+        "isDestacado" : true,
+        "isOferta": false
     },
     {
         "titleRemera" : "River Plate Titular 22/23",
@@ -25,7 +26,8 @@
             "XL": 5,
             "XXL" :1
         },
-        "isDestacado":"true"
+        "isDestacado": true,
+        "isOferta": false
 
     },
     {
@@ -40,7 +42,8 @@
             "XL": 2,
             "XXL" :2
         },
-        "isDestacado":"true"
+        "isDestacado": true,
+        "isOferta": false
 
     },
     {
@@ -55,7 +58,8 @@
             "XL": 1,
             "XXL" :1
         },
-        "isDestacado":"true"
+        "isDestacado" :true,
+        "isOferta": false
 
     },
     {
@@ -70,7 +74,8 @@
             "XL": 0,
             "XXL" :1
         },
-        "isDestacado":"true"
+        "isDestacado": true,
+        "isOferta": false
 
     },
     {
@@ -85,8 +90,59 @@
             "XL": 0,
             "XXL" :0
         },
-        "isDestacado":"true"
+        "isDestacado": true,
+        "isOferta": false
+
+    },
+    {
+        "titleRemera" : "San Lorenzo Titular 22/23",
+        "id" : 7,
+        "imageRemera" : "./src/assets/Remeras/San-lorenzo.jpg",
+        "descriptionRemera" : "Descubre la esencia del fervor cuervo con nuestra remera exclusiva de San Lorenzo, el auténtico Ciclón. Diseñada para los apasionados del fútbol y del emblemático barrio de Boedo, esta prenda captura la historia y la pasión de los seguidores más leales. Lleva contigo el orgullo azulgrana y siéntete parte de la vibrante tradición de San Lorenzo.",
+        "talleRemera":{
+            "S": 2,
+            "M" : 3,
+            "L": 2,
+            "XL": 1,
+            "XXL" :0
+        },
+        "isDestacado": false,
+        "isOferta": true
+
+    },
+    {
+        "titleRemera" : "River Plate Suplente 22/23",
+        "id" : 8,
+        "imageRemera" : "./src/assets/Remeras/River-suplente.jpg",
+        "descriptionRemera" : "Sumérgete en la grandeza del fútbol con nuestra remera exclusiva del Club Atlético River Plate, el equipo Millonario. Diseñada como el kit suplente, esta prenda rinde homenaje al espíritu indomable y la gloria de River Plate. Lleva contigo el orgullo de Nuñez y celebra la grandeza del fútbol argentino con estilo.",
+        "talleRemera":{
+            "S": 4,
+            "M" : 3,
+            "L": 3,
+            "XL": 1,
+            "XXL" :2
+        },
+        "isDestacado": false,
+        "isOferta": true
+
+    },
+    {
+        "titleRemera" : "Estudiantes de la Plata Titular 22/23",
+        "id" : 9,
+        "imageRemera" : "./src/assets/Remeras/Estudiantes.png",
+        "descriptionRemera" : "Explora la pasión del fútbol con nuestra remera única de Estudiantes de La Plata, los pincharratas. Esta prenda celebra la historia y el compromiso del equipo. Lleva contigo el orgullo de La Plata y muestra tu lealtad con estilo. ¡Viste la esencia pincharrata y abraza la grandeza futbolística! ",
+        "talleRemera":{
+            "S": 3,
+            "M" : 4,
+            "L": 3,
+            "XL": 3,
+            "XXL" :2
+        },
+        "isDestacado": false,
+        "isOferta": true
 
     }
+    
+    
     
 ]
