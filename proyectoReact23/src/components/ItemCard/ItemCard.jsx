@@ -4,34 +4,35 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import ItemCount from "../itemCount/itemCount";
-import "./ItemCard.css"
+
+import "./ItemCard.css";
 
 const ItemCard = ({ data }) => {
+  const cardStyle = {
+    boxShadow: "5px 4px 5px rgba(0, 0, 0, 0.1)",
+  };
+
   return (
-    <Card className=" w-64 relative" style={{ height: "800px" }}>
+    <Card
+      className="itemCard--card"
+      style={cardStyle}
+      sx={{ maxWidth: "400px", maxHeight: "800px" }}
+    >
       <CardMedia
-        className=""
-        style={{ backgroundColor: "white" }}
+        className="itemCard--image"
         component="img"
-        alt="boca-titular"
-        image={data.imageRemera}
+        alt={data.title}
+        image={data.image}
       />
       <CardContent>
-        <h3 className="titleCard mb-6 text-xl text-center">
-          {data.titleRemera}
-        </h3>
-        <Typography variant="body2" color="text.secondary">
-          {data.descriptionRemera}
-        </Typography>
+        <h3 className="itemCard--title">{data.title}</h3>
       </CardContent>
-      <CardActions className="absolute bottom-1 flex flex-col">
-        <Button className="botonesCard" color="inherit" size="small">
+      <CardActions className="divBotones">
+        <Button id="botonesCard" size="small">
           Ver mas
         </Button>
-        <ItemCount />
-        <Button className="botonesCard" color="inherit" size="small">
+
+        <Button id="botonesCard" size="small">
           Añadir al Carrito
         </Button>
       </CardActions>

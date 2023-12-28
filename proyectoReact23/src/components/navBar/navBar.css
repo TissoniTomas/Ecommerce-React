@@ -1,8 +1,41 @@
-@font-face {
-    font-family: Tungsten-bold;
-    src: url(../../assets/fonts/FontsFree-Net-Tungsten-Bold.ttf);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.item-list{
-    font-family: Tungsten-bold;
+@font-face {
+  font-family: Tungsten-bold;
+  src: url(../../assets/fonts/FontsFree-Net-Tungsten-Bold.ttf);
+}
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: red;
+}
+
+.navbar--imagen {
+  width: 300px;
+  height: 300px;
+}
+
+#navbar--list {
+  font-size: 40px;
+  font-family: Tungsten-bold;
+  font-weight: bold;
+  margin-right: 40px;
+}
+
+.navbar--item {
+  font-family: Tungsten-bold;
+  margin-right: 150px;
+  text-decoration: none;
+  color: black;
+}
+
+.navbar--icon {
+  color: lightblue;
+  text-decoration: dotted;
 }
