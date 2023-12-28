@@ -11,6 +11,7 @@ import ContactPage from "./pages/ContactPage/ContactPage";
 import AboutPage from "./pages/AboutPage/AboutPage"
 import ErrorPage from "./pages/ErrorPage/ErrorPage"
 import DetailPage from "./pages/DetailPage/DetailPage";
+import CategoryPage from "./pages/CategoryPage/CategoryPage";
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/contact" element={<ContactPage/>}/>
         <Route path="*" element={<ErrorPage/>}/>
         <Route path="/product/detail/:id" element = {<DetailPage/>}/>
+        <Route path="/category/:Categoryid" element = {<CategoryPage/>}/>
       </Routes>
     </Router>
   );
