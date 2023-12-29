@@ -1,5 +1,5 @@
 import React from "react";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import logo from "../../assets/Logo/logo.png";
 import "./navBar.css";
 import { Link } from "react-router-dom";
@@ -26,8 +26,7 @@ const navBar = () => {
           ELECTRONICS
         </Link>
         <Link>
-          {" "}
-          <ShoppingCartIcon className="navbar--icon" fontSize="large" />{" "}
+        
         </Link>
         <span>5</span>
       </ul>
