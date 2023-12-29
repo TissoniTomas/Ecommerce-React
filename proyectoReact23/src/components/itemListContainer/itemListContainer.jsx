@@ -1,33 +1,51 @@
-
+import {useState, useEffect} from "react"
 import ItemCard from "../ItemCard/ItemCard";
 import "./itemListContainer.css";
-import {Link} from "react-router-dom"
 
-const itemListContainer = ({data}) => {
+const itemListContainer = ({section, data}) => {
 
-  const dataFiltered = data.filter((item)=> item.category === "men's clothing" || item.category === "women's clothing" )
-  console.log(dataFiltered);
-
- 
   
+  const [dataFilter, setDataFilter] = useState([])
+
+useEffect(()=>{
+
+  switch(section){
+    case "clothing" :{
+      const dataFiltered = data.filter((item)=> item.category === "men's clothing" || item.category === "women's clothing");
+      console.log(dataFiltered);
+      setDataFilter(dataFiltered);
+      break;
+    }
+
+    case "electronics" :{
+      const dataFiltered = data.filter((item)=> item.category === "electronics");
+      console.log(dataFiltered);
+      setDataFilter(dataFiltered);
+      break;
+
+    }
+    default:{
+      setDataFilter(data)
+      console.log("No hay resultados");
+    
+    }
+  }
+    },[section, data])
+
   return (
     <>
-     <main id="main" >
-        <h1 className="main--title" >
-          MEN & WOMAN
-        </h1>
+    
    
-    <div className="main--grid" >
-      {dataFiltered.map((item) => (
+    <div className="grid grid-cols-3 gap-20" >
+      {dataFilter.map((item) => (
           <div key={item.id}>
-            <Link to ={`/product/detail/${item.id}`} >
-            <ItemCard data={item} />
             
-            </Link>
+            <ItemCard data={item} />
+                      
           </div>
         ))}
     </div>
-        </main>
+        
         </>
   );
 };

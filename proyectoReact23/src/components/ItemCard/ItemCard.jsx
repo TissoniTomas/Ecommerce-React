@@ -1,21 +1,30 @@
 import React from "react";
-import "./ItemCard.css"
+import "./ItemCard.css";
+import { Link } from "react-router-dom";
 
 const ItemCard = ({ data }) => {
-  const cardStyle = {
-    boxShadow: "5px 4px 5px rgba(0, 0, 0, 0.1)",
-  };
-
   return (
     <>
-      <div className="flex flex-col items-center border-4 border-black w-72 h-auto p-10"> 
-        <img className="w-44 mt-5 " src={data.image} alt={data.title} />
-        <h1 className="font-Montserrat text-xl">{data.title}</h1>
+      <div className="flex flex-col items-center border w-96 h-dvh p-10 hover:bg-emerald-200 shadow-2xl ">
+        <img
+          className="w-auto mt-5 h-60"
+          src={data.image}
+          alt={data.title}
+        />
+        <h1 className="font-Montserrat text-xl mt-20 text-center">
+          {data.title}
+        </h1>
         <div>
-          <button className=" border-4 rounded-lg border-red-300"> VER MAS</button>
+          <Link to={`/product/detail/${data.id}`}>
+            <button className=" border-2 rounded-lg border-red-300 mt-20 w-40 h-10 text-xl font-Montserrat hover:bg-lime-400">
+              {" "}
+              VER MAS
+            </button>
+          </Link>
         </div>
       </div>
     </>
-  ); };
+  );
+};
 
 export default ItemCard;

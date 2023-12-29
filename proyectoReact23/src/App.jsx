@@ -1,9 +1,10 @@
 
 import Header from "./components/navBar/navBar";
+import Footer from "./components/Footer/Footer";
+
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import "./App.css";
 
 import HomePage from "./pages/HomePage/HomePage";
 import PrdouctsPage from "./pages/ProductsPage/ProductsPage";
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/product/detail/:id" element = {<DetailPage/>}/>
         <Route path="/category/:Categoryid" element = {<CategoryPage/>}/>
       </Routes>
+      <Footer/>
     </Router>
   );
 };
