@@ -1,34 +1,31 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import ItemListContainer from "../../components/itemListContainer/itemListContainer";
 
-
-
-
 const HomePage = () => {
+  const [data, setData] = useState([]);
 
-  const [data, setData] = useState([])
-
-  
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
-    .then((res) => res.json())
-    .then((json) => {
-      setData(json)
-      console.log(json)});
-    }, []);
-    
-    
+      .then((res) => res.json())
+      .then((json) => {
+        setData(json);
+        console.log(json);
+      });
+  }, []);
+
   return (
     <>
-      <main id="main">
-        <h1 className="font-Montserrat text-6xl hover:bg-black hover:text-white">MEN'S & WOMEN'S</h1>
-        <ItemListContainer  data ={data} section="clothing" />
+      <main className="flex flex-col items-center">
+        <h1 className="font-Montserrat text-4xl hover:bg-black hover:text-white mt-20">
+          MEN'S & WOMEN'S
+        </h1>
+        <ItemListContainer data={data} section="clothing" />
 
-        <h2 className="font-Montserrat text-6xl hover:bg-black hover:text-white">ELECTRONICS</h2>
+        <h2 className="font-Montserrat text-4xl hover:bg-black hover:text-white mt-20">
+          ELECTRONICS
+        </h2>
 
-
-
-        <ItemListContainer data ={data} section="electronics" />
+        <ItemListContainer data={data} section="electronics" />
       </main>
     </>
   );

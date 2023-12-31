@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react"
 import ItemCard from "../ItemCard/ItemCard";
-import "./itemListContainer.css";
 
 const itemListContainer = ({section, data}) => {
 
@@ -26,17 +25,17 @@ useEffect(()=>{
     }
     default:{
       setDataFilter(data)
-      console.log("No hay resultados");
+      console.log(data);
     
     }
   }
-    },[section, data])
+    },[section ,data])
 
   return (
     <>
     
    
-    <div className="grid grid-cols-3 gap-20" >
+    <div className="grid grid-cols-1 gap-10" >
       {dataFilter.map((item) => (
           <div key={item.id}>
             
