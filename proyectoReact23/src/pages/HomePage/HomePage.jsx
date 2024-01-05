@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ItemListContainer from "../../components/itemListContainer/itemListContainer";
 
+
 const HomePage = () => {
   const [data, setData] = useState([]);
 
@@ -15,17 +16,14 @@ const HomePage = () => {
 
   return (
     <>
-      <main className="flex flex-col items-center">
-        <h1 className="font-Montserrat text-4xl hover:bg-black hover:text-white mt-20">
-          MEN'S & WOMEN'S
-        </h1>
-        <ItemListContainer data={data} section="clothing" />
+      <main className="flex flex-col items-center justify-center ">
+        <h1 className="text-4xl font-Montserrat text-center">Men's & Woman's</h1>
+        <ItemListContainer section= "clothing" data={data}/>
 
-        <h2 className="font-Montserrat text-4xl hover:bg-black hover:text-white mt-20">
-          ELECTRONICS
-        </h2>
 
-        <ItemListContainer data={data} section="electronics" />
+
+
+
       </main>
     </>
   );

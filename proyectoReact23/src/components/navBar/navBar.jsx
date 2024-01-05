@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 const navBar = () => {
   const [mode, setMode] = useState(localStorage.getItem("theme"));
-  const [openButton, setOpenButton] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
-  const toggleButton = () => {
+  const toggleMode = () => {
     const newMode = mode === "light" ? "dark" : "light";
     setMode(newMode);
     localStorage.setItem("theme", newMode);
@@ -16,7 +16,7 @@ const navBar = () => {
   };
 
   const toggleNavBar = () => {
-    setOpenButton(!openButton);
+    setOpenMenu(!openMenu);
   };
 
   return (
@@ -26,12 +26,12 @@ const navBar = () => {
           mode === "light" ? "bg-white" : "bg-black"
         } `}
         >
-          <div className="flex justify-around  items-center">
+          <div className="flex justify-between items-center w-full">
         <Link to="/">
             <img className="w-48 h-48 mr-40" src={logo} />
         </Link>
             <span className="lg:hidden" onClick={toggleNavBar}>
-              {openButton ? (
+              {openMenu ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -65,15 +65,15 @@ const navBar = () => {
             </span>
           </div>
         <ul
-          className={`tungsten-bold text-3xl flex flex-col items-center ${
-            openButton ? "flex" : "hidden"
+          className={`tungsten-bold text-3xl flex flex-col items-center text-center ${
+            openMenu ? "flex" : "hidden"
           } lg:flex lg:flex-row lg:items-center `}
         >
           <Link
             className={`mt-10 ${
               mode === "light" ? "text-black" : "text-white"
             } `}
-            to="/" onClick={openButton}
+            to="/" onClick={openMenu}
           >
             HOME
           </Link>
@@ -81,7 +81,7 @@ const navBar = () => {
             className={`mt-10 ${
               mode === "light" ? "text-black" : "text-white"
             } `}
-            to="/products" onClick={openButton}
+            to="/products" onClick={openMenu}
           >
             PRODUCTS
           </Link>
@@ -89,7 +89,7 @@ const navBar = () => {
             className={`mt-10 ${
               mode === "light" ? "text-black" : "text-white"
             }`}
-            to="/category/jewelery" onClick={openButton}
+            to="/category/jewelery" onClick={openMenu}
           >
             JEWELERY
           </Link>
@@ -97,7 +97,7 @@ const navBar = () => {
             className={`mt-10 ${
               mode === "light" ? "text-black" : "text-white"
             }`}
-            to="/category/electronics" onClick={openButton}
+            to="/category/electronics" onClick={openMenu}
           >
             ELECTRONICS
           </Link>
@@ -140,7 +140,7 @@ const navBar = () => {
           </Link>
           {mode === "light" ? (
             <svg
-              onClick={toggleButton}
+              onClick={toggleMode}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
@@ -150,7 +150,7 @@ const navBar = () => {
             </svg>
           ) : (
             <svg
-              onClick={toggleButton}
+              onClick={toggleMode}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
