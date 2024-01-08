@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const navBar = () => {
   const [mode, setMode] = useState(localStorage.getItem("theme"));
   const [openMenu, setOpenMenu] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
 
   const toggleMode = () => {
     const newMode = mode === "light" ? "dark" : "light";
@@ -22,86 +23,91 @@ const navBar = () => {
   return (
     <>
       <nav
-        className={`flex flex-col p-10  ${
+        className={` ${
           mode === "light" ? "bg-white" : "bg-black"
-        } `}
-        >
-          <div className="flex justify-between items-center w-full">
-        <Link to="/">
-            <img className="w-48 h-48 mr-40" src={logo} />
-        </Link>
-            <span className="lg:hidden" onClick={toggleNavBar}>
-              {openMenu ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-10 h-10"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-10 h-10"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-              )}
-            </span>
-          </div>
+        } border-b border-black mx-10 lg:flex justify-between relative`}
+      >
+        <div className="flex items-center justify-between">
+          <Link to="/">
+            <img className="w-48 h-48" src={logo} />
+          </Link>
+          <span className="lg:hidden" onClick={toggleNavBar}>
+            {openMenu ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-10 h-10"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-10 h-10"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            )}
+          </span>
+        </div>
         <ul
           className={`tungsten-bold text-3xl flex flex-col items-center text-center ${
             openMenu ? "flex" : "hidden"
-          } lg:flex lg:flex-row lg:items-center `}
+          }  lg:flex-row lg:items-center lg:flex lg:mr-8`}
         >
           <Link
-            className={`mt-10 ${
+            className={`mt-10 lg:mx-10 ${
               mode === "light" ? "text-black" : "text-white"
             } `}
-            to="/" onClick={openMenu}
+            to="/"
+            onClick={openMenu}
           >
             HOME
           </Link>
           <Link
-            className={`mt-10 ${
+            className={`mt-10 lg:mx-10 ${
               mode === "light" ? "text-black" : "text-white"
             } `}
-            to="/products" onClick={openMenu}
+            to="/products"
+            onClick={openMenu}
           >
             PRODUCTS
           </Link>
           <Link
-            className={`mt-10 ${
+            className={`mt-10 lg:mx-10 ${
               mode === "light" ? "text-black" : "text-white"
             }`}
-            to="/category/jewelery" onClick={openMenu}
+            to="/category/jewelery"
+            onClick={openMenu}
           >
             JEWELERY
           </Link>
           <Link
-            className={`mt-10 ${
+            className={`mt-10 lg:mx-10 ${
               mode === "light" ? "text-black" : "text-white"
             }`}
-            to="/category/electronics" onClick={openMenu}
+            to="/category/electronics"
+            onClick={openMenu}
           >
             ELECTRONICS
           </Link>
-          <Link className="mt-10 flex">
+
+          <Link className="mt-10 lg:mx-10 flex">
             {mode === "light" ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -165,6 +171,37 @@ const navBar = () => {
               />
             </svg>
           )}
+          <Link
+            className={`mt-10 lg:mx-10 ${
+              mode === "light" ? "text-black" : "text-white"
+            } relative flex flex-col`}
+            to="/category/profile"
+            onClick={() => setOpenProfile(!openProfile)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
+
+            {openProfile && (
+              <div className="absolute top-10 flex flex-col w-32 items-start border border-gray-700 rounded-xl bg-white ">
+                <li className="py-4 text-center hover:bg-sky-500 w-full " >My Profile</li>
+                <li className="py-4 text-center hover:bg-sky-500 w-full" >Settings</li>
+                <li className="py-4 text-center hover:bg-sky-500 w-full" >Log Out</li>
+                <li></li>
+              </div>
+            )}
+          </Link>
         </ul>
       </nav>
     </>

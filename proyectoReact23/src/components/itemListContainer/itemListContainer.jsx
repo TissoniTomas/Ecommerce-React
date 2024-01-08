@@ -34,7 +34,7 @@ const itemListContainer = ({ section, data }) => {
 
   return (
     <>
-      <div className="grid ">
+      <div className="grid gap-10 md:grid-cols-2">
         {dataFilter.map((item) => (
           <div className="content-center justify-items-stretch" key={item.id}>
             <ItemCard data={item} />

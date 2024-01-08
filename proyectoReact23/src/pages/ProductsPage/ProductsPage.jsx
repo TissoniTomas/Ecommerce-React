@@ -44,7 +44,7 @@ const ProductsPage = () => {
           onChange={handleInput}
         />
       </div>
-      <div className="grid grid-cols-3 gap-20 mt-20 mb-40">
+      <div className="grid grid-cols-1 gap-20 my-20 md:grid md:grid-cols-2">
         {dataFilter.map((item) => (
           <div key={item.id}>
             <ItemCard data={item} />

@@ -19,9 +19,7 @@ const App = () => {
  
   return (
     <Router>
-      <Header />
-
-      
+      <Header />    
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/products" element={<PrdouctsPage/>}/>

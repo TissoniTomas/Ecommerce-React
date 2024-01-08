@@ -17,12 +17,10 @@ const HomePage = () => {
   return (
     <>
       <main className="flex flex-col items-center justify-center ">
-        <h1 className="text-4xl font-Montserrat text-center">Men's & Woman's</h1>
+        <h1 className="text-4xl font-Montserrat text-center my-10">Men's & Woman's</h1>
         <ItemListContainer section= "clothing" data={data}/>
-
-
-
-
+        <h2 className="text-4xl font-Montserrat text-center my-20">Electronics</h2>
+        <ItemListContainer section = "electronics" data = {data} />
 
       </main>
     </>
