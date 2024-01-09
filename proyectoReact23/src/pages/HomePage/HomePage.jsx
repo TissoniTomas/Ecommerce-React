@@ -1,28 +1,31 @@
-import { useState, useEffect } from "react";
+import SpinnerFB from "../../components/Spinner/Spinner";
 import ItemListContainer from "../../components/itemListContainer/itemListContainer";
+import useFetch from "../../hooks/useFetch";
 
 
 const HomePage = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json);
-        console.log(json);
-      });
-  }, []);
-
+  const {data,spinner} = useFetch("https://fakestoreapi.com/products")
+  console.log(data);
+ 
   return (
     <>
-      <main className="flex flex-col items-center justify-center ">
-        <h1 className="text-4xl font-Montserrat text-center my-10">Men's & Woman's</h1>
-        <ItemListContainer section= "clothing" data={data}/>
-        <h2 className="text-4xl font-Montserrat text-center my-20">Electronics</h2>
-        <ItemListContainer section = "electronics" data = {data} />
+      {spinner == true ? (
+        <div className="flex justify-center my-40">
 
-      </main>
+        <SpinnerFB/>
+        </div>
+      ) : (
+        <main className="flex flex-col items-center justify-center ">
+          <h1 className="text-4xl font-Montserrat text-center my-10 md:text-5xl">
+            Men's & Woman's
+          </h1>
+          <ItemListContainer section="clothing" data={data} />
+          <h2 className="text-4xl font-Montserrat text-center my-20 md:text-5xl">
+            Electronics
+          </h2>
+          <ItemListContainer section="electronics" data={data} />
+        </main>
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/Logo/logo.png";
 import "./navBar.css";
 import { Link } from "react-router-dom";
@@ -7,18 +7,34 @@ const navBar = () => {
   const [mode, setMode] = useState(localStorage.getItem("theme"));
   const [openMenu, setOpenMenu] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
+  const [openCategories, setOpenCategories] = useState(false)
 
   const toggleMode = () => {
     const newMode = mode === "light" ? "dark" : "light";
     setMode(newMode);
     localStorage.setItem("theme", newMode);
 
-    console.log(mode);
+    
   };
+
+  useEffect(()=>{
+    console.log(mode);
+  },[mode])
 
   const toggleNavBar = () => {
     setOpenMenu(!openMenu);
+    
   };
+
+  const toggleCategories = ()=>{
+    setOpenCategories(!openCategories)
+  };
+
+  const toggleNavBarKey = (e)=>{
+    e.key === 'Escape' ? setOpenCategories(!openCategories) : null
+  }
+
+ 
 
   return (
     <>
@@ -70,41 +86,74 @@ const navBar = () => {
             openMenu ? "flex" : "hidden"
           }  lg:flex-row lg:items-center lg:flex lg:mr-8`}
         >
-          <Link
-            className={`mt-10 lg:mx-10 ${
-              mode === "light" ? "text-black" : "text-white"
-            } `}
-            to="/"
-            onClick={openMenu}
-          >
-            HOME
+          <Link to="/">
+            <li
+              onClick={openMenu}
+              className={`mt-10 lg:mx-10 ${
+                mode === "light" ? "text-black" : "text-white"
+              } `}
+            >
+              HOME
+            </li>
           </Link>
-          <Link
-            className={`mt-10 lg:mx-10 ${
-              mode === "light" ? "text-black" : "text-white"
-            } `}
-            to="/products"
-            onClick={openMenu}
-          >
-            PRODUCTS
+          <Link to="/products">
+            <li
+              className={`mt-10 lg:mx-10 ${
+                mode === "light" ? "text-black" : "text-white"
+              } `}
+              onClick={openMenu}
+            >
+              PRODUCTS
+            </li>
           </Link>
-          <Link
-            className={`mt-10 lg:mx-10 ${
+
+          <li
+            onClick={toggleCategories}
+            onKeyUp={toggleNavBarKey}
+            tabIndex="0"
+         
+            className={`mt-10 lg:mx-10 cursor-pointer relative ${
               mode === "light" ? "text-black" : "text-white"
-            }`}
-            to="/category/jewelery"
-            onClick={openMenu}
+            }`} 
           >
-            JEWELERY
-          </Link>
-          <Link
-            className={`mt-10 lg:mx-10 ${
-              mode === "light" ? "text-black" : "text-white"
-            }`}
-            to="/category/electronics"
-            onClick={openMenu}
-          >
-            ELECTRONICS
+            CATEGORIES
+          </li>
+
+          {
+            openCategories && (
+
+              <ul className="bg-white my-10 flex lg:absolute lg:top-[60%] lg:left-[64%]  lg:flex flex-col w-32 items-center lg:border lg:border-gray-700 ">
+                <Link to="/category/men's clothing">
+                <li  onClick={()=> {toggleCategories();toggleNavBar()}} className="py-4 hover:bg-sky-500 w-32">
+                  MEN'S CLOTHING
+                </li>
+                </Link>
+                <Link to="/category/women's clothing">
+                <li onClick={()=> {toggleCategories();toggleNavBar()}} className="py-4 hover:bg-sky-500 w-32">
+                  WOMAN'S CLOTHING
+                </li>
+                </Link>
+                <Link to= "/category/jewelery">
+                <li onClick={()=> {toggleCategories();toggleNavBar()}} className="py-4 hover:bg-sky-500 w-32">
+                  JEWELERY
+                </li>
+                </Link>
+                <Link to = "/category/electronics">
+                <li onClick={()=> {toggleCategories();toggleNavBar()}} className="py-4 hover:bg-sky-500 w-32">ELECTRONICS</li>
+                </Link>
+              </ul>
+            )
+          }
+          <Link>
+            <li
+              className={`mt-10 lg:mx-10 ${
+                mode === "light" ? "text-black" : "text-white"
+              }`}
+              onClick={openMenu} 
+            >
+              ELECTRONICS
+            </li>
+
           </Link>
 
           <Link className="mt-10 lg:mx-10 flex">
@@ -174,7 +223,7 @@ const navBar = () => {
           <Link
             className={`mt-10 lg:mx-10 ${
               mode === "light" ? "text-black" : "text-white"
-            } relative flex flex-col`}
+            } lg:relative flex flex-col items-center`}
             to="/category/profile"
             onClick={() => setOpenProfile(!openProfile)}
           >
@@ -184,7 +233,7 @@ const navBar = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-8 h-8"
             >
               <path
                 strokeLinecap="round"
@@ -194,12 +243,18 @@ const navBar = () => {
             </svg>
 
             {openProfile && (
-              <div className="absolute top-10 flex flex-col w-32 items-start border border-gray-700 rounded-xl bg-white ">
-                <li className="py-4 text-center hover:bg-sky-500 w-full " >My Profile</li>
-                <li className="py-4 text-center hover:bg-sky-500 w-full" >Settings</li>
-                <li className="py-4 text-center hover:bg-sky-500 w-full" >Log Out</li>
+              <ul className="bg-white my-10 lg:absolute lg:top-10 flex flex-col w-32 items-start lg:border lg:border-gray-700 lg:rounded-xl ">
+                <li className="py-4 text-center hover:bg-sky-500 w-full">
+                  MY PROFILE
+                </li>
+                <li className="py-4 text-center hover:bg-sky-500 w-full">
+                  SETTINGS
+                </li>
+                <li className="py-4 text-center hover:bg-sky-500 w-full">
+                  LOG OUT
+                </li>
                 <li></li>
-              </div>
+              </ul>
             )}
           </Link>
         </ul>

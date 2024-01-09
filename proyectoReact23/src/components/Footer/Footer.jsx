@@ -1,4 +1,4 @@
-import React from "react";
+import {useRef, } from "react";
 import { Link } from "react-router-dom";
 import FBLM from "../../assets/social-media/facebook-lightmode.jpg";
 import IGLM from "../../assets/social-media/instagram-lightmode.png";
@@ -8,6 +8,11 @@ import IGDM from "../../assets/social-media/instagram-darkmode.png"
 import XDM from "../../assets/social-media/x-darkmode.jpg"
 
 const Footer = () => {
+  
+
+
+
+
   return (
     <div className="border-t border-black flex flex-col items-center justify-center m-10 p-10">
       <h1 className="mt-20">The Last Store 2023 ©</h1>
@@ -15,7 +20,7 @@ const Footer = () => {
         <Link className="m-5" to="/">
           Home
         </Link>
-        <Link className="m-5">Products</Link>
+        <Link to="/products" className="m-5">Products</Link>
         <Link className="m-5">Men's & Women's Clothing</Link>
         <Link className="m-5">Electronics</Link>
         <Link className="m-5">Jewelry</Link>

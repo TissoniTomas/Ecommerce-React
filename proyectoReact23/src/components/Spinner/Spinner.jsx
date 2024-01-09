@@ -1,12 +1,7 @@
-import React from 'react'
+import React from "react";
 
-
-
-
-import { Spinner } from 'flowbite-react';
-
-function SpinnerFB() {
-  return <Spinner aria-label="Default status example" />;
-}
-
-export default SpinnerFB
+import { Spinner } from "keep-react";
+const SpinnerFB = () => {
+  return <Spinner className="" color="failure" size="lg" />;
+};
+export default SpinnerFB;
