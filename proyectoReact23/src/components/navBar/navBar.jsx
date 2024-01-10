@@ -7,34 +7,29 @@ const navBar = () => {
   const [mode, setMode] = useState(localStorage.getItem("theme"));
   const [openMenu, setOpenMenu] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
-  const [openCategories, setOpenCategories] = useState(false)
+  const [openCategories, setOpenCategories] = useState(false);
 
   const toggleMode = () => {
     const newMode = mode === "light" ? "dark" : "light";
     setMode(newMode);
     localStorage.setItem("theme", newMode);
-
-    
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(mode);
-  },[mode])
+  }, [mode]);
 
   const toggleNavBar = () => {
     setOpenMenu(!openMenu);
-    
   };
 
-  const toggleCategories = ()=>{
-    setOpenCategories(!openCategories)
+  const toggleCategories = () => {
+    setOpenCategories(!openCategories);
   };
 
-  const toggleNavBarKey = (e)=>{
-    e.key === 'Escape' ? setOpenCategories(!openCategories) : null
-  }
-
- 
+  const toggleNavBarKey = (e) => {
+    e.key === "Escape" ? setOpenCategories(!openCategories) : null;
+  };
 
   return (
     <>
@@ -108,52 +103,76 @@ const navBar = () => {
           </Link>
 
           <li
-            onClick={toggleCategories}
+            onMouseOver={toggleCategories}
             onKeyUp={toggleNavBarKey}
             tabIndex="0"
-         
             className={`mt-10 lg:mx-10 cursor-pointer relative ${
               mode === "light" ? "text-black" : "text-white"
-            }`} 
+            }`}
           >
             CATEGORIES
           </li>
 
-          {
-            openCategories && (
-
-              <ul className="bg-white my-10 flex lg:absolute lg:top-[60%] lg:left-[64%]  lg:flex flex-col w-32 items-center lg:border lg:border-gray-700 ">
-                <Link to="/category/men's clothing">
-                <li  onClick={()=> {toggleCategories();toggleNavBar()}} className="py-4 hover:bg-sky-500 w-32">
+          {openCategories && (
+            <ul
+              onMouseLeave={toggleCategories}
+              className="bg-white my-10 flex lg:absolute lg:top-[60%] lg:left-[67%]  lg:flex flex-col w-32 items-center lg:border lg:border-gray-700 "
+            >
+              <Link to="/category/men's clothing">
+                <li
+                  onClick={() => {
+                    toggleCategories();
+                    toggleNavBar();
+                  }}
+                  className="py-4 hover:bg-sky-500 w-32"
+                >
                   MEN'S CLOTHING
                 </li>
-                </Link>
-                <Link to="/category/women's clothing">
-                <li onClick={()=> {toggleCategories();toggleNavBar()}} className="py-4 hover:bg-sky-500 w-32">
+              </Link>
+              <Link to="/category/women's clothing">
+                <li
+                  onClick={() => {
+                    toggleCategories();
+                    toggleNavBar();
+                  }}
+                  className="py-4 hover:bg-sky-500 w-32"
+                >
                   WOMAN'S CLOTHING
                 </li>
-                </Link>
-                <Link to= "/category/jewelery">
-                <li onClick={()=> {toggleCategories();toggleNavBar()}} className="py-4 hover:bg-sky-500 w-32">
+              </Link>
+              <Link to="/category/jewelery">
+                <li
+                  onClick={() => {
+                    toggleCategories();
+                    toggleNavBar();
+                  }}
+                  className="py-4 hover:bg-sky-500 w-32"
+                >
                   JEWELERY
                 </li>
-                </Link>
-                <Link to = "/category/electronics">
-                <li onClick={()=> {toggleCategories();toggleNavBar()}} className="py-4 hover:bg-sky-500 w-32">ELECTRONICS</li>
-                </Link>
-              </ul>
-            )
-          }
-          <Link>
+              </Link>
+              <Link to="/category/electronics">
+                <li
+                  onClick={() => {
+                    toggleCategories();
+                    toggleNavBar();
+                  }}
+                  className="py-4 hover:bg-sky-500 w-32"
+                >
+                  ELECTRONICS
+                </li>
+              </Link>
+            </ul>
+          )}
+          <Link to="/contact">
             <li
               className={`mt-10 lg:mx-10 ${
                 mode === "light" ? "text-black" : "text-white"
               }`}
               onClick={openMenu} 
             >
-              ELECTRONICS
+              CONTACT
             </li>
-
           </Link>
 
           <Link className="mt-10 lg:mx-10 flex">

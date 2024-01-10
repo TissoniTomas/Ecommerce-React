@@ -26,6 +26,7 @@ const App = () => {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/product/detail/:id" element={<DetailPage />} />
         <Route path="/category/:Categoryid" element={<CategoryPage />} />
+        
       </Routes>
 
       <Footer />

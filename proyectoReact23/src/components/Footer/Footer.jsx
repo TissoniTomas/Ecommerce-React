@@ -21,9 +21,9 @@ const Footer = () => {
           Home
         </Link>
         <Link to="/products" className="m-5">Products</Link>
-        <Link className="m-5">Men's & Women's Clothing</Link>
-        <Link className="m-5">Electronics</Link>
-        <Link className="m-5">Jewelry</Link>
+        <Link to="/category/men's clothing" className="m-5">Men's & Women's Clothing</Link>
+        <Link to= "/category/electronics" className="m-5">Electronics</Link>
+        <Link to="/category/jewelery" className="m-5">Jewelery</Link>
       
       
         <Link className="m-5">About Us</Link>
