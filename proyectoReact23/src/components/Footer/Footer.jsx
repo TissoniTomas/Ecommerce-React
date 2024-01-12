@@ -1,4 +1,4 @@
-import {useRef, } from "react";
+import {useContext, useRef, } from "react";
 import { Link } from "react-router-dom";
 import FBLM from "../../assets/social-media/facebook-lightmode.jpg";
 import IGLM from "../../assets/social-media/instagram-lightmode.png";
@@ -6,17 +6,19 @@ import XLM from "../../assets/social-media/x-lightmode.jpg"
 import FBDM from "../../assets/social-media/facebook-darkmode.png"
 import IGDM from "../../assets/social-media/instagram-darkmode.png"
 import XDM from "../../assets/social-media/x-darkmode.jpg"
+import { ModeContext } from "../../context/modeContext";
 
 const Footer = () => {
   
+  const {mode} = useContext(ModeContext)
 
 
 
 
   return (
-    <div className="border-t border-black flex flex-col items-center justify-center m-10 p-10">
-      <h1 className="mt-20">The Last Store 2023 ©</h1>
-      <ul className="mt-20 flex flex-col">
+    <div className={`border-t flex flex-col items-center justify-center p-20 ${mode === "light" ? "bg-white border-black" : "bg-black border-white"}`}>
+      <h1 className={`mt-20 ${mode === "light"? "text-gray-500" : "text-white"}`}>The Last Store 2023 ©</h1>
+      <ul className={`mt-20 flex flex-col ${mode === "light"? "text-gray-500" : "text-white"}`}>
         <Link className="m-5" to="/">
           Home
         </Link>
@@ -28,15 +30,15 @@ const Footer = () => {
       
         <Link className="m-5">About Us</Link>
         <Link className="m-5">Contact</Link>
-      </ul>
+      </ul >
 
-      <h2 className="mt-20">
+      <h2 className={`mt-20 ${mode === "light"? "text-gray-500" : "text-white"}`}>
         Get the newsest information on our social medias
       </h2>
-      <ul className="flex justify-around">
-        < img className="w-10 h-10 m-10" src={FBLM} alt="facebook-lightmode" />
-        < img className="w-10 h-10 m-10" src={IGLM} alt="instagram-lightmode" />
-        < img className="w-10 h-10 m-10" src={XLM} alt="x-lightmode" />
+      <ul className={`mt-20 flex justify-around ${mode === "light"? "text-gray-500" : "text-white"}`}>
+        {mode === "light" ? < img className="w-10 h-10 m-10" src={FBLM} alt="facebook-lightmode" /> : <img className="w-10 h-10 m-10" src={FBDM} alt="facebook-darkmode" /> } 
+        {mode === "light" ? < img className="w-10 h-10 m-10" src={IGLM} alt="facebook-lightmode" /> : <img className="w-10 h-10 m-10" src={IGDM} alt="facebook-darkmode" /> } 
+        {mode === "light" ? < img className="w-10 h-10 m-10" src={XLM} alt="facebook-lightmode" /> : <img className="w-10 h-10 m-10" src={XDM} alt="facebook-darkmode" /> } 
       </ul>
     </div>
   );

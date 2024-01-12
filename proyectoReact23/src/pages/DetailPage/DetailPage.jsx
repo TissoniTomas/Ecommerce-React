@@ -1,19 +1,47 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 
 const DetailPage = () => {
   let { id } = useParams();
 
   const { data } = useFetch(`https://fakestoreapi.com/products/${id}`);
-  console.log(data);
-  const { title, price, description, category, image, rating } = data;
+  
+  const { title, price, description, category, image } = data;
   const [counterStock, setCounterStock] = useState(0);
   const [isFav, setIsFav] = useState(false);
+  const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext)
+ 
+
+  const handleShoppingCart = ()=>{
+    let item = {
+      name: data.title,
+      price: data.price,
+      image: data.image,
+      quantity: counterStock,
+      id: data.id
+
+    }
+
+    console.log(item);
+    setShoppingCart([...shoppingCart, item])
+    const json = JSON.stringify(item)
+    sessionStorage.setItem(`item-${item.id}`, json)
+    
+   
+   
+
+  }
+
 
   const handleCounterUp = () => {
     setCounterStock(counterStock + 1);
   };
+
+  useEffect(()=>{
+    console.log(shoppingCart);
+  },[shoppingCart])
 
   const handleCounterDown = () => {
     setCounterStock(counterStock > 0 ? counterStock - 1 : 0);
@@ -23,27 +51,32 @@ const DetailPage = () => {
     setIsFav(!isFav);
   };
 
+  const counterManual = (e)=>{
+    setCounterStock(parseInt(e.target.value))
+  }
+
   return (
     <main className="h-[1400px]">
-      <div className="flex flex-col items-center m-10 text-center relative">
+      <div className="flex flex-col items-center m-10 text-center relative ">
         <img className="w-72" src={image} alt={title} />
         <div className="flex flex-col h-screen items-center m-10">
-          <h1 className="font-Montserrat text-3xl hover:bg-black hover:text-white mt-20">
+          <h1 className="font-Montserrat text-3xl hover:bg-black hover:text-white mt-20 lg:text-5xl ">
             {title}
           </h1>
 
-          <span className="my-10 text-3xl font-Montserrat text-sky-500">{`$ ${price}`}</span>
-          <p className="my-20 font-Montserrat text-lg">{description}</p>
-          <div className="flex justify-around w-screen">
-            <label className="font-Montserrat" htmlFor="quantity">
+          <span className="my-10 text-3xl font-Montserrat text-sky-500 lg:text-5xl lg:my-14">{`$ ${price}`}</span>
+          <p className="my-20 font-Inter text-lg mx-6 lg:text-2xl lg:mx-20">{description}</p>
+          <div className="flex justify-evenly w-screen lg:w-[60rem]">
+            <label className="font-Montserrat mx-6 lg:text-2xl" htmlFor="quantity">
               Select Quantity
             </label>
             <input
-              className="w-20 font-Montserrat"
+              className="w-20 font-Montserrat lg:text-2xl"
               type="number"
               name="stock"
               id="stock"
               value={counterStock}
+              onChange={counterManual}
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +84,7 @@ const DetailPage = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-6 h-6 lg:h-10 lg:w-10 cursor-pointer"
               onClick={handleCounterUp}
             >
               <path
@@ -66,7 +99,7 @@ const DetailPage = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-6 h-6 lg:h-10 lg:w-10 cursor-pointer"
               onClick={handleCounterDown}
             >
               <path
@@ -77,36 +110,37 @@ const DetailPage = () => {
             </svg>
           </div>
 
-          <div className="flex justify-around items-center w-screen my-20">
-            <label className="font-Montserrat" htmlFor="size">
+            {["women's clothing", "men's clothing"].includes(category) && (
+          <div className="flex justify-around items-center w-screen my-20 lg:w-[60rem]">
+
+            <label className="font-Montserrat  lg:text-2xl" htmlFor="size">
               Select Size
             </label>
-            {["women's clothing", "men's clothing"].includes(category) && (
               <select
-                className="h-10 w-20 font-Montserrat"
+                className="h-10 w-20 font-Montserrat lg:text-2xl"
                 name="talle"
                 id="talle"
               >
                 <option
-                  className="focus:bg-sky-600 text-xl font-Montserrat "
+                  className="focus:bg-sky-600 text-xl font-Montserrat lg:text-2xl "
                   value="SM"
                 >
                   SM
                 </option>
                 <option
-                  className="focus:bg-sky-600 text-xl font-Montserrat"
+                  className="focus:bg-sky-600 text-xl font-Montserrat lg:text-2xl"
                   value="M"
                 >
                   M
                 </option>
                 <option
-                  className="focus:bg-sky-600 text-xl font-Montserrat"
+                  className="focus:bg-sky-600 text-xl font-Montserrat lg:text-2xl"
                   value="L"
                 >
                   L
                 </option>
                 <option
-                  className="focus:bg-sky-600 text-xl font-Montserrat"
+                  className="focus:bg-sky-600 text-xl font-Montserrat lg:text-2xl"
                   value="XL"
                 >
                   XL
@@ -118,10 +152,10 @@ const DetailPage = () => {
                   XXL
                 </option>
               </select>
-            )}
           </div>
+            )}
           <div className="flex items-center justify-around w-full">
-            <button className="bg-sky-500 text-white w-40 my-6 h-10 rounded-xl font-Montserrat hover:bg-slate-300 ">
+            <button onClick={handleShoppingCart}  className="bg-sky-500 text-white w-40 my-6 h-10 rounded-xl font-Montserrat hover:bg-slate-300 ">
               Add to Cart
             </button>
 

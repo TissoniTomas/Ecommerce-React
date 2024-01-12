@@ -25,7 +25,7 @@ const CategoryPage = () => {
         <div className="grid grid-cols-1 gap-10 my-20 md:grid md:grid-cols-2 lg:grid-cols-3">
           
           {dataFiltered.map((item) => (
-            <div key={item.id}>
+            <div className="animate-fade-down animate-duration-[3000ms] animate-delay-1000" key={item.id}>
             <Link to={`/product/detail/${item.id}`}>
             <ItemCard data={item} />
             </Link>

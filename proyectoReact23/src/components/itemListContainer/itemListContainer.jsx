@@ -14,7 +14,7 @@ const itemListContainer = ({ section, data }) => {
         );
         console.log(dataFiltered);
         setDataFilter(dataFiltered);
-    
+
         break;
       }
 
@@ -31,11 +31,11 @@ const itemListContainer = ({ section, data }) => {
         console.log(data);
       }
     }
-  }, [section,data ]);
+  }, [section, data]);
 
   return (
     <>
-      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-10 md:grid-cols-2 grid-rows-1 lg:grid-cols-3 animate-fade-down animate-duration-[3000ms] animate-delay-1000">
         {dataFilter.map((item) => (
           <div className="content-center justify-items-stretch" key={item.id}>
             <ItemCard data={item} />

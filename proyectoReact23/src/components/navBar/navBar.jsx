@@ -1,48 +1,74 @@
-import { useEffect, useState } from "react";
+import React from 'react'
 import logo from "../../assets/Logo/logo.png";
-import "./navBar.css";
+import { useState, useContext } from "react";
+import { ModeContext } from "../../context/modeContext";
+
+
+import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+
 import { Link } from "react-router-dom";
 
-const navBar = () => {
-  const [mode, setMode] = useState(localStorage.getItem("theme"));
-  const [openMenu, setOpenMenu] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
-  const [openCategories, setOpenCategories] = useState(false);
+const NavBar = () => {
+    const { mode, setMode } = useContext(ModeContext);
 
-  const toggleMode = () => {
-    const newMode = mode === "light" ? "dark" : "light";
-    setMode(newMode);
-    localStorage.setItem("theme", newMode);
-  };
-
-  useEffect(() => {
-    console.log(mode);
-  }, [mode]);
-
-  const toggleNavBar = () => {
-    setOpenMenu(!openMenu);
-  };
-
-  const toggleCategories = () => {
-    setOpenCategories(!openCategories);
-  };
-
-  const toggleNavBarKey = (e) => {
-    e.key === "Escape" ? setOpenCategories(!openCategories) : null;
-  };
-
+    const [openMenu, setOpenMenu] = useState(false);
+    const [openProfile, setOpenProfile] = useState(false);
+    const [openCategories, setOpenCategories] = useState(false);
+    const [shoppingCart] = useContext(ShoppingCartContext);
+  
+    const toggleMode = () => {
+      setTimeout(() => {
+        const newMode = mode === "light" ? "dark" : "light";
+        setMode(newMode);
+        sessionStorage.setItem("theme", newMode)
+      }, 500);
+    };
+  
+    const toggleNavBar = () => {
+      setOpenMenu(!openMenu);
+    };
+  
+    const toggleCategories = () => {
+      setOpenCategories(!openCategories);
+    };
+  
+    const toggleNavBarKey = (e) => {
+      e.key === "Escape" ? setOpenCategories(!openCategories) : null;
+    };
+  
   return (
     <>
-      <nav
+    /**LIGHT MODE
+ * 
+ * Titulos : gray-900
+ * Textos: gray-600 
+ * Bg Botones: cyan-700
+ * Texto botones : white font-medium
+ * Hover Iconos : bg-gray-100
+ * Sections : bg-gray-50
+   Iconos : gray-500
+ * 
+ * DARK MODE
+ * 
+ * BG: bg-gray-900
+ * Titulos : white
+ * Textos: gray-400
+ * Bg Botones: cyan-700
+ * Texto botones : white font-medium
+ * Hover Iconos : bg-gray-700
+ Iconos: gray-400
+ * Sections : bg-gray-800
+ */
+    <nav
         className={` ${
-          mode === "light" ? "bg-white" : "bg-black"
-        } border-b border-black mx-10 lg:flex justify-between relative`}
+          mode === "light" ? "bg-white " : "bg-gray-900"
+        } lg:flex justify-evenly  w-full box-border lg:h-64 top-0 z-20  `}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between ">
           <Link to="/">
             <img className="w-48 h-48" src={logo} />
           </Link>
-          <span className="lg:hidden" onClick={toggleNavBar}>
+          <span className="lg:hidden mr-5" onClick={toggleNavBar}>
             {openMenu ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +76,9 @@ const navBar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-10 h-10"
+                className={`w-10 h-10 ${
+                  mode === "light" ? "text-gray-500" : "text-gray-400"
+                }`}
               >
                 <path
                   strokeLinecap="round"
@@ -65,7 +93,9 @@ const navBar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-10 h-10"
+                className={`w-10 h-10 ${
+                  mode === "light" ? "text-gray-500" : "text-gray-400"
+                }`}
               >
                 <path
                   strokeLinecap="round"
@@ -77,16 +107,16 @@ const navBar = () => {
           </span>
         </div>
         <ul
-          className={`tungsten-bold text-3xl flex flex-col items-center text-center ${
+          className={`font-Montserrat text-xl flex flex-col items-center text-center ${
             openMenu ? "flex" : "hidden"
-          }  lg:flex-row lg:items-center lg:flex lg:mr-8`}
+          }  lg:flex-row lg:items-center lg:flex lg:mr-8 whitespace-nowrap relative `}
         >
           <Link to="/">
             <li
               onClick={openMenu}
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-black" : "text-white"
-              } `}
+                mode === "light" ? "text-gray-900" : "text-white"
+              } lg:text-3xl `}
             >
               HOME
             </li>
@@ -94,8 +124,8 @@ const navBar = () => {
           <Link to="/products">
             <li
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-black" : "text-white"
-              } `}
+                mode === "light" ? "text-gray-900" : "text-white"
+              } lg:text-3xl `}
               onClick={openMenu}
             >
               PRODUCTS
@@ -103,28 +133,28 @@ const navBar = () => {
           </Link>
 
           <li
-            onMouseOver={toggleCategories}
             onKeyUp={toggleNavBarKey}
+            onClick={toggleCategories}
+            onMouseEnter={toggleCategories}
+           
+           
             tabIndex="0"
-            className={`mt-10 lg:mx-10 cursor-pointer relative ${
-              mode === "light" ? "text-black" : "text-white"
-            }`}
+            className={`mt-10 lg:mx-10 cursor-pointer   ${
+              mode === "light" ? "text-gray-900" : "text-white"
+            } lg:text-3xl `}
           >
             CATEGORIES
           </li>
-
-          {openCategories && (
-            <ul
-              onMouseLeave={toggleCategories}
-              className="bg-white my-10 flex lg:absolute lg:top-[60%] lg:left-[67%]  lg:flex flex-col w-32 items-center lg:border lg:border-gray-700 "
-            >
+          { openCategories &&
+            <ul onMouseLeave={toggleCategories}  className={` my-4 h-40 lg:my-0 flex lg:absolute lg:top-44 lg:right-2  lg:justify-between lg:flex-row lg:w-[1400px] flex-col w-32 items-center  z-10 animate-fade-down animate-ease-in-out ${ mode === "light" ? "bg-white " : "bg-black"} `}>
               <Link to="/category/men's clothing">
                 <li
                   onClick={() => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className="py-4 hover:bg-sky-500 w-32"
+                  
+                  className={`py-4 hover:bg-sky-500 w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900" : "text-white"}`}
                 >
                   MEN'S CLOTHING
                 </li>
@@ -135,7 +165,7 @@ const navBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className="py-4 hover:bg-sky-500 w-32"
+                  className={`py-4 hover:bg-sky-500 w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900" : "text-white"}`}
                 >
                   WOMAN'S CLOTHING
                 </li>
@@ -146,7 +176,7 @@ const navBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className="py-4 hover:bg-sky-500 w-32"
+                  className={`py-4 hover:bg-sky-500 w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900" : "text-white"}`}
                 >
                   JEWELERY
                 </li>
@@ -157,25 +187,26 @@ const navBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className="py-4 hover:bg-sky-500 w-32"
+                  className={`py-4 hover:bg-sky-500 w-full text-3xl mr-4 ${mode === "light" ? "text-gray-900" : "text-white"}`}
                 >
                   ELECTRONICS
                 </li>
               </Link>
             </ul>
-          )}
+          }
+
           <Link to="/contact">
             <li
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-black" : "text-white"
-              }`}
-              onClick={openMenu} 
+                mode === "light" ? "text-gray-900" : "text-white"
+              }  lg:text-3xl`}
+              onClick={openMenu}
             >
               CONTACT
             </li>
           </Link>
 
-          <Link className="mt-10 lg:mx-10 flex">
+          <Link to="/cart" className="mt-10 lg:mx-10 flex">
             {mode === "light" ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -207,9 +238,9 @@ const navBar = () => {
             )}
 
             <span
-              className={` ${mode === "light" ? "text-black" : "text-white"} `}
+              className={` ${mode === "light" ? "text-gray-900" : "text-white"} lg:text-3xl `}
             >
-              5
+               {shoppingCart}
             </span>
           </Link>
           {mode === "light" ? (
@@ -218,7 +249,7 @@ const navBar = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
-              className="w-8 h-8 transition transform hover:scale-105 cursor-pointer mt-10"
+              className="w-8 h-8 transition transform hover:scale-105 cursor-pointer mt-10 hover:bg-gray-700"
             >
               <path d="M8 1a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 1ZM10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM12.95 4.11a.75.75 0 1 0-1.06-1.06l-1.062 1.06a.75.75 0 0 0 1.061 1.062l1.06-1.061ZM15 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 15 8ZM11.89 12.95a.75.75 0 0 0 1.06-1.06l-1.06-1.062a.75.75 0 0 0-1.062 1.061l1.061 1.06ZM8 12a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 12ZM5.172 11.89a.75.75 0 0 0-1.061-1.062L3.05 11.89a.75.75 0 1 0 1.06 1.06l1.06-1.06ZM4 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 4 8ZM4.11 5.172A.75.75 0 0 0 5.173 4.11L4.11 3.05a.75.75 0 1 0-1.06 1.06l1.06 1.06Z" />
             </svg>
@@ -230,7 +261,7 @@ const navBar = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-8 h-8 text-white transition transform hover:scale-105 cursor-pointer mt-10"
+              className="w-8 h-8 text-white transition transform hover:scale-105 cursor-pointer mt-10 hover:bg-gray-100"
             >
               <path
                 strokeLinecap="round"
@@ -241,7 +272,7 @@ const navBar = () => {
           )}
           <Link
             className={`mt-10 lg:mx-10 ${
-              mode === "light" ? "text-black" : "text-white"
+              mode === "light" ? "text-gray-900" : "text-white"
             } lg:relative flex flex-col items-center`}
             to="/category/profile"
             onClick={() => setOpenProfile(!openProfile)}
@@ -262,7 +293,7 @@ const navBar = () => {
             </svg>
 
             {openProfile && (
-              <ul className="bg-white my-10 lg:absolute lg:top-10 flex flex-col w-32 items-start lg:border lg:border-gray-700 lg:rounded-xl ">
+              <ul className="bg-white my-10 lg:absolute lg:top-10 flex flex-col w-32 items-start lg:border lg:border-gray-700 lg:rounded-xl animate-fade-down animate-ease-in-out ">
                 <li className="py-4 text-center hover:bg-sky-500 w-full">
                   MY PROFILE
                 </li>
@@ -279,9 +310,7 @@ const navBar = () => {
         </ul>
       </nav>
     </>
-  );
-};
+  )
+}
 
-export default navBar;
-
-// ml-20 flex transition transform hover:scale-105 cursor-pointer
+export default NavBar
