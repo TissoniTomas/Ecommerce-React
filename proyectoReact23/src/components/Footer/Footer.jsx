@@ -5,7 +5,7 @@ import IGLM from "../../assets/social-media/instagram-lightmode.png";
 import XLM from "../../assets/social-media/x-lightmode.jpg"
 import FBDM from "../../assets/social-media/facebook-darkmode.png"
 import IGDM from "../../assets/social-media/instagram-darkmode.png"
-import XDM from "../../assets/social-media/x-darkmode.jpg"
+import XDM from "../../assets/social-media/x-darkmode.png"
 import { ModeContext } from "../../context/modeContext";
 
 const Footer = () => {
@@ -16,7 +16,7 @@ const Footer = () => {
 
 
   return (
-    <div className={`border-t flex flex-col items-center justify-center p-20 ${mode === "light" ? "bg-white border-black" : "bg-black border-white"}`}>
+    <div className={`border-t flex flex-col items-center justify-center p-20 ${mode === "light" ? "bg-white border-black" : "bg-gray-800 border-white"}`}>
       <h1 className={`mt-20 ${mode === "light"? "text-gray-500" : "text-white"}`}>The Last Store 2023 ©</h1>
       <ul className={`mt-20 flex flex-col ${mode === "light"? "text-gray-500" : "text-white"}`}>
         <Link className="m-5" to="/">

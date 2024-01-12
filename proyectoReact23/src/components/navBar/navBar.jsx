@@ -38,27 +38,7 @@ const NavBar = () => {
   
   return (
     <>
-    /**LIGHT MODE
- * 
- * Titulos : gray-900
- * Textos: gray-600 
- * Bg Botones: cyan-700
- * Texto botones : white font-medium
- * Hover Iconos : bg-gray-100
- * Sections : bg-gray-50
-   Iconos : gray-500
- * 
- * DARK MODE
- * 
- * BG: bg-gray-900
- * Titulos : white
- * Textos: gray-400
- * Bg Botones: cyan-700
- * Texto botones : white font-medium
- * Hover Iconos : bg-gray-700
- Iconos: gray-400
- * Sections : bg-gray-800
- */
+   
     <nav
         className={` ${
           mode === "light" ? "bg-white " : "bg-gray-900"
@@ -109,13 +89,13 @@ const NavBar = () => {
         <ul
           className={`font-Montserrat text-xl flex flex-col items-center text-center ${
             openMenu ? "flex" : "hidden"
-          }  lg:flex-row lg:items-center lg:flex lg:mr-8 whitespace-nowrap relative `}
+          }  lg:flex-row lg:items-center lg:flex lg:mr-8 whitespace-nowrap relative  `}
         >
           <Link to="/">
             <li
               onClick={openMenu}
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-gray-900" : "text-white"
+                mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"
               } lg:text-3xl `}
             >
               HOME
@@ -124,7 +104,7 @@ const NavBar = () => {
           <Link to="/products">
             <li
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-gray-900" : "text-white"
+                mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"
               } lg:text-3xl `}
               onClick={openMenu}
             >
@@ -140,13 +120,13 @@ const NavBar = () => {
            
             tabIndex="0"
             className={`mt-10 lg:mx-10 cursor-pointer   ${
-              mode === "light" ? "text-gray-900" : "text-white"
+              mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"
             } lg:text-3xl `}
           >
             CATEGORIES
           </li>
           { openCategories &&
-            <ul onMouseLeave={toggleCategories}  className={` my-4 h-40 lg:my-0 flex lg:absolute lg:top-44 lg:right-2  lg:justify-between lg:flex-row lg:w-[1400px] flex-col w-32 items-center  z-10 animate-fade-down animate-ease-in-out ${ mode === "light" ? "bg-white " : "bg-black"} `}>
+            <ul onMouseLeave={toggleCategories}  className={` my-4 h-40 lg:my-0 flex lg:absolute lg:top-44 lg:right-2  lg:justify-between lg:flex-row lg:w-[1400px] flex-col w-32 items-center  z-10 animate-fade-down animate-ease-in-out ${ mode === "light" ? "bg-white " : "bg-gray-900"} `}>
               <Link to="/category/men's clothing">
                 <li
                   onClick={() => {
@@ -154,7 +134,7 @@ const NavBar = () => {
                     toggleNavBar();
                   }}
                   
-                  className={`py-4 hover:bg-sky-500 w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900" : "text-white"}`}
+                  className={`py-4  w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}
                 >
                   MEN'S CLOTHING
                 </li>
@@ -165,7 +145,7 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4 hover:bg-sky-500 w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900" : "text-white"}`}
+                  className={`py-4  w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}
                 >
                   WOMAN'S CLOTHING
                 </li>
@@ -176,7 +156,7 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4 hover:bg-sky-500 w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900" : "text-white"}`}
+                  className={`py-4  w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}
                 >
                   JEWELERY
                 </li>
@@ -187,7 +167,7 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4 hover:bg-sky-500 w-full text-3xl mr-4 ${mode === "light" ? "text-gray-900" : "text-white"}`}
+                  className={`py-4  w-full text-3xl mr-4 ${mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}
                 >
                   ELECTRONICS
                 </li>
@@ -198,7 +178,7 @@ const NavBar = () => {
           <Link to="/contact">
             <li
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-gray-900" : "text-white"
+                mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"
               }  lg:text-3xl`}
               onClick={openMenu}
             >
@@ -212,7 +192,7 @@ const NavBar = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="w-6 h-6 bg-white "
+                className="w-8 h-8 bg-white hover:bg-gray-300 "
               >
                 <path
                   fillRule="evenodd"
@@ -227,7 +207,7 @@ const NavBar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 text-white "
+                className="w-8 h-8 text-white hover:bg-gray-700"
               >
                 <path
                   strokeLinecap="round"
@@ -238,7 +218,7 @@ const NavBar = () => {
             )}
 
             <span
-              className={` ${mode === "light" ? "text-gray-900" : "text-white"} lg:text-3xl `}
+              className={` ${mode === "light" ? "text-gray-900 " : "text-white "} lg:text-3xl `}
             >
                {shoppingCart}
             </span>
@@ -249,7 +229,7 @@ const NavBar = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
-              className="w-8 h-8 transition transform hover:scale-105 cursor-pointer mt-10 hover:bg-gray-700"
+              className="w-8 h-8 transition transform hover:scale-105 cursor-pointer mt-10 hover:bg-gray-300"
             >
               <path d="M8 1a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 1ZM10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM12.95 4.11a.75.75 0 1 0-1.06-1.06l-1.062 1.06a.75.75 0 0 0 1.061 1.062l1.06-1.061ZM15 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 15 8ZM11.89 12.95a.75.75 0 0 0 1.06-1.06l-1.06-1.062a.75.75 0 0 0-1.062 1.061l1.061 1.06ZM8 12a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 12ZM5.172 11.89a.75.75 0 0 0-1.061-1.062L3.05 11.89a.75.75 0 1 0 1.06 1.06l1.06-1.06ZM4 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 4 8ZM4.11 5.172A.75.75 0 0 0 5.173 4.11L4.11 3.05a.75.75 0 1 0-1.06 1.06l1.06 1.06Z" />
             </svg>
@@ -261,7 +241,7 @@ const NavBar = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-8 h-8 text-white transition transform hover:scale-105 cursor-pointer mt-10 hover:bg-gray-100"
+              className="w-8 h-8 text-white transition transform hover:scale-105 cursor-pointer mt-10 hover:bg-gray-700"
             >
               <path
                 strokeLinecap="round"
@@ -283,7 +263,7 @@ const NavBar = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-8 h-8"
+              className="w-8 h-8 hover:bg-gray-300"
             >
               <path
                 strokeLinecap="round"
@@ -293,14 +273,14 @@ const NavBar = () => {
             </svg>
 
             {openProfile && (
-              <ul className="bg-white my-10 lg:absolute lg:top-10 flex flex-col w-32 items-start lg:border lg:border-gray-700 lg:rounded-xl animate-fade-down animate-ease-in-out ">
-                <li className="py-4 text-center hover:bg-sky-500 w-full">
+              <ul className={`my-10 lg:absolute lg:top-10 flex flex-col w-36 items-start lg:border lg:border-gray-700 lg:rounded-xl animate-fade-down animate-ease-in-out ${mode === "light" ?"bg-white" : "bg-gray-900" }`}>
+                <li className={`py-4 text-center w-full ${mode === "light"? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}>
                   MY PROFILE
                 </li>
-                <li className="py-4 text-center hover:bg-sky-500 w-full">
+                <li className={`py-4 text-center w-full ${mode === "light"? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}>
                   SETTINGS
                 </li>
-                <li className="py-4 text-center hover:bg-sky-500 w-full">
+                <li className={`py-4 text-center w-full ${mode === "light"? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}>
                   LOG OUT
                 </li>
                 <li></li>
