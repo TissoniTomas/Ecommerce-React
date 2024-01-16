@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import {ModeContext} from "../../context/modeContext"
 import { Label, TextInput } from "keep-react";
 import { Button } from "keep-react";
 
@@ -8,12 +9,16 @@ import { Textarea } from "keep-react";
 
 const ContactPage = () => {
   const [option, setOption] = useState("Pick a option");
-    
+  const {mode} = useContext(ModeContext)
+
+  const SubmitForm = () =>{
+
+  }
 
   return (
-    <div className="flex flex-col items-center mx-6">
-      <h1 className="font-Montserrat text-3xl my-10">Contact Us</h1>
-      <p className="text-center font-Inter my-10 w-72 ">
+    <div className={`flex flex-col items-center ${mode === "light" ? "bg-white" : "bg-gray-900"}`}>
+      <h1 className={`font-Montserrat text-4xl my-10 ${mode === "light" ? "text-gray-900" : "text-white" }`}>Contact Us</h1>
+      <p className={`text-center font-Inter my-10 w-72 ${mode === "light" ? "text-gray-900" : "text-gray-400"}`}>
         Your messages through our contact form are vital! They allow us to
         swiftly address your needs, ensuring a seamless and satisfying
         experience. Your direct input shapes our services, emphasizing our
@@ -22,10 +27,10 @@ const ContactPage = () => {
       </p>
       <form action="contact" method="post">
         <div>
-          <Label htmlFor="#id-2" value="Your Name" color="info" />
+          <Label htmlFor="#id-2" value="Your Name" className="text-sky-400"/>
           <TextInput
             id="#id-2"
-            placeholder="Info Color Input"
+            placeholder="Your Name"
             color="info"
             sizing="md"
             type="text"
@@ -33,10 +38,10 @@ const ContactPage = () => {
           />
         </div>
         <div>
-          <Label htmlFor="#id-2" value="Your Surname" color="info" />
+          <Label htmlFor="#id-2" value="Your Surname" className="text-sky-400" />
           <TextInput
             id="#id-2"
-            placeholder="Info Color Input"
+            placeholder="Your Surname"
             color="info"
             sizing="md"
             type="text"
@@ -45,14 +50,14 @@ const ContactPage = () => {
         </div>
         <div>
           <Label
-            className="font-Inter font-bold"
+            className="font-Inter font-bold text-sky-400"
             htmlFor="#id-2"
             value="Your Email"
-            color="info"
+           
           />
           <TextInput
             id="#id-2"
-            placeholder="Info Color Input"
+            placeholder="Your Email"
             color="info"
             sizing="md"
             type="text"
@@ -62,7 +67,7 @@ const ContactPage = () => {
           />
         </div>
         <div>
-          <Label htmlFor="#id-2" value="Reason of your contact" color="info" />
+          <Label htmlFor="#id-2" value="Reason of your contact" className="text-sky-400"/>
           <Dropdown
             label={option}
             size="sm"
@@ -83,7 +88,7 @@ const ContactPage = () => {
             </Dropdown.Item>
           </Dropdown>
         </div>
-        <Label htmlFor="#id-2" value="Leave your comment" color="info" />
+        <Label htmlFor="#id-2" value="Leave your comment" className="text-sky-400"/>
         <Textarea
           id="comment"
           placeholder="Leave a comment..."
@@ -94,7 +99,7 @@ const ContactPage = () => {
         />
         <div className="flex mt-5 justify-around w-72">
 
-        <Button size="md" type="primary">Send Form</Button>
+        <Button size="md" type="primary" onSubmit={SubmitForm}>Send Form</Button>
         <Button type="reset" size="md" color="error">Reset Form</Button>
       
         </div>

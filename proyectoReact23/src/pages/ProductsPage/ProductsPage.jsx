@@ -35,12 +35,12 @@ const ProductsPage = () => {
   };
 
   return (
-    <main className={`flex flex-col items-center ${mode === "light" ? "bg-white ": "bg-black"}`}>
-      <h1 className="font-Montserrat text-6xl hover:bg-black hover:text-white mt-20 ">
+    <main className={`flex flex-col items-center ${mode === "light" ? "bg-white ": "bg-gray-900"}`}>
+      <h1 className={`font-Montserrat text-6xl mt-20 ${mode === "light" ? "text-gray-900" : "text-white"}`}>
         Products
       </h1>
-      <div className="">
-        <label className="font-Inter text-xl font-bold">
+      <div className="flex items-center justify-evenly w-full mt-20">
+        <label className={`font-Inter text-2xl font-bold ${mode === "light" ? "text-gray-900" : "text-white"}`}>
           Filtrar por nombre :{" "}
         </label>
 
@@ -54,16 +54,10 @@ const ProductsPage = () => {
           onMouseLeave={handleFocus}
           value={filtro}
           className={`${
-            focus ? "focus: border-b border-sky-500 !outline-none "  : "border border-sky-500"
-          }`}
+            !focus ? "focus: border-b border-sky-500 outline-none" : "border-2 border-sky-500"
+          } ${mode === "light" ? "bg-white text-gray-900" : "bg-gray-900 text-white"} text-2xl w-96`}
         />
-        <button
-          className="w-28 h-10 font-Inter font-extrabold rounded-lg ml-10 hover:bg-sky-500"
-          onClick={clearFilter}
-          type="reset"
-        >
-          Clear
-        </button>
+         <button type="reset" onClick={clearFilter}  className="bg-cyan-700 text-white w-32 my-6 h-10 rounded-xl font-Inter font-medium text-2xl ">Clear</button>
       </div>
       {spinner ? (
         <div className="flex items-center my-20">
