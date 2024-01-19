@@ -115,7 +115,7 @@ const NavBar = () => {
           <li
             onKeyUp={toggleNavBarKey}
             onClick={toggleCategories}
-            onMouseEnter={toggleCategories}
+           
            
            
             tabIndex="0"
