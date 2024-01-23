@@ -1,16 +1,16 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import SpinnerFB from "../../components/Spinner/Spinner";
-import ItemCard from "../../components/ItemCard/ItemCard"; 
-import { ModeContext } from "../../context/modeContext";
+import ItemCard from "../../components/ItemCard/ItemCard";
+
+import { useSelector } from "react-redux";
 
 const ProductsPage = () => {
+  const mode = useSelector((state) => state.mode.mode);
   const { data, spinner } = useFetch("https://fakestoreapi.com/products");
   const [filtro, setFiltro] = useState("");
   const [dataFilt, setDataFilt] = useState(data);
   const [focus, setFocus] = useState(false);
-
-  const {mode} = useContext(ModeContext)
 
   useEffect(() => {
     const filteredData = data.filter((item) =>
@@ -22,7 +22,7 @@ const ProductsPage = () => {
   const handleInput = (e) => {
     const valorFiltro = e.target.value;
     setFiltro(valorFiltro);
-    setFocus(true)
+    setFocus(true);
   };
 
   const clearFilter = () => {
@@ -35,12 +35,24 @@ const ProductsPage = () => {
   };
 
   return (
-    <main className={`flex flex-col items-center ${mode === "light" ? "bg-white ": "bg-gray-900"}`}>
-      <h1 className={`font-Montserrat text-6xl mt-20 ${mode === "light" ? "text-gray-900" : "text-white"}`}>
+    <main
+      className={`flex flex-col items-center ${
+        mode === "light" ? "bg-white " : "bg-gray-900"
+      }`}
+    >
+      <h1
+        className={`font-Montserrat text-6xl mt-20 ${
+          mode === "light" ? "text-gray-900" : "text-white"
+        }`}
+      >
         Products
       </h1>
       <div className="flex items-center justify-evenly w-full mt-20">
-        <label className={`font-Inter text-2xl font-bold ${mode === "light" ? "text-gray-900" : "text-white"}`}>
+        <label
+          className={`font-Inter text-2xl font-bold ${
+            mode === "light" ? "text-gray-900" : "text-white"
+          }`}
+        >
           Filtrar por nombre :{" "}
         </label>
 
@@ -54,10 +66,22 @@ const ProductsPage = () => {
           onMouseLeave={handleFocus}
           value={filtro}
           className={`${
-            !focus ? "focus: border-b border-sky-500 outline-none" : "border-2 border-sky-500"
-          } ${mode === "light" ? "bg-white text-gray-900" : "bg-gray-900 text-white"} text-2xl w-96`}
+            !focus
+              ? "focus: border-b border-sky-500 outline-none"
+              : "border-2 border-sky-500"
+          } ${
+            mode === "light"
+              ? "bg-white text-gray-900"
+              : "bg-gray-900 text-white"
+          } text-2xl w-96`}
         />
-         <button type="reset" onClick={clearFilter}  className="bg-cyan-700 text-white w-32 my-6 h-10 rounded-xl font-Inter font-medium text-2xl ">Clear</button>
+        <button
+          type="reset"
+          onClick={clearFilter}
+          className="bg-cyan-700 text-white w-32 my-6 h-10 rounded-xl font-Inter font-medium text-2xl "
+        >
+          Clear
+        </button>
       </div>
       {spinner ? (
         <div className="flex items-center my-20">

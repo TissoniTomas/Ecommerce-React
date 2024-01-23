@@ -1,7 +1,5 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { ModeProvider } from "./context/modeContext";
-import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -17,8 +15,7 @@ import CartPage from "./pages/CartPage/CartPage";
 
 const App = () => {
   return (
-    <ShoppingCartProvider>
-      <ModeProvider>
+    
         <Router>
           <Header />
           <ScrollTop />
@@ -36,8 +33,7 @@ const App = () => {
 
           <Footer />
         </Router>
-      </ModeProvider>
-    </ShoppingCartProvider>
+      
   );
 };
 

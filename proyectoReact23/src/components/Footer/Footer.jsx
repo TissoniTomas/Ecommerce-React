@@ -1,4 +1,4 @@
-import {useContext, useRef, } from "react";
+
 import { Link } from "react-router-dom";
 import FBLM from "../../assets/social-media/facebook-lightmode.jpg";
 import IGLM from "../../assets/social-media/instagram-lightmode.png";
@@ -6,11 +6,14 @@ import XLM from "../../assets/social-media/x-lightmode.jpg"
 import FBDM from "../../assets/social-media/facebook-darkmode.png"
 import IGDM from "../../assets/social-media/instagram-darkmode.png"
 import XDM from "../../assets/social-media/x-darkmode.png"
-import { ModeContext } from "../../context/modeContext";
+
+import {useSelector} from "react-redux";
+
 
 const Footer = () => {
   
-  const {mode} = useContext(ModeContext)
+  
+  const mode = useSelector((state)=> state.mode.mode)
 
 
 

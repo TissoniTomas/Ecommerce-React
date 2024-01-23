@@ -1,12 +1,14 @@
-import {useContext} from "react";
-import { ModeContext } from "../../context/modeContext";
 
 
+
+import {useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 
 const ItemCard = ({ data }) => {
-
-  const {mode} = useContext(ModeContext);
+  
+  
+  const mode = useSelector((state) => state.mode.mode);
+  
   
   return (
     <>

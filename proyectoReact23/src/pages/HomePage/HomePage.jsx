@@ -1,7 +1,5 @@
-import { useState, useContext } from "react";
-import { ModeContext } from "../../context/modeContext";
-import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 
+import {useSelector} from "react-redux";
 import SpinnerFB from "../../components/Spinner/Spinner";
 import ItemListContainer from "../../components/itemListContainer/itemListContainer";
 import useFetch from "../../hooks/useFetch";
@@ -9,9 +7,10 @@ import useFetch from "../../hooks/useFetch";
 const HomePage = () => {
   const { data, spinner } = useFetch("https://fakestoreapi.com/products");
 
-  const { shoppingCart } = useContext(ShoppingCartContext);
+  const mode = useSelector((state) => state.mode.mode);
+  
 
-  const { mode, setMode } = useContext(ModeContext);
+  
 
   return (
     <>

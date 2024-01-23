@@ -1,45 +1,43 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import logo from "../../assets/Logo/logo.png";
-import { useState, useContext } from "react";
-import { ModeContext } from "../../context/modeContext";
-
-
-import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleMode } from "../../redux/features/mode/modeSlice";
 
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-    const { mode, setMode } = useContext(ModeContext);
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.mode.mode);
 
-    const [openMenu, setOpenMenu] = useState(false);
-    const [openProfile, setOpenProfile] = useState(false);
-    const [openCategories, setOpenCategories] = useState(false);
-    const [shoppingCart] = useContext(ShoppingCartContext);
-  
-    const toggleMode = () => {
-      setTimeout(() => {
-        const newMode = mode === "light" ? "dark" : "light";
-        setMode(newMode);
-        sessionStorage.setItem("theme", newMode)
-      }, 500);
-    };
-  
-    const toggleNavBar = () => {
-      setOpenMenu(!openMenu);
-    };
-  
-    const toggleCategories = () => {
-      setOpenCategories(!openCategories);
-    };
-  
-    const toggleNavBarKey = (e) => {
-      e.key === "Escape" ? setOpenCategories(!openCategories) : null;
-    };
-  
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+  const [openCategories, setOpenCategories] = useState(false);
+
+  useEffect(()=>{
+    sessionStorage.setItem("theme", mode);
+  },[mode])
+
+  const handleToggleMode = () => {
+    dispatch(toggleMode());
+    
+  };
+
+  const toggleNavBar = () => {
+    setOpenMenu(!openMenu);
+  };
+
+  const toggleCategories = () => {
+    setOpenCategories(!openCategories);
+  };
+
+  const toggleNavBarKey = (e) => {
+    e.key === "Escape" ? setOpenCategories(!openCategories) : null;
+  };
+
   return (
     <>
-   
-    <nav
+      <nav
         className={` ${
           mode === "light" ? "bg-white " : "bg-gray-900"
         } lg:flex justify-evenly  w-full box-border lg:h-64 top-0 z-20  `}
@@ -95,7 +93,9 @@ const NavBar = () => {
             <li
               onClick={openMenu}
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"
+                mode === "light"
+                  ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                  : "text-white hover:underline hover:decoration-white"
               } lg:text-3xl `}
             >
               HOME
@@ -104,7 +104,9 @@ const NavBar = () => {
           <Link to="/products">
             <li
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"
+                mode === "light"
+                  ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                  : "text-white hover:underline hover:decoration-white"
               } lg:text-3xl `}
               onClick={openMenu}
             >
@@ -115,26 +117,33 @@ const NavBar = () => {
           <li
             onKeyUp={toggleNavBarKey}
             onClick={toggleCategories}
-           
-           
-           
             tabIndex="0"
             className={`mt-10 lg:mx-10 cursor-pointer   ${
-              mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"
+              mode === "light"
+                ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                : "text-white hover:underline hover:decoration-white"
             } lg:text-3xl `}
           >
             CATEGORIES
           </li>
-          { openCategories &&
-            <ul onMouseLeave={toggleCategories}  className={` my-4 h-40 lg:my-0 flex lg:absolute lg:top-44 lg:right-2  lg:justify-between lg:flex-row lg:w-[1400px] flex-col w-32 items-center  z-10 animate-fade-down animate-ease-in-out ${ mode === "light" ? "bg-white " : "bg-gray-900"} `}>
+          {openCategories && (
+            <ul
+              onMouseLeave={toggleCategories}
+              className={` my-4 h-40 lg:my-0 flex lg:absolute lg:top-44 lg:right-2  lg:justify-between lg:flex-row lg:w-[1400px] flex-col w-32 items-center  z-10 animate-fade-down animate-ease-in-out ${
+                mode === "light" ? "bg-white " : "bg-gray-900"
+              } `}
+            >
               <Link to="/category/men's clothing">
                 <li
                   onClick={() => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  
-                  className={`py-4  w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}
+                  className={`py-4  w-full text-3xl ml-4 ${
+                    mode === "light"
+                      ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                      : "text-white hover:underline hover:decoration-white"
+                  }`}
                 >
                   MEN'S CLOTHING
                 </li>
@@ -145,7 +154,11 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4  w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}
+                  className={`py-4  w-full text-3xl ml-4 ${
+                    mode === "light"
+                      ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                      : "text-white hover:underline hover:decoration-white"
+                  }`}
                 >
                   WOMAN'S CLOTHING
                 </li>
@@ -156,7 +169,11 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4  w-full text-3xl ml-4 ${mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}
+                  className={`py-4  w-full text-3xl ml-4 ${
+                    mode === "light"
+                      ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                      : "text-white hover:underline hover:decoration-white"
+                  }`}
                 >
                   JEWELERY
                 </li>
@@ -167,18 +184,24 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4  w-full text-3xl mr-4 ${mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}
+                  className={`py-4  w-full text-3xl mr-4 ${
+                    mode === "light"
+                      ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                      : "text-white hover:underline hover:decoration-white"
+                  }`}
                 >
                   ELECTRONICS
                 </li>
               </Link>
             </ul>
-          }
+          )}
 
           <Link to="/contact">
             <li
               className={`mt-10 lg:mx-10 ${
-                mode === "light" ? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"
+                mode === "light"
+                  ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                  : "text-white hover:underline hover:decoration-white"
               }  lg:text-3xl`}
               onClick={openMenu}
             >
@@ -218,14 +241,16 @@ const NavBar = () => {
             )}
 
             <span
-              className={` ${mode === "light" ? "text-gray-900 " : "text-white "} lg:text-3xl `}
+              className={` ${
+                mode === "light" ? "text-gray-900 " : "text-white "
+              } lg:text-3xl `}
             >
-               {shoppingCart}
+              4
             </span>
           </Link>
           {mode === "light" ? (
             <svg
-              onClick={toggleMode}
+              onClick={handleToggleMode}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
@@ -235,7 +260,7 @@ const NavBar = () => {
             </svg>
           ) : (
             <svg
-              onClick={toggleMode}
+              onClick={handleToggleMode}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -273,14 +298,36 @@ const NavBar = () => {
             </svg>
 
             {openProfile && (
-              <ul className={`my-10 lg:absolute lg:top-10 flex flex-col w-36 items-start lg:border lg:border-gray-700 lg:rounded-xl animate-fade-down animate-ease-in-out ${mode === "light" ?"bg-white" : "bg-gray-900" }`}>
-                <li className={`py-4 text-center w-full ${mode === "light"? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}>
+              <ul
+                className={`my-10 lg:absolute lg:top-10 flex flex-col w-36 items-start lg:border lg:border-gray-700 lg:rounded-xl animate-fade-down animate-ease-in-out ${
+                  mode === "light" ? "bg-white" : "bg-gray-900"
+                }`}
+              >
+                <li
+                  className={`py-4 text-center w-full ${
+                    mode === "light"
+                      ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                      : "text-white hover:underline hover:decoration-white"
+                  }`}
+                >
                   MY PROFILE
                 </li>
-                <li className={`py-4 text-center w-full ${mode === "light"? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}>
+                <li
+                  className={`py-4 text-center w-full ${
+                    mode === "light"
+                      ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                      : "text-white hover:underline hover:decoration-white"
+                  }`}
+                >
                   SETTINGS
                 </li>
-                <li className={`py-4 text-center w-full ${mode === "light"? "text-gray-900 hover:underline hover:decoration-gray-900" : "text-white hover:underline hover:decoration-white"}`}>
+                <li
+                  className={`py-4 text-center w-full ${
+                    mode === "light"
+                      ? "text-gray-900 hover:underline hover:decoration-gray-900"
+                      : "text-white hover:underline hover:decoration-white"
+                  }`}
+                >
                   LOG OUT
                 </li>
                 <li></li>
@@ -290,7 +337,7 @@ const NavBar = () => {
         </ul>
       </nav>
     </>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

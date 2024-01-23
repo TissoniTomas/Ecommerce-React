@@ -3,17 +3,18 @@ import ItemCard from "../../components/ItemCard/ItemCard";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import SpinnerFB from "../../components/Spinner/Spinner";
-import { ModeContext } from "../../context/modeContext";
-import { useContext } from "react";
+
+import {useSelector} from "react-redux";
 
 
 const CategoryPage = () => {
-
+  
+  const mode = useSelector((state) => state.mode.mode);
   const {data,spinner} = useFetch("https://fakestoreapi.com/products/")
  
   const { Categoryid } = useParams();
   const title = Categoryid.toUpperCase();
-  const {mode} = useContext(ModeContext)
+
 
  
   const dataFiltered = data.filter((item) => item.category === Categoryid);
