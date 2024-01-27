@@ -1,24 +1,60 @@
-import useFetch from "../../hooks/useFetch";
-import ItemCard from "../../components/ItemCard/ItemCard";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import SpinnerFB from "../../components/Spinner/Spinner";
 
-import {useSelector} from "react-redux";
+import ItemCard from "../../components/ItemCard/ItemCard";
+import { Link, useParams } from "react-router-dom";
+
+import SpinnerFB from "../../components/Spinner/Spinner";
+import { useContext, useState, useEffect } from "react";
+import { ModeContext } from "../../context/modeContext";
+import { db } from "../../firebase/firebaseConfig";
+import { collection, query, where, getDocs,  } from "firebase/firestore";
+
+
 
 
 const CategoryPage = () => {
   
-  const mode = useSelector((state) => state.mode.mode);
-  const {data,spinner} = useFetch("https://fakestoreapi.com/products/")
- 
+  const {mode} = useContext(ModeContext)
   const { Categoryid } = useParams();
+  const [gamesData, setGamesData] = useState([]);
+  const [spinner, setSpinner] = useState(true);
+
+
+  
+  useEffect(() => {
+    
+    
+    setTimeout(() => {
+      setSpinner(!spinner);
+      console.log(spinner);
+    }, 2000);
+
+
+    const q = query(collection(db, "games"), where("categorySection", "==", Categoryid));
+
+    const getGames = async () => {
+      const querySnapshot = await getDocs(q);
+      const docs = [];
+      querySnapshot.forEach((doc) => {
+    
+    
+        docs.push({ ...doc.data(), id: doc.id });
+        
+        setGamesData(docs);
+        console.log(docs);
+      });
+     
+    };
+ 
+
+
+    getGames();
+  }, [Categoryid]);
+
+  
+ 
   const title = Categoryid.toUpperCase();
 
 
- 
-  const dataFiltered = data.filter((item) => item.category === Categoryid);
-  console.log(dataFiltered);
 
   return (
     <>
@@ -28,7 +64,7 @@ const CategoryPage = () => {
           {spinner ? <SpinnerFB/> :
         <div className="grid grid-cols-1 gap-10 my-20 md:grid md:grid-cols-2 lg:grid-cols-3">
           
-          {dataFiltered.map((item) => (
+          {gamesData.map((item) => (
             <div className="animate-fade-down animate-duration-[3000ms] animate-delay-1000" key={item.id}>
             <Link to={`/product/detail/${item.id}`}>
             <ItemCard data={item} />

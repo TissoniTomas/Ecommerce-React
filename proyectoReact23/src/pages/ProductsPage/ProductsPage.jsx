@@ -1,23 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { ModeContext } from "../../context/modeContext";
 import useFetch from "../../hooks/useFetch";
 import SpinnerFB from "../../components/Spinner/Spinner";
 import ItemCard from "../../components/ItemCard/ItemCard";
+import { db } from "../../firebase/firebaseConfig";
 
-import { useSelector } from "react-redux";
+
 
 const ProductsPage = () => {
-  const mode = useSelector((state) => state.mode.mode);
-  const { data, spinner } = useFetch("https://fakestoreapi.com/products");
+
+  const {mode, setMode} = useContext(ModeContext)
+
+  const {gamesData, spinner} = useFetch(db)
   const [filtro, setFiltro] = useState("");
-  const [dataFilt, setDataFilt] = useState(data);
+  const [dataFilt, setDataFilt] = useState(gamesData);
   const [focus, setFocus] = useState(false);
 
   useEffect(() => {
-    const filteredData = data.filter((item) =>
-      item.title.toLowerCase().includes(filtro.toLowerCase())
+    const filteredData = gamesData.filter((item) =>
+      item.name.toLowerCase().includes(filtro.toLowerCase())
     );
     setDataFilt(filteredData);
-  }, [data, filtro]);
+  }, [gamesData, filtro]);
 
   const handleInput = (e) => {
     const valorFiltro = e.target.value;

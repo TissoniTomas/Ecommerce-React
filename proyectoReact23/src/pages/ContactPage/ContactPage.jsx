@@ -1,4 +1,5 @@
-import  {  useState } from "react";
+import  {  useState, useContext } from "react";
+import { ModeContext } from "../../context/modeContext";
 
 import { Label, TextInput } from "keep-react";
 import { Button } from "keep-react";
@@ -7,11 +8,12 @@ import { Envelope } from "phosphor-react";
 import { Dropdown } from "keep-react";
 import { Textarea } from "keep-react";
 
-import {useSelector} from "react-redux";
+
 
 const ContactPage = () => {
-  const mode = useSelector((state) => state.mode.mode);
+
   const [option, setOption] = useState("Pick a option");
+  const {mode, setMode} = useContext(ModeContext)
   
 
   const SubmitForm = () =>{

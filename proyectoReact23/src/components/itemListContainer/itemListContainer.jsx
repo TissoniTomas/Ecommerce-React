@@ -1,43 +1,42 @@
 import { useState, useEffect } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 
-const itemListContainer = ({ section, data }) => {
-  const [dataFilter, setDataFilter] = useState([]);
+const itemListContainer = ({ section, gamesData }) => {
+  const [gamesDataFilter, setgamesDataFilter] = useState([]);
 
   useEffect(() => {
     switch (section) {
-      case "clothing": {
-        const dataFiltered = data.filter(
+      case "destacados": {
+        const dataFiltered = gamesData.filter(
           (item) =>
-            item.category === "men's clothing" ||
-            item.category === "women's clothing"
+            item.destacado 
         );
         console.log(dataFiltered);
-        setDataFilter(dataFiltered);
+        setgamesDataFilter(dataFiltered);
 
         break;
       }
 
-      case "electronics": {
-        const dataFiltered = data.filter(
-          (item) => item.category === "electronics"
+      case "ofertas": {
+        const dataFiltered = gamesData.filter(
+          (item) => item.oferta
         );
         console.log(dataFiltered);
-        setDataFilter(dataFiltered);
+        setgamesDataFilter(dataFiltered);
         break;
       }
       default: {
-        setDataFilter(data);
-        console.log(data);
+        setgamesDataFilter(gamesData);
+        console.log(gamesData);
       }
     }
-  }, [section, data]);
+  }, [section, gamesData]);
 
   return (
     <>
       <div className="grid gap-10 md:grid-cols-2 grid-rows-1 lg:grid-cols-3 animate-fade-down animate-duration-[3000ms] animate-delay-1000">
-        {dataFilter.map((item) => (
-          <div className="content-center justify-items-stretch" key={item.id}>
+        {gamesDataFilter.map((item) => (
+          <div className="content-center justify-items-stretch shadow-2xl" key={item.id}>
             <ItemCard data={item} />
           </div>
         ))}

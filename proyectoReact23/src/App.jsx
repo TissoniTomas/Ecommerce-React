@@ -13,9 +13,15 @@ import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 import CartPage from "./pages/CartPage/CartPage";
 
+import { ModeProvider } from "./context/modeContext";
+import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+
+import { db } from "./firebase/firebaseConfig";
+
 const App = () => {
   return (
-    
+    <ShoppingCartProvider>
+      <ModeProvider>
         <Router>
           <Header />
           <ScrollTop />
@@ -28,29 +34,29 @@ const App = () => {
             <Route path="*" element={<ErrorPage />} />
             <Route path="/product/detail/:id" element={<DetailPage />} />
             <Route path="/category/:Categoryid" element={<CategoryPage />} />
-            <Route path="/cart" element = {<CartPage/>}/>
+            <Route path="/cart" element={<CartPage />} />
           </Routes>
 
           <Footer />
         </Router>
-      
+      </ModeProvider>
+    </ShoppingCartProvider>
   );
 };
 
 export default App;
 
-
 /**LIGHT MODE
- * 
+ *
  * Titulos : gray-900
- * Textos: gray-600 
+ * Textos: gray-600
  * Bg Botones: cyan-700
  * Texto botones : white font-medium
  * Hover Iconos : bg-gray-100
  * Sections : bg-gray-50
- * 
+ *
  * DARK MODE
- * 
+ *
  * BG: bg-gray-900
  * Titulos : white
  * Textos: gray-400

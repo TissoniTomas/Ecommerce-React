@@ -1,38 +1,80 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../../redux/features/cart/cartSlice";
-
-
+import { useState, useContext, useEffect } from "react";
+import { ModeContext } from "../../context/modeContext";
+import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+import { db } from "../../firebase/firebaseConfig";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  documentId,
+} from "firebase/firestore";
 
 const DetailPage = () => {
   let { id } = useParams();
-  const dispatch = useDispatch();
-  const mode = useSelector((state) => state.mode.mode);
-  const items = useSelector((state)=> state.cart.items);
-  
+  const { mode } = useContext(ModeContext);
+  const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
 
-  const { data } = useFetch(`https://fakestoreapi.com/products/${id}`);
+  const [gamesData, setGamesData] = useState({});
+  const [spinner, setSpinner] = useState(true);
 
-  const { title, price, description, category, image } = data;
+  useEffect(() => {
+    const q = query(collection(db, "games"), where(documentId(), "==", id));
+
+    const getGames = async () => {
+      const querySnapshot = await getDocs(q);
+      const docs = [];
+      querySnapshot.forEach((doc) => {
+        docs.push({ ...doc.data(), id: doc.id });
+
+        setGamesData(...docs);
+        console.log(docs);
+      });
+    };
+    setTimeout(() => {
+      setSpinner(!spinner);
+    }, 2000);
+
+    getGames();
+  }, [id]);
+
+  const { name, price, description, category, img } = gamesData;
   const [counterStock, setCounterStock] = useState(0);
   const [isFav, setIsFav] = useState(false);
 
   const [item, setItem] = useState({});
 
   const handleShoppingCart = (e) => {
-    setItem({
-      name: data.title,
-      price: data.price,
-      image: data.image,
+    const item = {
+      name: gamesData.name,
+      price: gamesData.price,
+      image: gamesData.img,
       quantity: counterStock,
-      id: data.id,
-    });
+      id: gamesData.id,
+    };
+    setItem(item);
     e.preventDefault();
-    dispatch(addToCart(item));
-    console.log(items);
+
+    const duplicatedItem = shoppingCart.findIndex(
+      (item) => item.id === item.id
+    );
+
+    if (duplicatedItem !== -1) {
+      setShoppingCart((prevCart) => {
+        const updatedCart = [...prevCart];
+        console.log(updatedCart[duplicatedItem]);
+        updatedCart[duplicatedItem].quantity += item.quantity;
+        return updatedCart;
+      });
+    } else {
+      setShoppingCart((prevCart) => [...prevCart, item]);
+    }
   };
+
+  useEffect(() => {
+    console.log(shoppingCart);
+  }, [shoppingCart]);
 
   const handleCounterUp = () => {
     setCounterStock(counterStock + 1);
@@ -51,22 +93,20 @@ const DetailPage = () => {
   };
 
   return (
-    <main
-      className={`h-[1400px] ${mode === "light" ? "bg-white" : "bg-gray-900"}`}
-    >
+    <main className={`h-full ${mode === "light" ? "bg-white" : "bg-gray-900"}`}>
       <div className="flex flex-col items-center text-center relative ">
-        <img className="w-72" src={image} alt={title} />
+        <img className="" src={img} alt={name} />
         <div className="flex flex-col h-screen items-center m-10">
           <h1
             className={`font-Montserrat text-3xl hover:bg-black hover:text-white mt-20 lg:text-5xl ${
               mode === "light" ? "text-gray-900" : "text-white"
             }`}
           >
-            {title}
+            {gamesData.name}
           </h1>
 
           <span className="my-10 text-3xl font-Montserrat text-sky-500 lg:text-5xl lg:my-14">
-            {price}
+            {gamesData.price}
           </span>
           <p
             className={`my-20 font-Inter text-lg mx-6 lg:text-2xl lg:mx-20 ${

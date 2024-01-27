@@ -1,14 +1,20 @@
-import React, { useEffect } from "react";
-import logo from "../../assets/Logo/logo.png";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleMode } from "../../redux/features/mode/modeSlice";
 
+import logo from "../../assets/Logo/logo.png";
+
+// Hooks
+import { useState, useContext, useEffect } from "react";
+
+// Contextos
+import {ModeContext} from "../../context/modeContext"
+import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+
+// React Router
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  const dispatch = useDispatch();
-  const mode = useSelector((state) => state.mode.mode);
+
+  const {mode, setMode} = useContext(ModeContext)
+  const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext)
 
   const [openMenu, setOpenMenu] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
@@ -16,10 +22,11 @@ const NavBar = () => {
 
   useEffect(()=>{
     sessionStorage.setItem("theme", mode);
+    console.log(mode);
   },[mode])
 
   const handleToggleMode = () => {
-    dispatch(toggleMode());
+    setMode(mode === "light" ? "dark" : "light")
     
   };
 
@@ -133,7 +140,7 @@ const NavBar = () => {
                 mode === "light" ? "bg-white " : "bg-gray-900"
               } `}
             >
-              <Link to="/category/men's clothing">
+              <Link to="/category/rockstar-games">
                 <li
                   onClick={() => {
                     toggleCategories();
@@ -145,10 +152,10 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  MEN'S CLOTHING
+                  ROCKSTAR GAMES MASTERPIECES
                 </li>
               </Link>
-              <Link to="/category/women's clothing">
+              <Link to="/category/cod-saga">
                 <li
                   onClick={() => {
                     toggleCategories();
@@ -160,10 +167,10 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  WOMAN'S CLOTHING
+                  COD SAGA
                 </li>
               </Link>
-              <Link to="/category/jewelery">
+              <Link to="/category/nfs-saga">
                 <li
                   onClick={() => {
                     toggleCategories();
@@ -175,10 +182,10 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  JEWELERY
+                  NEED FOR SPEED SAGA
                 </li>
               </Link>
-              <Link to="/category/electronics">
+              <Link to="/category/sports&others">
                 <li
                   onClick={() => {
                     toggleCategories();
@@ -190,7 +197,7 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  ELECTRONICS
+                  SPORT WORLD & OTHERS
                 </li>
               </Link>
             </ul>
@@ -245,7 +252,7 @@ const NavBar = () => {
                 mode === "light" ? "text-gray-900 " : "text-white "
               } lg:text-3xl `}
             >
-              4
+              {shoppingCart.length}
             </span>
           </Link>
           {mode === "light" ? (

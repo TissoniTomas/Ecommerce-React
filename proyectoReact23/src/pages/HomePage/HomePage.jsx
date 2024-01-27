@@ -1,14 +1,17 @@
-
-import {useSelector} from "react-redux";
 import SpinnerFB from "../../components/Spinner/Spinner";
 import ItemListContainer from "../../components/itemListContainer/itemListContainer";
 import useFetch from "../../hooks/useFetch";
+import { ModeContext } from "../../context/modeContext";
+import { useContext } from "react";
+import { db } from "../../firebase/firebaseConfig";
 
 const HomePage = () => {
-  const { data, spinner } = useFetch("https://fakestoreapi.com/products");
+  const { gamesData, spinner } = useFetch(db);
+  console.log(gamesData);
 
-  const mode = useSelector((state) => state.mode.mode);
-  
+  const {mode, setMode} = useContext(ModeContext)
+
+
 
   
 
@@ -24,7 +27,7 @@ const HomePage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          Men's & Woman's
+          Racing
         </h1>
         {spinner === true ? (
           <div className="mt-10">
@@ -32,7 +35,7 @@ const HomePage = () => {
             <SpinnerFB />
           </div>
         ) : (
-          <ItemListContainer section="clothing" data={data} />
+          <ItemListContainer section="destacados" gamesData={gamesData} />
         )}
 
         <h2
@@ -40,7 +43,7 @@ const HomePage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          Electronics
+          SUMMER SALES!
         </h2>
         <div className="mb-32 ">
           {spinner === true ? (
@@ -49,7 +52,7 @@ const HomePage = () => {
               <SpinnerFB />
             </div>
           ) : (
-            <ItemListContainer section="electronics" data={data} />
+            <ItemListContainer section="ofertas" gamesData={gamesData} />
           )}
         </div>
       </main>
