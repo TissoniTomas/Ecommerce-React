@@ -7,9 +7,11 @@ import { db } from "../../firebase/firebaseConfig";
 
 const HomePage = () => {
   const { gamesData, spinner } = useFetch(db);
-  console.log(gamesData);
+  
 
-  const {mode, setMode} = useContext(ModeContext)
+  const {mode} = useContext(ModeContext)
+  const titleNewGames = "FEATURED GAMES"
+  const titleDiscountGames = "SUMMER SALES"
 
 
 
@@ -27,7 +29,7 @@ const HomePage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          Racing
+          {titleNewGames}
         </h1>
         {spinner === true ? (
           <div className="mt-10">
@@ -43,7 +45,7 @@ const HomePage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          SUMMER SALES!
+          {titleDiscountGames}
         </h2>
         <div className="mb-32 ">
           {spinner === true ? (
@@ -61,24 +63,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-/**LIGHT MODE
- * 
- * Titulos : gray-900
- * Textos: gray-600 
- * Bg Botones: cyan-700
- * Texto botones : white font-medium
- * Hover Iconos : bg-gray-100
- * Sections : bg-gray-50
-   Iconos : gray-500
- * 
- * DARK MODE
- * 
- * BG: bg-gray-900
- * Titulos : white
- * Textos: gray-400
- * Bg Botones: cyan-700
- * Texto botones : white font-medium
- * Hover Iconos : bg-gray-700
- Iconos: gray-400
- * Sections : bg-gray-800
- */

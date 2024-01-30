@@ -10,6 +10,7 @@ import {
   getDocs,
   documentId,
 } from "firebase/firestore";
+import { NotificationComponent } from "../../components/Notification/Notification";
 
 const DetailPage = () => {
   let { id } = useParams();
@@ -18,6 +19,13 @@ const DetailPage = () => {
 
   const [gamesData, setGamesData] = useState({});
   const [spinner, setSpinner] = useState(true);
+  const { name, price, description, category, img, brand, release, consolas } =
+    gamesData;
+  const [counterStock, setCounterStock] = useState(0);
+  const [isFav, setIsFav] = useState(false);
+
+  const [item, setItem] = useState({});
+  const [platform, setPlatform] = useState("");
 
   useEffect(() => {
     const q = query(collection(db, "games"), where(documentId(), "==", id));
@@ -39,37 +47,36 @@ const DetailPage = () => {
     getGames();
   }, [id]);
 
-  const { name, price, description, category, img } = gamesData;
-  const [counterStock, setCounterStock] = useState(0);
-  const [isFav, setIsFav] = useState(false);
-
-  const [item, setItem] = useState({});
-
   const handleShoppingCart = (e) => {
-    const item = {
-      name: gamesData.name,
-      price: gamesData.price,
-      image: gamesData.img,
+    const newitem = {
+      name: name,
+      price: price,
+      image: img,
       quantity: counterStock,
-      id: gamesData.id,
+      id: id,
+      platform: platform,
     };
     setItem(item);
     e.preventDefault();
 
     const duplicatedItem = shoppingCart.findIndex(
-      (item) => item.id === item.id
+      (item) => item.id === newitem.id && item.platform === newitem.platform
     );
 
     if (duplicatedItem !== -1) {
       setShoppingCart((prevCart) => {
         const updatedCart = [...prevCart];
         console.log(updatedCart[duplicatedItem]);
-        updatedCart[duplicatedItem].quantity += item.quantity;
+        updatedCart[duplicatedItem].quantity += newitem.quantity;
         return updatedCart;
       });
     } else {
-      setShoppingCart((prevCart) => [...prevCart, item]);
+      setShoppingCart((prevCart) => [...prevCart, newitem]);
     }
+
+
+
+
   };
 
   useEffect(() => {
@@ -92,31 +99,59 @@ const DetailPage = () => {
     setCounterStock(parseInt(e.target.value));
   };
 
+  const claves = () => {
+    let clavesConsolas = [];
+    for (const clave in consolas) {
+      clavesConsolas.push(clave);
+    }
+    return clavesConsolas;
+  };
+
+  let consolasArray = claves();
+
+  const handlePlatform = (id) => {
+    setPlatform(id);
+  };
+
+  useEffect(() => {
+    console.log(platform);
+  }, [platform]);
+
   return (
-    <main className={`h-full ${mode === "light" ? "bg-white" : "bg-gray-900"}`}>
-      <div className="flex flex-col items-center text-center relative ">
-        <img className="" src={img} alt={name} />
-        <div className="flex flex-col h-screen items-center m-10">
+    <main className={` ${mode === "light" ? "bg-white" : "bg-gray-900"} `}>
+      <div className="flex mx-10 items-center text-center relative  ">
+        <img className="w-auto h-[700px]" src={img} alt={name} />
+        <div className="flex flex-col h-full items-center m-10 ">
           <h1
             className={`font-Montserrat text-3xl hover:bg-black hover:text-white mt-20 lg:text-5xl ${
               mode === "light" ? "text-gray-900" : "text-white"
             }`}
           >
-            {gamesData.name}
+            {name}
           </h1>
 
           <span className="my-10 text-3xl font-Montserrat text-sky-500 lg:text-5xl lg:my-14">
-            {gamesData.price}
+            $ {price}
           </span>
           <p
-            className={`my-20 font-Inter text-lg mx-6 lg:text-2xl lg:mx-20 ${
+            className={`my-10 font-Inter text-lg mx-6 lg:mx-20 ${
               mode === "light" ? "text-gray-900" : "text-gray-400"
             }`}
           >
             {description}
           </p>
-          <form action="">
-            <div className="flex justify-evenly w-screen lg:w-[60rem]">
+          <ul
+            className={` flex font-Inter text-lg mx-6 lg:mx-20 mb-10 ${
+              mode === "light" ? "text-gray-900" : "text-gray-400"
+            }`}
+          >
+            <li className="mx-10">Brand: {brand}</li>
+            <li className="mx-10">Release: {release}</li>
+            <li className="mx-10">Category: {category}</li>
+          </ul>
+
+          <form className="w-full flex flex-col items-center">
+            <div className="flex justify-evenly items-center w-screen lg:w-[60rem] ">
               <label
                 className={`font-Montserrat mx-6 lg:text-2xl ${
                   mode === "light" ? "text-gray-900" : "text-gray-400"
@@ -172,62 +207,33 @@ const DetailPage = () => {
                 />
               </svg>
             </div>
-
-            {["women's clothing", "men's clothing"].includes(category) && (
-              <div className="flex justify-around items-center w-screen my-20 lg:w-[60rem]">
-                <label
-                  className={`font-Montserrat mx-6 lg:text-2xl ${
-                    mode === "light" ? "text-gray-900" : "text-gray-400"
-                  }`}
-                  htmlFor="size"
-                >
-                  Select Size
-                </label>
-                <select
-                  className={`w-20 font-Montserrat lg:text-2xl focus:border-4 focus:rounded-lg focus:animate-fade-up focus:border-sky-500 focus:outline-none ${
-                    mode === "light"
-                      ? "bg-white text-gray-900"
-                      : "bg-gray-900 text-gray-400"
-                  }`}
-                  name="talle"
-                  id="talle"
-                >
-                  <option
-                    className=" text-xl font-Montserrat lg:text-2xl"
-                    value="SM"
-                  >
-                    SM
-                  </option>
-                  <option
-                    className=" text-xl font-Montserrat lg:text-2xl"
-                    value="M"
-                  >
-                    M
-                  </option>
-                  <option
-                    className="text-xl font-Montserrat lg:text-2xl"
-                    value="L"
-                  >
-                    L
-                  </option>
-                  <option
-                    className="text-xl font-Montserrat lg:text-2xl"
-                    value="XL"
-                  >
-                    XL
-                  </option>
-                  <option className="text-xl font-Montserrat" value="XXL">
-                    XXL
-                  </option>
-                </select>
-              </div>
-            )}
-            <div className="flex items-center justify-around w-full">
-              <button
-                onClick={handleShoppingCart}
-                className="bg-sky-500 text-white w-40 my-6 h-10 rounded-xl font-Montserrat hover:bg-slate-300 "
+            <div className="flex justify-center w-full mt-10">
+              <label
+                className={`font-Montserrat mx-6 lg:text-2xl ${
+                  mode === "light" ? "text-gray-900" : "text-gray-400"
+                }`}
+                htmlFor="platform"
               >
-                Add to Cart
+                Gaming Platform
+              </label>
+              <div className={`flex flex-col mb-20 justify-between  `} >
+                {consolasArray.map((item, index) => (
+                 <div className="w-full"  key={index}>
+                   <span onClick={()=> setPlatform(item)} className={`text-gray-400 block w-32 font-Montserrat text-lg list-none mx-10 cursor-pointer hover:border p-1 ${platform === item ? " text-white " : null}`}
+                    key={item.id}
+                  >
+                {item}
+                    
+                  </span>
+                 </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-around w-full">
+              <button type="button" className="hover:animate-pulse " onMouseUp={handleShoppingCart}>
+
+             <NotificationComponent />
               </button>
 
               <button type="button" onClick={handleIsFav}>
@@ -259,6 +265,7 @@ const DetailPage = () => {
                   </svg>
                 )}
               </button>
+            
             </div>
           </form>
         </div>

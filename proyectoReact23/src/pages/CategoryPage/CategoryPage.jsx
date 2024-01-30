@@ -23,12 +23,8 @@ const CategoryPage = () => {
   useEffect(() => {
     
     
-    setTimeout(() => {
-      setSpinner(!spinner);
-      console.log(spinner);
-    }, 2000);
-
-
+    
+    
     const q = query(collection(db, "games"), where("categorySection", "==", Categoryid));
 
     const getGames = async () => {
@@ -42,24 +38,53 @@ const CategoryPage = () => {
         setGamesData(docs);
         console.log(docs);
       });
-     
+      
     };
  
+    setTimeout(() => {
+      setSpinner(false);
+      console.log(spinner);
+    }, 2000);
 
 
     getGames();
+
   }, [Categoryid]);
+
+  let title;
+
+  switch(Categoryid){
+    case "rockstar-games" :{
+      title = "ROCKSTAR GAMES MASTERPIECES"
+      break;
+    }
+    case "cod-saga" :{
+      title = "CALL OF DUTY SAGA"
+      break;
+    }
+    case "nfs-saga" :{
+      title = "NEED FOR SPEED SAGA"
+      break;
+    }
+    case "sports&others" :{
+      title = "SPORTS & OTHERS"
+      break;
+    }
+
+    default : 
+    title = "La busqueda no devuelve resultados"
+
+    
+  }
 
   
  
-  const title = Categoryid.toUpperCase();
-
-
+  
 
   return (
     <>
       <main className={`flex flex-col items-center ${mode === "light" ? "bg-white" : "bg-gray-900"}`}>
-        <h1 className={`font-Montserrat text-4xl my-10 ${mode === "light" ? "text-gray-900" : "text-white"}`}>{title}</h1>
+        <h1 className={`font-Montserrat text-4xl lg:text-6xl my-10 ${mode === "light" ? "text-gray-900" : "text-white"}`}>{title}</h1>
 
           {spinner ? <SpinnerFB/> :
         <div className="grid grid-cols-1 gap-10 my-20 md:grid md:grid-cols-2 lg:grid-cols-3">

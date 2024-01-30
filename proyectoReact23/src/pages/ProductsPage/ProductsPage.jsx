@@ -25,6 +25,7 @@ const ProductsPage = () => {
 
   const handleInput = (e) => {
     const valorFiltro = e.target.value;
+    console.log(valorFiltro);
     setFiltro(valorFiltro);
     setFocus(true);
   };
