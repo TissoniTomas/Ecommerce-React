@@ -41,7 +41,7 @@ const ProductsPage = () => {
 
   return (
     <main
-      className={`flex flex-col items-center ${
+      className={`flex flex-col items-center mt-48  ${
         mode === "light" ? "bg-white " : "bg-gray-900"
       }`}
     >

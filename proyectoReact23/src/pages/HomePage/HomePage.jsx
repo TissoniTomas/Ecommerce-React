@@ -20,7 +20,7 @@ const HomePage = () => {
   return (
     <>
       <main
-        className={`flex flex-col items-center justify-center px-20 ${
+        className={`flex flex-col items-center justify-center px-20 mt-48 ${
           mode === "light" ? "bg-white border-t border-black" : "bg-gray-900"
         }`}
       >
@@ -29,7 +29,7 @@ const HomePage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          {titleNewGames}
+          {titleDiscountGames}
         </h1>
         {spinner === true ? (
           <div className="mt-10">
@@ -37,7 +37,7 @@ const HomePage = () => {
             <SpinnerFB />
           </div>
         ) : (
-          <ItemListContainer section="destacados" gamesData={gamesData} />
+          <ItemListContainer section="ofertas" gamesData={gamesData} />
         )}
 
         <h2
@@ -45,7 +45,7 @@ const HomePage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          {titleDiscountGames}
+          {titleNewGames}
         </h2>
         <div className="mb-32 ">
           {spinner === true ? (
@@ -54,7 +54,7 @@ const HomePage = () => {
               <SpinnerFB />
             </div>
           ) : (
-            <ItemListContainer section="ofertas" gamesData={gamesData} />
+            <ItemListContainer section="destacados" gamesData={gamesData} />
           )}
         </div>
       </main>

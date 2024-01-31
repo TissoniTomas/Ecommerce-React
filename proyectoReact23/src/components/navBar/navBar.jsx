@@ -47,7 +47,7 @@ const NavBar = () => {
       <nav
         className={` ${
           mode === "light" ? "bg-white " : "bg-gray-900"
-        } lg:flex justify-evenly  w-full box-border lg:h-64 top-0 z-20  `}
+        } lg:flex lg:fixed lg:z-10 justify-evenly  w-full box-border lg:h-54 top-0 `}
       >
         <div className="flex items-center justify-between ">
           <Link to="/">
@@ -136,7 +136,7 @@ const NavBar = () => {
           {openCategories && (
             <ul
               onMouseLeave={toggleCategories}
-              className={` my-4 h-40 lg:my-0 flex lg:absolute lg:top-44 lg:right-2  lg:justify-between lg:flex-row lg:w-[1400px] flex-col w-32 items-center  z-10 animate-fade-down animate-ease-in-out ${
+              className={` my-4 h-auto flex lg:top-44 lg:absolute lg:right-64 lg:justify-between lg:flex-col lg:w-[700px] flex-col w-32 items-center  animate-fade-down animate-ease-in-out ${
                 mode === "light" ? "bg-white " : "bg-gray-900"
               } `}
             >
@@ -252,7 +252,7 @@ const NavBar = () => {
                 mode === "light" ? "text-gray-900 " : "text-white "
               } lg:text-3xl `}
             >
-              {shoppingCart.length}
+              { shoppingCart.length >= 1 ? shoppingCart.length : null}
             </span>
           </Link>
           {mode === "light" ? (

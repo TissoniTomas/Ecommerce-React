@@ -12,6 +12,7 @@ import DetailPage from "./pages/DetailPage/DetailPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 import CartPage from "./pages/CartPage/CartPage";
+import ShopPage from "./pages/ShopPage/ShopPage";
 
 import { ModeProvider } from "./context/modeContext";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/product/detail/:id" element={<DetailPage />} />
             <Route path="/category/:Categoryid" element={<CategoryPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<ShopPage/>}/>
           </Routes>
 
           <Footer />

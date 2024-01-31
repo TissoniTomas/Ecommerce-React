@@ -11,6 +11,7 @@ import {
   documentId,
 } from "firebase/firestore";
 import { NotificationComponent } from "../../components/Notification/Notification";
+import { Button } from "keep-react";
 
 const DetailPage = () => {
   let { id } = useParams();
@@ -19,8 +20,17 @@ const DetailPage = () => {
 
   const [gamesData, setGamesData] = useState({});
   const [spinner, setSpinner] = useState(true);
-  const { name, price, description, category, img, brand, release, consolas } =
-    gamesData;
+  const {
+    name,
+    price,
+    description,
+    category,
+    img,
+    brand,
+    release,
+    consolas,
+    discountPrice,
+  } = gamesData;
   const [counterStock, setCounterStock] = useState(0);
   const [isFav, setIsFav] = useState(false);
 
@@ -48,35 +58,34 @@ const DetailPage = () => {
   }, [id]);
 
   const handleShoppingCart = (e) => {
-    const newitem = {
-      name: name,
-      price: price,
-      image: img,
-      quantity: counterStock,
-      id: id,
-      platform: platform,
-    };
-    setItem(item);
-    e.preventDefault();
+    if (platform !== "" && counterStock >= 1) {
+      const newitem = {
+        name: name,
+        price: price,
+        image: img,
+        quantity: counterStock,
+        id: id,
+        platform: platform,
+        discountPrice: discountPrice,
+      };
+      setItem(item);
+      e.preventDefault();
 
-    const duplicatedItem = shoppingCart.findIndex(
-      (item) => item.id === newitem.id && item.platform === newitem.platform
-    );
+      const duplicatedItem = shoppingCart.findIndex(
+        (item) => item.id === newitem.id && item.platform === newitem.platform
+      );
 
-    if (duplicatedItem !== -1) {
-      setShoppingCart((prevCart) => {
-        const updatedCart = [...prevCart];
-        console.log(updatedCart[duplicatedItem]);
-        updatedCart[duplicatedItem].quantity += newitem.quantity;
-        return updatedCart;
-      });
-    } else {
-      setShoppingCart((prevCart) => [...prevCart, newitem]);
+      if (duplicatedItem !== -1) {
+        setShoppingCart((prevCart) => {
+          const updatedCart = [...prevCart];
+          console.log(updatedCart[duplicatedItem]);
+          updatedCart[duplicatedItem].quantity += newitem.quantity;
+          return updatedCart;
+        });
+      } else {
+        setShoppingCart((prevCart) => [...prevCart, newitem]);
+      }
     }
-
-
-
-
   };
 
   useEffect(() => {
@@ -109,18 +118,10 @@ const DetailPage = () => {
 
   let consolasArray = claves();
 
-  const handlePlatform = (id) => {
-    setPlatform(id);
-  };
-
-  useEffect(() => {
-    console.log(platform);
-  }, [platform]);
-
   return (
-    <main className={` ${mode === "light" ? "bg-white" : "bg-gray-900"} `}>
-      <div className="flex mx-10 items-center text-center relative  ">
-        <img className="w-auto h-[700px]" src={img} alt={name} />
+    <main className={` ${mode === "light" ? "bg-white" : "bg-gray-900"} mt-48  `}>
+      <div className="flex px-12 mx-4 items-center text-center">
+        <img className="w-auto h-[800px]" src={img} alt={name} />
         <div className="flex flex-col h-full items-center m-10 ">
           <h1
             className={`font-Montserrat text-3xl hover:bg-black hover:text-white mt-20 lg:text-5xl ${
@@ -216,24 +217,40 @@ const DetailPage = () => {
               >
                 Gaming Platform
               </label>
-              <div className={`flex flex-col mb-20 justify-between  `} >
-                {consolasArray.map((item, index) => (
-                 <div className="w-full"  key={index}>
-                   <span onClick={()=> setPlatform(item)} className={`text-gray-400 block w-32 font-Montserrat text-lg list-none mx-10 cursor-pointer hover:border p-1 ${platform === item ? " text-white " : null}`}
-                    key={item.id}
-                  >
-                {item}
-                    
-                  </span>
-                 </div>
+              <div className={`flex flex-col mb-20 justify-between  `}>
+                {consolasArray.map((consola, index) => (
+                  <div className="w-full" key={index}>
+                    <span
+                      onClick={() =>
+                        platform === consola
+                          ? setPlatform("")
+                          : setPlatform(consola)
+                      }
+                      className={`text-gray-400 block w-32 font-Montserrat text-lg list-none mx-10 cursor-pointer hover:border p-1 ${
+                        platform === consola ? " text-white " : null
+                      }`}
+                      key={consola.id}
+                    >
+                      {consola}
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>
 
             <div className="flex items-center justify-around w-full">
-              <button type="button" className="hover:animate-pulse " onMouseUp={handleShoppingCart}>
-
-             <NotificationComponent />
+              <button
+                type="button"
+                className="hover:animate-pulse "
+                onMouseUp={handleShoppingCart}
+              >
+                {counterStock > 0 && platform !== "" ? (
+                  <NotificationComponent />
+                ) : (
+                  <Button size="md" type="outlineGray">
+                    Add to Cart
+                  </Button>
+                )}
               </button>
 
               <button type="button" onClick={handleIsFav}>
@@ -265,7 +282,6 @@ const DetailPage = () => {
                   </svg>
                 )}
               </button>
-            
             </div>
           </form>
         </div>

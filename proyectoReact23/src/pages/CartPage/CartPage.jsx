@@ -1,37 +1,56 @@
 import { useEffect, useContext, useState } from "react";
 import { ModeContext } from "../../context/modeContext";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+import { Button } from "keep-react";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const { mode } = useContext(ModeContext);
   const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
   const [totalCart, setTotalCart] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
   const items = shoppingCart;
   const emptyCart = shoppingCart.length;
 
-  const removeItem = (itemId) => {
-    let removeItemFilter = items.filter((item) => item.id !== itemId);
-    console.log(removeItemFilter);
-    setShoppingCart(removeItemFilter);
+  console.log(items);
+
+  const removeItem = (itemName, itemPlatform) => {
+    const index = items.findIndex(
+      (item) => item.platform === itemPlatform && item.name === itemName
+    );
+    if (index !== -1) {
+      items.splice(index, 1);
+      setShoppingCart([...items]); // Actualizar el estado del carrito
+    }
   };
+
+  const clearCart = ()=>{
+    items = setShoppingCart([])
+  }
 
   useEffect(() => {
     const precioTotal = items.reduce((acc, prod) => {
+      if (prod.discountPrice != null) {
+        return acc + prod.discountPrice * prod.quantity;
+      }
+
       return acc + prod.price * prod.quantity;
     }, 0);
 
-    setTotalCart(precioTotal);
-    console.log(precioTotal);
-  }, [items]);
+    const cantidadTotal = items.reduce((acc, prod) => {
+      return acc + prod.quantity;
+    }, 0);
 
-  console.log(items);
+    setTotalCart(precioTotal.toFixed(2));
+    setTotalQuantity(cantidadTotal);
+  }, [items]);
 
   return (
     <>
       {emptyCart === 0 ? (
         <div
-          className={`flex flex-col items-center  h-full ${
+          className={`flex flex-col items-center  h-full  ${
             mode === "light"
               ? "text-gray-900 bg-white"
               : "text-gray-400 bg-gray-900"
@@ -43,7 +62,7 @@ const CartPage = () => {
         </div>
       ) : (
         <div
-          className={`flex flex-col items-center h-full ${
+          className={`flex flex-col items-center h-full mt-48 ${
             mode === "light"
               ? "text-gray-900 bg-white"
               : "text-white bg-gray-900"
@@ -53,16 +72,33 @@ const CartPage = () => {
             Carrito de Compras
           </h1>
           <div className="grid grid-cols-7 w-screen px-64 mb-10">
-            <div><span>ID</span></div>
-            <div><span>{null}</span></div>
-            <div><span>Title</span></div>
-            <div><span>Price in USD</span></div>
-            <div><span>Quantity</span></div>
-            <div><span>Platform</span></div>
-            <div><span>{null}</span></div>
+            <div>
+              <span>ID</span>
+            </div>
+            <div>
+              <span>{null}</span>
+            </div>
+            <div>
+              <span>Title</span>
+            </div>
+            <div>
+              <span>Price in USD</span>
+            </div>
+            <div>
+              <span>Quantity</span>
+            </div>
+            <div>
+              <span>Platform</span>
+            </div>
+            <div>
+              <span>{null}</span>
+            </div>
           </div>
           {items.map((item, index) => (
-            <div className={`grid grid-cols-7 grid-rows-${items.length} w-screen px-64 gap-10 mb-20 items-center`}  key={item.id}>
+            <div
+              className={`grid grid-cols-7  w-screen px-64 gap-10 mb-20 items-center font-Montserrat`}
+              key={item.id}
+            >
               <div>
                 <span>{index + 1}</span>
               </div>
@@ -74,7 +110,9 @@ const CartPage = () => {
               </div>
 
               <div>
-                <span>{item.price}</span>
+                <span>
+                  {item.discountPrice != null ? item.discountPrice : item.price}
+                </span>
               </div>
               <div>
                 <span>{item.quantity}</span>
@@ -84,17 +122,25 @@ const CartPage = () => {
               </div>
 
               <div>
-                <button onClick={() => removeItem(item.id)}>
+                <button onClick={() => removeItem(item.name, item.platform)}>
                   Remover Item
                 </button>
               </div>
             </div>
           ))}
+          <div className={`flex flex-col mb-40 justify-between items-center border lg:w-[100vh] lg:h-[50vh] font-Montserrat pt-10 `}>
+            <h2 className="text-4xl ">Resumen de la Compra</h2>
+            <span className="text-2xl">Total: $ {totalCart}</span>
+            <span className="text-2xl">Items Quantity: {totalQuantity}</span>
+            <div className="flex justify-evenly items-start w-full my-10">
+              <Link to="/checkout">
+            <Button className="" size="md" pill={true} color="success">Continuar con la compra</Button>
+              </Link>
+            <Button onClick={clearCart} size="md" pill={true} color="warning">Vaciar Carrito de Compras</Button>
+            </div>
+          </div>
         </div>
       )}
-
-      
-       
     </>
   );
 };
