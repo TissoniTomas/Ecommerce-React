@@ -146,7 +146,7 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4  w-full text-3xl ml-4 ${
+                  className={`py-4 w-full text-lg lg:text-3xl ml-4 ${
                     mode === "light"
                       ? "text-gray-900 hover:underline hover:decoration-gray-900"
                       : "text-white hover:underline hover:decoration-white"
@@ -161,7 +161,7 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4  w-full text-3xl ml-4 ${
+                  className={`py-4  w-full text-lg lg:text-3xl ml-4 ${
                     mode === "light"
                       ? "text-gray-900 hover:underline hover:decoration-gray-900"
                       : "text-white hover:underline hover:decoration-white"
@@ -176,7 +176,7 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4  w-full text-3xl ml-4 ${
+                  className={`py-4  w-full text-lg lg:text-3xl ml-4 ${
                     mode === "light"
                       ? "text-gray-900 hover:underline hover:decoration-gray-900"
                       : "text-white hover:underline hover:decoration-white"
@@ -191,7 +191,7 @@ const NavBar = () => {
                     toggleCategories();
                     toggleNavBar();
                   }}
-                  className={`py-4  w-full text-3xl mr-4 ${
+                  className={`py-4  w-full text-lg lg:text-3xl mr-4 ${
                     mode === "light"
                       ? "text-gray-900 hover:underline hover:decoration-gray-900"
                       : "text-white hover:underline hover:decoration-white"

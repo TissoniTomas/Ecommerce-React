@@ -20,8 +20,8 @@ const HomePage = () => {
   return (
     <>
       <main
-        className={`flex flex-col items-center justify-center px-20 mt-48 ${
-          mode === "light" ? "bg-white border-t border-black" : "bg-gray-900"
+        className={`flex flex-col items-center justify-center px-20 lg:mt-48 ${
+          mode === "light" ? "bg-white border-t border-black" : "bg-gray-900 border-white border-t"
         }`}
       >
         <h1

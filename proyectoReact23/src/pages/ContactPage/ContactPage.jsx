@@ -13,7 +13,7 @@ import { Textarea } from "keep-react";
 const ContactPage = () => {
 
   const [option, setOption] = useState("Pick a option");
-  const {mode, setMode} = useContext(ModeContext)
+  const {mode} = useContext(ModeContext)
   
 
   const SubmitForm = () =>{
@@ -21,7 +21,7 @@ const ContactPage = () => {
   }
 
   return (
-    <div className={`flex flex-col items-center ${mode === "light" ? "bg-white" : "bg-gray-900"} mt-48`}>
+    <div className={`flex flex-col items-center ${mode === "light" ? "bg-white" : "bg-gray-900"} lg:mt-48`}>
       <h1 className={`font-Montserrat text-5xl my-10 ${mode === "light" ? "text-gray-900" : "text-white" }`}>Contact Us</h1>
       <p className={`text-center font-Inter my-10 w-72 ${mode === "light" ? "text-gray-900" : "text-gray-400"}`}>
         Your messages through our contact form are vital! They allow us to

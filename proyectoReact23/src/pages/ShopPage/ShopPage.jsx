@@ -5,24 +5,18 @@ import {CheckoutForm} from "../../components/CheckoutForm/CheckoutForm"
 
 const ShopPage = () => {
 
-  const initialForm = {
-    name : "",
-    surname: "",
-    email:"",
-    address: ""
-  }
-
+  
 
   const { mode } = useContext(ModeContext);
   const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
-  const [formValues, setFormValues] = useState(initialForm)
+
 
   const items = shoppingCart
   return (
     <div
       className={`flex flex-col items-center w-screen  ${
         mode === "light" ? "bg-white" : "bg-gray-900"
-      } mt-48 `}
+      } lg:mt-48 `}
     >
         <div className="flex flex-col items-center mx-20 text-center">
 
@@ -31,7 +25,7 @@ const ShopPage = () => {
 
         </div>
         
-        <CheckoutForm values={formValues}/>
+        <CheckoutForm />
         
         
         

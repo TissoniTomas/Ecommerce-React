@@ -30,7 +30,7 @@ export const CheckoutForm = () => {
   };
 
   return (
-    <form className="my-10" onSubmit={onSubmit}>
+    <form className="my-10 flex flex-col" onSubmit={onSubmit}>
       <div className="mb-10 w-96 text-center">
         <label htmlFor="name">Name</label>
         <input

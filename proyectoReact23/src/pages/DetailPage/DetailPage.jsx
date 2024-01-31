@@ -113,36 +113,37 @@ const DetailPage = () => {
     for (const clave in consolas) {
       clavesConsolas.push(clave);
     }
-    return clavesConsolas;
+     let clavesOrdenadas = clavesConsolas.toSorted();
+    return clavesOrdenadas;
   };
 
   let consolasArray = claves();
 
   return (
-    <main className={` ${mode === "light" ? "bg-white" : "bg-gray-900"} mt-48  `}>
-      <div className="flex px-12 mx-4 items-center text-center">
-        <img className="w-auto h-[800px]" src={img} alt={name} />
-        <div className="flex flex-col h-full items-center m-10 ">
+    <main className={` ${mode === "light" ? "bg-white" : "bg-gray-900"} lg:mt-48 px-6 w-screen`}>
+      <div className="flex flex-col lg:flex-row w-full items-center text-center">
+        <img className="w-auto lg:h-[600px]" src={img} alt={name} />
+        <div className="flex flex-col h-full  items-center">
           <h1
-            className={`font-Montserrat text-3xl hover:bg-black hover:text-white mt-20 lg:text-5xl ${
+            className={`font-Montserrat text-3xl px-10 hover:bg-black hover:text-white mt-10 lg:text-5xl ${
               mode === "light" ? "text-gray-900" : "text-white"
             }`}
           >
             {name}
           </h1>
 
-          <span className="my-10 text-3xl font-Montserrat text-sky-500 lg:text-5xl lg:my-14">
+          <span className="my-10 text-3xl font-Montserrat text-sky-500 lg:text-5xl lg:my-6">
             $ {price}
           </span>
           <p
-            className={`my-10 font-Inter text-lg mx-6 lg:mx-20 ${
+            className={`my-10 font-Inter px-10 text-lg lg:px-20  ${
               mode === "light" ? "text-gray-900" : "text-gray-400"
             }`}
           >
             {description}
           </p>
           <ul
-            className={` flex font-Inter text-lg mx-6 lg:mx-20 mb-10 ${
+            className={` flex flex-col lg:flex-row font-Inter text-lg  mb-10 ${
               mode === "light" ? "text-gray-900" : "text-gray-400"
             }`}
           >
@@ -151,8 +152,8 @@ const DetailPage = () => {
             <li className="mx-10">Category: {category}</li>
           </ul>
 
-          <form className="w-full flex flex-col items-center">
-            <div className="flex justify-evenly items-center w-screen lg:w-[60rem] ">
+          <form className="w-full flex flex-col items-center pb-20">
+            <div className="flex justify-evenly items-center w-full">
               <label
                 className={`font-Montserrat mx-6 lg:text-2xl ${
                   mode === "light" ? "text-gray-900" : "text-gray-400"
@@ -259,7 +260,7 @@ const DetailPage = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="w-10 h-10 text-pink-500"
+                    className="w-6 h-6 lg:h-10 lg:w-10 text-pink-500"
                   >
                     <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
                   </svg>
@@ -292,11 +293,3 @@ const DetailPage = () => {
 
 export default DetailPage;
 
-// useEffect(() => {
-//   fetch(`https://fakestoreapi.com/products/${id}`).then((res) =>
-//     res.json().then((data) => {
-//       setData(data);
-//       console.log(data);
-//     })
-//   );
-// }, [id]);

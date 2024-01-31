@@ -41,18 +41,18 @@ const ProductsPage = () => {
 
   return (
     <main
-      className={`flex flex-col items-center mt-48  ${
+      className={`flex flex-col items-center lg:mt-48  ${
         mode === "light" ? "bg-white " : "bg-gray-900"
       }`}
     >
       <h1
-        className={`font-Montserrat text-6xl mt-20 ${
+        className={`font-Montserrat text-4xl lg:text-6xl mt-20 ${
           mode === "light" ? "text-gray-900" : "text-white"
         }`}
       >
         Products
       </h1>
-      <div className="flex items-center justify-evenly w-full mt-20">
+      <div className="flex flex-col lg:flex-row items-center justify-evenly w-full mt-20">
         <label
           className={`font-Inter text-2xl font-bold ${
             mode === "light" ? "text-gray-900" : "text-white"
@@ -78,12 +78,12 @@ const ProductsPage = () => {
             mode === "light"
               ? "bg-white text-gray-900"
               : "bg-gray-900 text-white"
-          } text-2xl w-96`}
+          } text-2xl w-96 pt-6`}
         />
         <button
           type="reset"
           onClick={clearFilter}
-          className="bg-cyan-700 text-white w-32 my-6 h-10 rounded-xl font-Inter font-medium text-2xl "
+          className="bg-cyan-700 text-white w-32 my-10 h-10 rounded-xl font-Inter font-medium text-2xl "
         >
           Clear
         </button>

@@ -25,9 +25,9 @@ const CartPage = () => {
     }
   };
 
-  const clearCart = ()=>{
-    items = setShoppingCart([])
-  }
+  const clearCart = () => {
+    items = setShoppingCart([]);
+  };
 
   useEffect(() => {
     const precioTotal = items.reduce((acc, prod) => {
@@ -62,48 +62,53 @@ const CartPage = () => {
         </div>
       ) : (
         <div
-          className={`flex flex-col items-center h-full mt-48 ${
+          className={`flex flex-col items-center h-full text-center lg:mt-48 ${
             mode === "light"
               ? "text-gray-900 bg-white"
               : "text-white bg-gray-900"
-          }`}
+          } `}
         >
           <h1 className={`font-Montserrat text-6xl mb-20`}>
             Carrito de Compras
           </h1>
-          <div className="grid grid-cols-7 w-screen px-64 mb-10">
-            <div>
-              <span>ID</span>
-            </div>
-            <div>
-              <span>{null}</span>
-            </div>
-            <div>
-              <span>Title</span>
-            </div>
-            <div>
-              <span>Price in USD</span>
-            </div>
-            <div>
-              <span>Quantity</span>
-            </div>
-            <div>
-              <span>Platform</span>
-            </div>
-            <div>
-              <span>{null}</span>
-            </div>
-          </div>
+
           {items.map((item, index) => (
             <div
-              className={`grid grid-cols-7  w-screen px-64 gap-10 mb-20 items-center font-Montserrat`}
+              className={`lg:grid lg:grid-cols-7 flex flex-col w-screen lg:px-64 gap-10  mb-20 items-center border-b border-white  font-Montserrat`}
               key={item.id}
             >
-              <div>
-                <span>{index + 1}</span>
+              <div className="hidden">
+                <div>
+                  <span className="">ID</span>
+                </div>
+                <div>
+                  <span>{null}</span>
+                </div>
+                <div>
+                  <span>Title</span>
+                </div>
+                <div>
+                  <span>Price in USD</span>
+                </div>
+                <div>
+                  <span>Quantity</span>
+                </div>
+                <div>
+                  <span>Platform</span>
+                </div>
+                <div>
+                  <span>{null}</span>
+                </div>
               </div>
               <div>
-                <img className="w-32 h-48" src={item.image} alt={item.name} />
+                <span className="hidden">{index + 1}</span>
+              </div>
+              <div>
+                <img
+                  className="lg:w-32 lg:h-48 h-36 w-auto"
+                  src={item.image}
+                  alt={item.name}
+                />
               </div>
               <div>
                 <h2>{item.name}</h2>
@@ -111,32 +116,42 @@ const CartPage = () => {
 
               <div>
                 <span>
+                  $
                   {item.discountPrice != null ? item.discountPrice : item.price}
                 </span>
               </div>
               <div>
-                <span>{item.quantity}</span>
+                <span>{item.quantity}U</span>
               </div>
               <div>
                 <span>{item.platform}</span>
               </div>
 
-              <div>
-                <button onClick={() => removeItem(item.name, item.platform)}>
+              <div className="">
+                <button
+                  className=""
+                  onClick={() => removeItem(item.name, item.platform)}
+                >
                   Remover Item
                 </button>
               </div>
             </div>
           ))}
-          <div className={`flex flex-col mb-40 justify-between items-center border lg:w-[100vh] lg:h-[50vh] font-Montserrat pt-10 `}>
+          <div
+            className={`flex flex-col mb-40 justify-between items-center border lg:w-[100vh] lg:h-[50vh] font-Montserrat pt-10 `}
+          >
             <h2 className="text-4xl ">Resumen de la Compra</h2>
             <span className="text-2xl">Total: $ {totalCart}</span>
             <span className="text-2xl">Items Quantity: {totalQuantity}</span>
             <div className="flex justify-evenly items-start w-full my-10">
               <Link to="/checkout">
-            <Button className="" size="md" pill={true} color="success">Continuar con la compra</Button>
+                <Button className="" size="md" pill={true} color="success">
+                  Continuar con la compra
+                </Button>
               </Link>
-            <Button onClick={clearCart} size="md" pill={true} color="warning">Vaciar Carrito de Compras</Button>
+              <Button onClick={clearCart} size="md" pill={true} color="warning">
+                Vaciar Carrito de Compras
+              </Button>
             </div>
           </div>
         </div>
