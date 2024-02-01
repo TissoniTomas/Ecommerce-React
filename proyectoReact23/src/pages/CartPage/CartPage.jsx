@@ -28,7 +28,7 @@ const CartPage = () => {
               : "text-gray-400 bg-gray-900"
           }`}
         >
-          <h1 className=" text-4xl text-bold text-center font-Inter my-72 ">
+          <h1 className=" my-32 mx-10 text-4xl text-bold text-center font-Inter lg:my-72 ">
             El carrito esta vacio, agregue productos para visualizarlos aqui
           </h1>
         </div>
@@ -76,7 +76,7 @@ const CartPage = () => {
               </div>
               <div>
                 <img
-                  className=" lg:h-48 h-36 w-auto"
+                  className="w-auto h-36 md:h-60  lg:h-48"
                   src={item.image}
                   alt={item.name}
                 />
@@ -167,9 +167,9 @@ const CartPage = () => {
             <h2 className="text-4xl ">Resumen de la Compra</h2>
             <span className="text-2xl">Total: $ {totalCart}</span>
             <span className="text-2xl">Items Quantity: {totalQuantity}</span>
-            <div className="flex justify-evenly items-start w-full my-10">
+            <div className="flex flex-col items-center justify-evenly lg:flex-row lg:items-start w-full my-10">
               <Link to="/checkout">
-                <Button className="" size="md" pill={true} color="success">
+                <Button className="mb-10" size="md" pill={true} color="success">
                   Continuar con la compra
                 </Button>
               </Link>

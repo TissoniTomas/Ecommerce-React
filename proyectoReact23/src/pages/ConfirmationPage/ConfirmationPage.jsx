@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import { PurchaseInfoContext } from "../../context/PurchaseInfoContext";
 import { ModeContext } from "../../context/modeContext";
+import { Button } from "keep-react";
+import { Link } from "react-router-dom";
 
 const ConfirmationPage = () => {
   const {
@@ -41,16 +43,16 @@ const ConfirmationPage = () => {
     <main
       className={`flex flex-col items-center justify-center ${
         mode === "light" ? "bg-white" : "bg-gray-900"
-      } lg:mt-48`}
+      }  lg:mt-48`}
     >
       <h1
-        className={`font-Montserrat text-center text-4xl lg:text-6xl my-10 ${
+        className={`font-Montserrat text-center text-4xl lg:text-6xl mx-6 my-10 ${
           mode === "light" ? "text-gray-900" : "text-white"
         }`}
       >
         ¡Gracias por su compra!
       </h1>
-      <div>
+      <div className="mx-6">
         <p
           className={`text-2xl font-Inter text-center ${
             mode === "light" ? "text-gray-900" : "text-white"
@@ -62,7 +64,7 @@ const ConfirmationPage = () => {
         </p>
       </div>
 
-      <ul className="my-10">
+      <ul className="my-10 mx-6">
         <li
           className={`text-xl font-Inter my-4 font-bold ${
             mode === "light" ? "text-gray-900" : "text-white"
@@ -103,7 +105,7 @@ const ConfirmationPage = () => {
         </li>
       </ul>
 
-      <div className="flex flex-col items-center ">
+      <div className="flex flex-col items-center mx-6 ">
         <h2
           className={`text-5xl font-Montserrat mb-10 ${
             mode === "light" ? "text-gray-900" : "text-white"
@@ -111,11 +113,11 @@ const ConfirmationPage = () => {
         >
           Summary
         </h2>
-        <ul className="flex flex-col w-[1200px] ">
+        <ul className="flex flex-col lg:w-[1200px] w-screen px-6 ">
           {infoCart.map((item) => (
-            <div className="flex w-full justify-around">
+            <div className="flex w-full justify-evenly">
               <li
-                className={` text-3xl font-Montserrat border-b border-black py-10 my-4 w-full  ${
+                className={`text-xl lg:text-3xl font-Montserrat border-b border-black py-10 my-4 w-full  ${
                   mode === "light" ? "text-gray-900" : "text-white"
                 }`}
               >
@@ -124,7 +126,7 @@ const ConfirmationPage = () => {
                  
                 
               </li>
-              <span   className={` text-3xl font-Montserrat border-b border-black py-10 my-4 w-[25%]  ${
+              <span   className={`text-xl lg:text-3xl font-Montserrat border-b border-black py-10 my-4 lg:w-[25%]  ${
                   mode === "light" ? "text-gray-900" : "text-white"
                 }`}
               >
@@ -134,31 +136,34 @@ const ConfirmationPage = () => {
             </div>
           ))}
         </ul>
-        <div className="flex flex-col w-96">
+        <div className="flex flex-col items-center lg:w-96 mx-6">
           {priceListCart > priceCart ? (
             <span
-              className={`text-4xl font-Montserrat text-center my-10  ${
+              className={` text-xl lg:text-4xl font-Montserrat text-center my-10  ${
                 mode === "light" ? "text-gray-900" : "text-sky-500"
               } `}
             >
-              Discounts: ${priceListCart - priceCart}
+              Discounts: ${(priceListCart - priceCart).toFixed(2)}
             </span>
           ) : null}
 
           <span
-            className={`text-4xl font-Montserrat text-center my-10  ${
+            className={` text-xl lg:text-4xl font-Montserrat text-center my-10  ${
               mode === "light" ? "text-gray-900" : "text-sky-500"
             } `}
           >
             Total Cart: ${priceCart}
           </span>
           <span
-            className={`text-4xl font-Montserrat text-center my-10  ${
+            className={` text-xl lg:text-4xl font-Montserrat text-center my-10  ${
               mode === "light" ? "text-gray-900" : "text-sky-500"
             } `}
           >
             Total Items: {quantityCart}
           </span>
+          <Link to="/">
+          <Button className="mb-20" size="md" type="default">Back to Home</Button>
+          </Link>
         </div>
       </div>
     </main>

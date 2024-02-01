@@ -128,7 +128,7 @@ const DetailPage = () => {
       } lg:mt-48 px-6 w-screen`}
     >
       <div className="flex flex-col lg:flex-row w-full items-center text-center">
-        <img className="w-auto lg:h-[600px]" src={img} alt={name} />
+        <img className="w-auto md:h-[600px] lg:h-[600px]" src={img} alt={name} />
         <div className="flex flex-col h-full  items-center">
           <h1
             className={`font-Montserrat text-3xl px-10 hover:bg-black hover:text-white mt-10 lg:text-5xl ${
@@ -140,7 +140,7 @@ const DetailPage = () => {
           {discountPrice ? (
             <div className="flex items-center mt-6">
               <s
-                className={`font-Montserrat text-4xl mr-4 ${
+                className={`font-Montserrat text-3xl lg:text-4xl mr-4 ${
                   mode === "light" ? "text-gray-400 " : "text-white"
                 } `}
               >
@@ -148,7 +148,7 @@ const DetailPage = () => {
                 $ {price}
               </s>
               <span
-                className={`font-Montserrat text-6xl text-sky-400 `}
+                className={`font-Montserrat text-4xl lg:text-6xl text-sky-400 `}
               >
                 $ {discountPrice}
               </span>
@@ -156,7 +156,7 @@ const DetailPage = () => {
           ) : (
             <div className="flex items-center justify-center my-6">
               <span
-                className={`font-Montserrat text-6xl mt-6 text-sky-500 `}
+                className={`font-Montserrat text-4xl lg:text-6xl mt-6 text-sky-500 `}
               >
                 $ {price}
               </span>

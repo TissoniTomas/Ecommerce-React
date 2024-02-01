@@ -1,9 +1,18 @@
+// React Router Dom
+
 import { Link } from "react-router-dom";
+
+// Contexts
+
 import { useContext } from "react";
 import { ModeContext } from "../../context/modeContext";
 
 const ItemCard = ({ data }) => {
-  const { mode, setMode } = useContext(ModeContext);
+  // Hooks & Contexts
+  const { mode } = useContext(ModeContext);
+
+// Data Object
+const {name, img, discountPrice, price, id} = data
 
   return (
     <>
@@ -14,26 +23,44 @@ const ItemCard = ({ data }) => {
             : "bg-gray-900 border border-white shadow-white"
         }`}
       >
-        <img className={`h-64 lg:h-96 w-72 pt-4`} src={data.img} alt="" />
+        <img
+          className={`h-64 lg:h-96 w-72 pt-4`}
+          src={img}
+          alt={name}
+        />
         <h1
           className={`font-inter font-extrabold text-xl text-center my-10 lg:text-3xl lg:my-160 ${
             mode === "light" ? "text-black" : "text-white"
           }`}
         >
-          {data.name}
+          {name}
         </h1>
-        {data.discountPrice ?
-        <div className="flex items-center">
-   <s className={`font-Inter font-extrabold text-2xl mr-4 ${mode === "light" ? "text-gray-400 ": "text-white"} `}> $ {data.price}</s>
-          <span className={`font-Inter font-extrabold text-3xl text-sky-400 `}>
-            $ {data.discountPrice}
-          </span>
-
-        </div>
-        : <div>
-          <span  className={`font-Inter font-extrabold text-3xl mr-4 text-sky-500 `} >$ {data.price}</span>
-          </div>}
-        <Link to={`/product/detail/${data.id}`}>
+        {data.discountPrice ? (
+          <div className="flex items-center">
+            <s
+              className={`font-Inter font-extrabold text-2xl mr-4 ${
+                mode === "light" ? "text-gray-400 " : "text-white"
+              } `}
+            >
+              {" "}
+              $ {price}
+            </s>
+            <span
+              className={`font-Inter font-extrabold text-3xl text-sky-400 `}
+            >
+              $ {discountPrice}
+            </span>
+          </div>
+        ) : (
+          <div>
+            <span
+              className={`font-Inter font-extrabold text-3xl mr-4 text-sky-500 `}
+            >
+              $ {price}
+            </span>
+          </div>
+        )}
+        <Link to={`/product/detail/${id}`}>
           <button className="bg-cyan-700 text-white w-32 my-6 h-10 rounded-xl font-Inter font-medium absolute bottom-2 right-[25%]">{`See More`}</button>
         </Link>
       </div>

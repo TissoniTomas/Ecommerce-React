@@ -1,20 +1,26 @@
 
-import { Link } from "react-router-dom";
+// Contexts
+
+import { useContext } from "react";
+import { ModeContext } from "../../context/modeContext";
+
+// Assets
+
 import FBLM from "../../assets/social-media/facebook-lightmode.jpg";
 import IGLM from "../../assets/social-media/instagram-lightmode.png";
 import XLM from "../../assets/social-media/x-lightmode.jpg"
 import FBDM from "../../assets/social-media/facebook-darkmode.png"
 import IGDM from "../../assets/social-media/instagram-darkmode.png"
 import XDM from "../../assets/social-media/x-darkmode.png"
-import { useContext } from "react";
-import { ModeContext } from "../../context/modeContext";
 
+// React Router Dom
 
-
+import { Link } from "react-router-dom";
 
 const Footer = () => {
 
-  const {mode, setMode} = useContext(ModeContext)
+  // Contexts & Hooks
+  const {mode} = useContext(ModeContext)
   
   
  

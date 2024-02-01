@@ -1,8 +1,20 @@
+
+// React Hooks
+
 import { useContext, useEffect, useState } from "react";
+
+// Componentes
+
 import { Modal, Button } from "keep-react";
 import { CloudArrowUp } from "phosphor-react";
+
+//Firestore
+
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
+
+// Contextos
+
 import { PurchaseInfoContext } from "../../context/PurchaseInfoContext";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 
@@ -13,12 +25,16 @@ export const ModalComponent = ({
   confirmation,
   confirm,
 }) => {
+
+  // Context & Hooks
   const [showModal, setShowModal] = useState(true);
-  const {purchaseInfo, setPurchaseInfo, setPurchaseID, purchaseID} = useContext(PurchaseInfoContext);
+  const {setPurchaseInfo, setPurchaseID} = useContext(PurchaseInfoContext);
   const {shoppingCart} = useContext(ShoppingCartContext);
  
+// Funciones
 
-  const onClickOne = async () => {
+
+  const onClickConfirm = async () => {
     const docRef = await addDoc(collection(db, "purchaseCollection"), {
       ...shoppingCart,
       ...formvalues,
@@ -30,11 +46,17 @@ export const ModalComponent = ({
     setPurchaseID(docRef.id)
     setformvalues(initialform);
     console.log(shoppingCart);
+    irAlPrincipio();
   };
-  const onClickTwo = () => {
+  const onClickDecline = () => {
     setShowModal(!showModal);
     confirmation(false);
   };
+
+  const irAlPrincipio = () => {
+    window.scrollTo(0, 0);
+  };
+  
 
   return (
     <>
@@ -53,10 +75,10 @@ export const ModalComponent = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button type="outlineGray" onClick={onClickTwo}>
+          <Button type="outlineGray" onClick={onClickDecline}>
             Cancel
           </Button>
-          <Button type="primary" onClick={onClickOne}>
+          <Button type="primary" onClick={onClickConfirm}>
             Confirm
           </Button>
         </Modal.Footer>

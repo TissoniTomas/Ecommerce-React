@@ -1,17 +1,19 @@
 
-
+// Hooks
 import { useState } from 'react'
+// Components
 import { Button, Notification } from 'keep-react'
 
 export const NotificationComponent = () => {
+  //Hooks
   const [showNotification, setShowNotification] = useState(true)
-
+//Funciones
   const onDismiss = () => {
     setShowNotification(false)
     
  setTimeout(()=>{
      setShowNotification(true)
- },2000)
+ },1500)
   }
   return (
     <div>

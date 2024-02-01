@@ -1,33 +1,28 @@
-
+// Assets
 import logo from "../../assets/Logo/logo.png";
-
 // Hooks
 import { useState, useContext, useEffect } from "react";
-
 // Contextos
-import {ModeContext} from "../../context/modeContext"
+import { ModeContext } from "../../context/modeContext";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
-
 // React Router
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-
-  const {mode, setMode} = useContext(ModeContext)
-  const {shoppingCart} = useContext(ShoppingCartContext);
-
+  // Hooks
+  const { mode, setMode } = useContext(ModeContext);
+  const { shoppingCart } = useContext(ShoppingCartContext);
   const [openMenu, setOpenMenu] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [openCategories, setOpenCategories] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     sessionStorage.setItem("theme", mode);
     console.log(mode);
-  },[mode])
-
+  }, [mode]);
+  // Funciones
   const handleToggleMode = () => {
-    setMode(mode === "light" ? "dark" : "light")
-    
+    setMode(mode === "light" ? "dark" : "light");
   };
 
   const toggleNavBar = () => {
@@ -120,7 +115,6 @@ const NavBar = () => {
               PRODUCTS
             </li>
           </Link>
-
           <li
             onKeyUp={toggleNavBarKey}
             onClick={toggleCategories}
@@ -223,6 +217,7 @@ const NavBar = () => {
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 className="w-8 h-8 bg-white hover:bg-gray-300 "
+                onClick={toggleNavBar}
               >
                 <path
                   fillRule="evenodd"
@@ -238,6 +233,7 @@ const NavBar = () => {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 className="w-8 h-8 text-white hover:bg-gray-700"
+                onClick={toggleNavBar}
               >
                 <path
                   strokeLinecap="round"
@@ -252,7 +248,7 @@ const NavBar = () => {
                 mode === "light" ? "text-gray-900 " : "text-white "
               } lg:text-3xl `}
             >
-              { shoppingCart.length >= 1 ? shoppingCart.length : null}
+              {shoppingCart.length >= 1 ? shoppingCart.length : null}
             </span>
           </Link>
           {mode === "light" ? (
@@ -261,6 +257,7 @@ const NavBar = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
+             
               className="w-8 h-8 transition transform hover:scale-105 cursor-pointer mt-10 hover:bg-gray-300"
             >
               <path d="M8 1a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 1ZM10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM12.95 4.11a.75.75 0 1 0-1.06-1.06l-1.062 1.06a.75.75 0 0 0 1.061 1.062l1.06-1.061ZM15 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 15 8ZM11.89 12.95a.75.75 0 0 0 1.06-1.06l-1.06-1.062a.75.75 0 0 0-1.062 1.061l1.061 1.06ZM8 12a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 12ZM5.172 11.89a.75.75 0 0 0-1.061-1.062L3.05 11.89a.75.75 0 1 0 1.06 1.06l1.06-1.06ZM4 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 4 8ZM4.11 5.172A.75.75 0 0 0 5.173 4.11L4.11 3.05a.75.75 0 1 0-1.06 1.06l1.06 1.06Z" />
@@ -286,7 +283,7 @@ const NavBar = () => {
             className={`mt-10 lg:mx-10 ${
               mode === "light" ? "text-gray-900" : "text-white"
             } lg:relative flex flex-col items-center`}
-            to="/category/profile"
+            
             onClick={() => setOpenProfile(!openProfile)}
           >
             <svg
@@ -296,6 +293,7 @@ const NavBar = () => {
               strokeWidth={1.5}
               stroke="currentColor"
               className="w-8 h-8 hover:bg-gray-300"
+             
             >
               <path
                 strokeLinecap="round"
@@ -308,7 +306,9 @@ const NavBar = () => {
               <ul
                 className={`my-10 lg:absolute lg:top-10 flex flex-col w-36 items-start lg:border lg:border-gray-700 lg:rounded-xl animate-fade-down animate-ease-in-out ${
                   mode === "light" ? "bg-white" : "bg-gray-900"
+                  
                 }`}
+                onClick={toggleNavBar}
               >
                 <li
                   className={`py-4 text-center w-full ${
@@ -316,6 +316,7 @@ const NavBar = () => {
                       ? "text-gray-900 hover:underline hover:decoration-gray-900"
                       : "text-white hover:underline hover:decoration-white"
                   }`}
+                  to="/category/profile"
                 >
                   MY PROFILE
                 </li>

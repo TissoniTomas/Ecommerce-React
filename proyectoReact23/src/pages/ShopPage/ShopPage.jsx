@@ -4,7 +4,7 @@ import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import { CheckoutForm } from "../../components/CheckoutForm/CheckoutForm";
 import SpinnerFB from "../../components/Spinner/Spinner";
 import { useNavigate } from 'react-router-dom';
-import { Button } from "keep-react";
+
 
 
 const ShopPage = () => {
@@ -28,15 +28,17 @@ const ShopPage = () => {
   }
 }, [isConfirmed, navigate]);
 
+
  
   return (
     <>
       {isConfirmed ? (
-        <div  className={`flex flex-col items-center justify-center w-screen h-screen  ${
+        <div  className={`flex flex-col items-center justify-center w-screen h-72 lg:h-96   ${
           mode === "light" ? "bg-white" : "bg-gray-900"
         } lg:mt-48 `}>
+         
           <SpinnerFB />
-          <h1 className={`font-Montserrat text-5xl my-10 ${
+          <h1 className={`font-Montserrat text-2xl text-center lg:text-5xl my-10 ${
                 mode === "light" ? "text-gray-900" : "text-white"
               }`}>Su compra esta sienda procesada...</h1>
         </div>
