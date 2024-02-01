@@ -61,7 +61,7 @@ const {name, img, discountPrice, price, id} = data
           </div>
         )}
         <Link to={`/product/detail/${id}`}>
-          <button className="bg-cyan-700 text-white w-32 my-6 h-10 rounded-xl font-Inter font-medium mt-14 ">{`See More`}</button>
+          <button className="bg-cyan-700 text-white w-32 my-6 h-10 rounded-xl font-Inter font-medium lg:mt-14 ">{`See More`}</button>
         </Link>
       </div>
     </>

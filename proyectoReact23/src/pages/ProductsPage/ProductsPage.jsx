@@ -48,7 +48,7 @@ const ProductsPage = () => {
       >
         PRODUCTS
       </h1>
-      <div className="flex flex-col lg:flex-row items-center lg:justify-evenly lg:w-[50%] mt-20">
+      <div className="flex flex-col lg:flex-row items-center lg:justify-evenly w-full mt-20">
         <label
           className={`font-Inter text-2xl font-bold ${
             mode === "light" ? "text-gray-900" : "text-white"
@@ -67,7 +67,7 @@ const ProductsPage = () => {
             mode === "light"
               ? "bg-white text-gray-900"
               : "bg-gray-900 text-white"
-          } text-center mt-8 text-2xl w-96 border border-sky-500 rounded-xl `}
+          } text-center mt-8 lg:mt-0 text-2xl w-96 border border-sky-500 rounded-xl `}
         />
         <button
           type="reset"

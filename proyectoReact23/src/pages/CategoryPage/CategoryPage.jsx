@@ -83,7 +83,12 @@ const CategoryPage = () => {
       <main className={`flex flex-col items-center ${mode === "light" ? "bg-white" : "bg-gray-900"} lg:mt-48`}>
         <h1 className={`font-Montserrat text-center text-4xl lg:text-6xl my-10 ${mode === "light" ? "text-gray-900" : "text-white"}`}>{title}</h1>
 
-          {spinner ? <SpinnerFB/> :
+          {spinner ? 
+          <div className="my-44">
+            <SpinnerFB/>
+
+          </div>
+           :
         <div className="grid grid-cols-1 gap-10 my-20 md:grid md:grid-cols-2 lg:grid-cols-3">
           
           {gamesData.map((item) => (
