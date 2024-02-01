@@ -4,51 +4,19 @@ import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import { Button } from "keep-react";
 import { Link } from "react-router-dom";
 
-
 const CartPage = () => {
-
   const { mode } = useContext(ModeContext);
-  const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
-  const [totalCart, setTotalCart] = useState(0);
-  const [totalQuantity, setTotalQuantity] = useState(0);
+  const {
+    shoppingCart,
+    removeItem,
+    clearCart,
+    totalCart,
+    totalQuantity,
+    handleDecrementQuantity,
+    handleIncrementQuantity,
+  } = useContext(ShoppingCartContext);
 
-  const items = shoppingCart;
   const emptyCart = shoppingCart.length;
-
-  console.log(items);
-
-  const removeItem = (itemName, itemPlatform) => {
-    const index = items.findIndex(
-      (item) => item.platform === itemPlatform && item.name === itemName
-    );
-    if (index !== -1) {
-      items.splice(index, 1);
-      setShoppingCart([...items]); 
-    }
-  };
-
-  const clearCart = () => {
-    items = setShoppingCart([]);
-  };
-
-  useEffect(() => {
-    const precioTotal = items.reduce((acc, prod) => {
-      if (prod.discountPrice != null) {
-        return acc + prod.discountPrice * prod.quantity;
-      }
-
-      return acc + prod.price * prod.quantity;
-    }, 0);
-
-    const cantidadTotal = items.reduce((acc, prod) => {
-      return acc + prod.quantity;
-    }, 0);
-
-    setTotalCart(precioTotal.toFixed(2));
-    setTotalQuantity(cantidadTotal);
-  }, [items]);
-
-  
 
   return (
     <>
@@ -76,40 +44,39 @@ const CartPage = () => {
             Carrito de Compras
           </h1>
 
-          {items.map((item, index) => (
+          {shoppingCart.map((item, index) => (
             <div
               className={`lg:grid lg:grid-cols-7 flex flex-col w-screen lg:px-64 gap-10 mb-20 pb-20 items-center border-b border-white font-Montserrat`}
               key={item.id}
             >
-             
-                <div className="hidden lg:block">
-                  <span >ID</span>
-                </div>
-                <div className="hidden lg:block">
-                  <span>{null}</span>
-                </div>
-                <div className="hidden lg:block">
-                  <span>Title</span>
-                </div>
-                <div className="hidden lg:block">
-                  <span>Price in USD</span>
-                </div>
-                <div className="hidden lg:block">
-                  <span>Quantity</span>
-                </div>
-                <div className="hidden lg:block">
-                  <span>Platform</span>
-                </div>
-                <div className="hidden lg:block">
-                  <span>{null}</span>
-                </div>
-             
+              <div className="hidden lg:block">
+                <span>ID</span>
+              </div>
+              <div className="hidden lg:block ">
+                <span>{null}</span>
+              </div>
+              <div className="hidden lg:block">
+                <span>Title</span>
+              </div>
+              <div className="hidden lg:block">
+                <span>Price in USD</span>
+              </div>
+              <div className="hidden lg:block">
+                <span>Quantity</span>
+              </div>
+              <div className="hidden lg:block">
+                <span>Platform</span>
+              </div>
+              <div className="hidden lg:block">
+                <span>{null}</span>
+              </div>
+
               <div>
                 <span className="hidden lg:block">{index + 1}</span>
               </div>
               <div>
                 <img
-                  className="lg:w-32 lg:h-48 h-36 w-auto"
+                  className=" lg:h-48 h-36 w-auto"
                   src={item.image}
                   alt={item.name}
                 />
@@ -124,8 +91,48 @@ const CartPage = () => {
                   {item.discountPrice != null ? item.discountPrice : item.price}
                 </span>
               </div>
-              <div>
+              <div className="flex items-center justify-center ">
+                <button
+                  onClick={() =>
+                    handleIncrementQuantity(item.name, item.platform)
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 mr-2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m15 11.25-3-3m0 0-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </button>
                 <span>{item.quantity}U</span>
+                <button
+                  onClick={() =>
+                    handleDecrementQuantity(item.name, item.platform)
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 ml-2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </button>
               </div>
               <div>
                 <span>{item.platform}</span>
@@ -136,7 +143,20 @@ const CartPage = () => {
                   className=""
                   onClick={() => removeItem(item.name, item.platform)}
                 >
-                  Remover Item
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6 hover:text-red-500"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6 18 18 6M6 6l12 12"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>

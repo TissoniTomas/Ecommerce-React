@@ -9,12 +9,12 @@ import { db } from "../../firebase/firebaseConfig";
 
 const ProductsPage = () => {
 
-  const {mode, setMode} = useContext(ModeContext)
+  const {mode} = useContext(ModeContext)
 
   const {gamesData, spinner} = useFetch(db)
   const [filtro, setFiltro] = useState("");
   const [dataFilt, setDataFilt] = useState(gamesData);
-  const [focus, setFocus] = useState(false);
+  
 
   useEffect(() => {
     const filteredData = gamesData.filter((item) =>
@@ -27,17 +27,13 @@ const ProductsPage = () => {
     const valorFiltro = e.target.value;
     console.log(valorFiltro);
     setFiltro(valorFiltro);
-    setFocus(true);
+   
   };
 
   const clearFilter = () => {
     setFiltro("");
   };
 
-  const handleFocus = () => {
-    setFocus(!focus);
-    console.log(focus);
-  };
 
   return (
     <main
@@ -52,7 +48,7 @@ const ProductsPage = () => {
       >
         Products
       </h1>
-      <div className="flex flex-col lg:flex-row items-center justify-evenly w-full mt-20">
+      <div className="flex flex-col lg:flex-row items-center justify-evenly w-[50%] mt-20">
         <label
           className={`font-Inter text-2xl font-bold ${
             mode === "light" ? "text-gray-900" : "text-white"
@@ -67,14 +63,11 @@ const ProductsPage = () => {
           id="filter"
           placeholder="Set a product"
           onChange={handleInput}
-          onMouseOver={handleFocus}
-          onMouseLeave={handleFocus}
-          value={filtro}
           className={`${
             mode === "light"
               ? "bg-white text-gray-900"
               : "bg-gray-900 text-white"
-          } text-2xl w-96 pt-6`}
+          } text-2xl w-96 focus:border focus:border-sky-500 `}
         />
         <button
           type="reset"

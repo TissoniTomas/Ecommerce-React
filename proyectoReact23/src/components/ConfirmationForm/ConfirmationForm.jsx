@@ -3,7 +3,7 @@ import { Modal, Button } from "keep-react";
 import { CloudArrowUp } from "phosphor-react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
-import { PurchaseIdContext } from "../../context/PurchaseIDContext";
+import { PurchaseInfoContext } from "../../context/PurchaseInfoContext";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 
 export const ModalComponent = ({
@@ -14,9 +14,9 @@ export const ModalComponent = ({
   confirm,
 }) => {
   const [showModal, setShowModal] = useState(true);
-  const [purchaseId, setPurchaseId] = useContext(PurchaseIdContext);
-  const [shoppingCart] = useContext(ShoppingCartContext);
-  console.log(shoppingCart);
+  const {purchaseInfo, setPurchaseInfo, setPurchaseID, purchaseID} = useContext(PurchaseInfoContext);
+  const {shoppingCart} = useContext(ShoppingCartContext);
+ 
 
   const onClickOne = async () => {
     const docRef = await addDoc(collection(db, "purchaseCollection"), {
@@ -24,10 +24,12 @@ export const ModalComponent = ({
       ...formvalues,
     });
 
-    setformvalues(initialform);
     setShowModal(!showModal);
     confirm(true);
-    setPurchaseId(docRef.id);
+    setPurchaseInfo(formvalues,);
+    setPurchaseID(docRef.id)
+    setformvalues(initialform);
+    console.log(shoppingCart);
   };
   const onClickTwo = () => {
     setShowModal(!showModal);

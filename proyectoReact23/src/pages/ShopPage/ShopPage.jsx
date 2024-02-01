@@ -9,7 +9,7 @@ import { Button } from "keep-react";
 
 const ShopPage = () => {
   const { mode } = useContext(ModeContext);
-  const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
+  const {shoppingCart, setShoppingCart} = useContext(ShoppingCartContext);
   const [isConfirmed, setisConfirmed] = useState(false);
 
  const navigate = useNavigate();
@@ -19,10 +19,11 @@ const ShopPage = () => {
     // Redirigir a la parte final de la compra después de 5 segundos
     const redirectTimeout = setTimeout(() => {
       navigate('/confirmation');
-      setShoppingCart([]) // Redirige a la página final de la compra
+      
     }, 5000);
 
-    // Limpiar el temporizador al desmontar el componente o cuando confirmado cambie nuevamente
+    
+    
     return () => clearTimeout(redirectTimeout);
   }
 }, [isConfirmed, navigate]);

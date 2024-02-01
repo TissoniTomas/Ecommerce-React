@@ -26,9 +26,10 @@ const Footer = () => {
           Home
         </Link>
         <Link to="/products" className="m-5">Products</Link>
-        <Link to="/category/men's clothing" className="m-5">Men's & Women's Clothing</Link>
-        <Link to= "/category/electronics" className="m-5">Electronics</Link>
-        <Link to="/category/jewelery" className="m-5">Jewelery</Link>
+        <Link to="/categories/rockstar-games" className="m-5">Rockstar Games</Link>
+        <Link to="/categories/nfs-saga" className="m-5">NFS Saga</Link>
+        <Link to= "/categories/cod-saga" className="m-5">COD Saga</Link>
+        <Link to= "/categories/sports&others" className="m-5">Sports & Others</Link>
       
       
         <Link className="m-5">About Us</Link>

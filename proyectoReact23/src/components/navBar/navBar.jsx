@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
 
   const {mode, setMode} = useContext(ModeContext)
-  const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext)
+  const {shoppingCart} = useContext(ShoppingCartContext);
 
   const [openMenu, setOpenMenu] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
@@ -140,7 +140,7 @@ const NavBar = () => {
                 mode === "light" ? "bg-white " : "bg-gray-900"
               } `}
             >
-              <Link to="/category/rockstar-games">
+              <Link to="/categories/rockstar-games">
                 <li
                   onClick={() => {
                     toggleCategories();
@@ -155,7 +155,7 @@ const NavBar = () => {
                   ROCKSTAR GAMES MASTERPIECES
                 </li>
               </Link>
-              <Link to="/category/cod-saga">
+              <Link to="/categories/cod-saga">
                 <li
                   onClick={() => {
                     toggleCategories();
@@ -170,7 +170,7 @@ const NavBar = () => {
                   COD SAGA
                 </li>
               </Link>
-              <Link to="/category/nfs-saga">
+              <Link to="/categories/nfs-saga">
                 <li
                   onClick={() => {
                     toggleCategories();
@@ -185,7 +185,7 @@ const NavBar = () => {
                   NEED FOR SPEED SAGA
                 </li>
               </Link>
-              <Link to="/category/sports&others">
+              <Link to="/categories/sports&others">
                 <li
                   onClick={() => {
                     toggleCategories();

@@ -16,7 +16,7 @@ import { Button } from "keep-react";
 const DetailPage = () => {
   let { id } = useParams();
   const { mode } = useContext(ModeContext);
-  const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
+  const {shoppingCart, setShoppingCart, counterStock, setCounterStock} = useContext(ShoppingCartContext);
 
   const [gamesData, setGamesData] = useState({});
   const [spinner, setSpinner] = useState(true);
@@ -31,7 +31,7 @@ const DetailPage = () => {
     consolas,
     discountPrice,
   } = gamesData;
-  const [counterStock, setCounterStock] = useState(0);
+  
   const [isFav, setIsFav] = useState(false);
 
   const [item, setItem] = useState({});
@@ -85,6 +85,8 @@ const DetailPage = () => {
       } else {
         setShoppingCart((prevCart) => [...prevCart, newitem]);
       }
+
+      
     }
   };
 
@@ -253,7 +255,7 @@ const DetailPage = () => {
                           : setPlatform(consola)
                       }
                       className={`text-gray-400 block w-32 font-Montserrat text-lg list-none mx-10 cursor-pointer hover:border p-1 ${
-                        platform === consola ? " text-white " : null
+                        platform === consola ? " text-red-700 " : null
                       }`}
                       key={consola.id}
                     >

@@ -17,8 +17,8 @@ import ConfirmationPage from "./pages/ConfirmationPage/ConfirmationPage";
 
 import { ModeProvider } from "./context/modeContext";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
-import { CounterStockProvider } from "./context/counterStockContext";
-import { PurchaseIDProvider } from "./context/PurchaseIDContext";
+import { PurchaseInfoProvider } from "./context/PurchaseInfoContext";
+
 
 
 
@@ -26,8 +26,8 @@ const App = () => {
   return (
     <ShoppingCartProvider>
       <ModeProvider>
-        <CounterStockProvider>
-          <PurchaseIDProvider>
+       
+          <PurchaseInfoProvider>
 
           <Router>
             <Header />
@@ -40,7 +40,7 @@ const App = () => {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<ErrorPage />} />
               <Route path="/product/detail/:id" element={<DetailPage />} />
-              <Route path="/category/:Categoryid" element={<CategoryPage />} />
+              <Route path="/categories/:Categoryid" element={<CategoryPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/checkout" element={<ShopPage />} />
               <Route path="/confirmation" element= {<ConfirmationPage/>} />
@@ -48,8 +48,8 @@ const App = () => {
 
             <Footer />
           </Router>
-          </PurchaseIDProvider>
-        </CounterStockProvider>
+          </PurchaseInfoProvider>
+       
       </ModeProvider>
     </ShoppingCartProvider>
   );

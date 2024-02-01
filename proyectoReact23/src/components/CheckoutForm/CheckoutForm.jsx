@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { ModalComponent } from "../ConfirmationForm/ConfirmationForm";
 import { ModeContext } from "../../context/modeContext";
 import { Button } from "keep-react";
+import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 
 export const CheckoutForm = ({ confirm }) => {
   const { mode } = useContext(ModeContext);
@@ -14,6 +15,7 @@ export const CheckoutForm = ({ confirm }) => {
   };
   const [formValues, setFormValues] = useState(initialForm);
   const [confirmation, setConfirmation] = useState(false);
+  
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -132,6 +134,7 @@ export const CheckoutForm = ({ confirm }) => {
           setformvalues={setFormValues}
           initialform={initialForm}
           confirmation={setConfirmation}
+          
         />
       )}
     </form>
