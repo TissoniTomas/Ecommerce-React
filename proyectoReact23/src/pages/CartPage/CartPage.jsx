@@ -4,7 +4,9 @@ import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import { Button } from "keep-react";
 import { Link } from "react-router-dom";
 
+
 const CartPage = () => {
+
   const { mode } = useContext(ModeContext);
   const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
   const [totalCart, setTotalCart] = useState(0);
@@ -21,7 +23,7 @@ const CartPage = () => {
     );
     if (index !== -1) {
       items.splice(index, 1);
-      setShoppingCart([...items]); // Actualizar el estado del carrito
+      setShoppingCart([...items]); 
     }
   };
 
@@ -46,11 +48,13 @@ const CartPage = () => {
     setTotalQuantity(cantidadTotal);
   }, [items]);
 
+  
+
   return (
     <>
       {emptyCart === 0 ? (
         <div
-          className={`flex flex-col items-center  h-full  ${
+          className={`flex flex-col items-center h-full  ${
             mode === "light"
               ? "text-gray-900 bg-white"
               : "text-gray-400 bg-gray-900"
@@ -74,34 +78,34 @@ const CartPage = () => {
 
           {items.map((item, index) => (
             <div
-              className={`lg:grid lg:grid-cols-7 flex flex-col w-screen lg:px-64 gap-10  mb-20 items-center border-b border-white  font-Montserrat`}
+              className={`lg:grid lg:grid-cols-7 flex flex-col w-screen lg:px-64 gap-10 mb-20 pb-20 items-center border-b border-white font-Montserrat`}
               key={item.id}
             >
-              <div className="hidden">
-                <div>
-                  <span className="">ID</span>
+             
+                <div className="hidden lg:block">
+                  <span >ID</span>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                   <span>{null}</span>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                   <span>Title</span>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                   <span>Price in USD</span>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                   <span>Quantity</span>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                   <span>Platform</span>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                   <span>{null}</span>
                 </div>
-              </div>
+             
               <div>
-                <span className="hidden">{index + 1}</span>
+                <span className="hidden lg:block">{index + 1}</span>
               </div>
               <div>
                 <img

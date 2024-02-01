@@ -13,34 +13,43 @@ import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 import CartPage from "./pages/CartPage/CartPage";
 import ShopPage from "./pages/ShopPage/ShopPage";
+import ConfirmationPage from "./pages/ConfirmationPage/ConfirmationPage";
 
 import { ModeProvider } from "./context/modeContext";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+import { CounterStockProvider } from "./context/counterStockContext";
+import { PurchaseIDProvider } from "./context/PurchaseIDContext";
 
-import { db } from "./firebase/firebaseConfig";
+
 
 const App = () => {
   return (
     <ShoppingCartProvider>
       <ModeProvider>
-        <Router>
-          <Header />
-          <ScrollTop />
+        <CounterStockProvider>
+          <PurchaseIDProvider>
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<PrdouctsPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="*" element={<ErrorPage />} />
-            <Route path="/product/detail/:id" element={<DetailPage />} />
-            <Route path="/category/:Categoryid" element={<CategoryPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<ShopPage/>}/>
-          </Routes>
+          <Router>
+            <Header />
+            <ScrollTop />
 
-          <Footer />
-        </Router>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/products" element={<PrdouctsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="*" element={<ErrorPage />} />
+              <Route path="/product/detail/:id" element={<DetailPage />} />
+              <Route path="/category/:Categoryid" element={<CategoryPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<ShopPage />} />
+              <Route path="/confirmation" element= {<ConfirmationPage/>} />
+            </Routes>
+
+            <Footer />
+          </Router>
+          </PurchaseIDProvider>
+        </CounterStockProvider>
       </ModeProvider>
     </ShoppingCartProvider>
   );

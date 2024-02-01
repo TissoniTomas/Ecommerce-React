@@ -113,14 +113,18 @@ const DetailPage = () => {
     for (const clave in consolas) {
       clavesConsolas.push(clave);
     }
-     let clavesOrdenadas = clavesConsolas.toSorted();
+    let clavesOrdenadas = clavesConsolas.toSorted();
     return clavesOrdenadas;
   };
 
   let consolasArray = claves();
 
   return (
-    <main className={` ${mode === "light" ? "bg-white" : "bg-gray-900"} lg:mt-48 px-6 w-screen`}>
+    <main
+      className={` ${
+        mode === "light" ? "bg-white" : "bg-gray-900"
+      } lg:mt-48 px-6 w-screen`}
+    >
       <div className="flex flex-col lg:flex-row w-full items-center text-center">
         <img className="w-auto lg:h-[600px]" src={img} alt={name} />
         <div className="flex flex-col h-full  items-center">
@@ -131,12 +135,33 @@ const DetailPage = () => {
           >
             {name}
           </h1>
-
-          <span className="my-10 text-3xl font-Montserrat text-sky-500 lg:text-5xl lg:my-6">
-            $ {price}
-          </span>
+          {discountPrice ? (
+            <div className="flex items-center mt-6">
+              <s
+                className={`font-Montserrat text-4xl mr-4 ${
+                  mode === "light" ? "text-gray-400 " : "text-white"
+                } `}
+              >
+                {" "}
+                $ {price}
+              </s>
+              <span
+                className={`font-Montserrat text-6xl text-sky-400 `}
+              >
+                $ {discountPrice}
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center my-6">
+              <span
+                className={`font-Montserrat text-6xl mt-6 text-sky-500 `}
+              >
+                $ {price}
+              </span>
+            </div>
+          )}
           <p
-            className={`my-10 font-Inter px-10 text-lg lg:px-20  ${
+            className={`my-10 font-Montserrat px-10 text-lg lg:px-20  ${
               mode === "light" ? "text-gray-900" : "text-gray-400"
             }`}
           >
@@ -292,4 +317,3 @@ const DetailPage = () => {
 };
 
 export default DetailPage;
-

@@ -71,10 +71,6 @@ const ProductsPage = () => {
           onMouseLeave={handleFocus}
           value={filtro}
           className={`${
-            !focus
-              ? "focus: border-b border-sky-500 outline-none"
-              : "border-2 border-sky-500"
-          } ${
             mode === "light"
               ? "bg-white text-gray-900"
               : "bg-gray-900 text-white"
