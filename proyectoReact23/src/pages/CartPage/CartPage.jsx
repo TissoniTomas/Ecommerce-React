@@ -76,7 +76,7 @@ const CartPage = () => {
               </div>
               <div>
                 <img
-                  className="w-auto h-36 md:h-60  lg:h-48"
+                  className="w-auto h-36 md:h-60  lg:h-44"
                   src={item.image}
                   alt={item.name}
                 />

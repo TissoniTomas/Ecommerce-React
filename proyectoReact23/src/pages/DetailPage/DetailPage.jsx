@@ -148,7 +148,7 @@ const DetailPage = () => {
                 $ {price}
               </s>
               <span
-                className={`font-Montserrat text-4xl lg:text-6xl text-sky-400 `}
+                className={`font-Montserrat text-4xl xl:text-5xl text-sky-400 `}
               >
                 $ {discountPrice}
               </span>
