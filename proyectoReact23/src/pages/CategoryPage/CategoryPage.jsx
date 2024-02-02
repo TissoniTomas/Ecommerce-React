@@ -55,19 +55,19 @@ const CategoryPage = () => {
 
   switch(Categoryid){
     case "rockstar-games" :{
-      title = "ROCKSTAR GAMES MASTERPIECES"
+      title = "ROCKSTAR GAMES OBRAS MAESTRAS"
       break;
     }
     case "cod-saga" :{
-      title = "CALL OF DUTY SAGA"
+      title = "SAGA CALL OF DUTY"
       break;
     }
     case "nfs-saga" :{
-      title = "NEED FOR SPEED SAGA"
+      title = "SAGA NEED FOR SPEED"
       break;
     }
     case "sports&others" :{
-      title = "SPORTS & OTHERS"
+      title = "DEPORTES Y OTROS"
       break;
     }
 

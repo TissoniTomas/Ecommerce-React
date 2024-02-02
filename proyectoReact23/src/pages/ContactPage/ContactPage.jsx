@@ -1,4 +1,4 @@
-import  {  useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { ModeContext } from "../../context/modeContext";
 
 import { Label, TextInput } from "keep-react";
@@ -8,31 +8,40 @@ import { Envelope } from "phosphor-react";
 import { Dropdown } from "keep-react";
 import { Textarea } from "keep-react";
 
-
-
 const ContactPage = () => {
-
   const [option, setOption] = useState("Pick a option");
-  const {mode} = useContext(ModeContext)
-  
+  const { mode } = useContext(ModeContext);
 
-  const SubmitForm = () =>{
-
-  }
+  const SubmitForm = () => {};
 
   return (
-    <div className={`flex flex-col items-center ${mode === "light" ? "bg-white" : "bg-gray-900"} lg:mt-48`}>
-      <h1 className={`font-Montserrat text-5xl my-10 ${mode === "light" ? "text-gray-900" : "text-white" }`}>Contact Us</h1>
-      <p className={`text-center font-Inter my-10 w-72 ${mode === "light" ? "text-gray-900" : "text-gray-400"}`}>
-        Your messages through our contact form are vital! They allow us to
-        swiftly address your needs, ensuring a seamless and satisfying
-        experience. Your direct input shapes our services, emphasizing our
-        commitment to your satisfaction. We value your engagement, as it
-        strengthens our relationship and helps us serve you better.
+    <div
+      className={`flex flex-col items-center ${
+        mode === "light" ? "bg-white" : "bg-gray-900"
+      } lg:mt-48`}
+    >
+      <h1
+        className={`font-Montserrat text-5xl my-10 ${
+          mode === "light" ? "text-gray-900" : "text-white"
+        }`}
+      >
+        Contacta con nuestro equipo
+      </h1>
+      <p
+        className={`text-center font-Inter my-10 w-72 ${
+          mode === "light" ? "text-gray-900" : "text-gray-400"
+        }`}
+      >
+        ¡Tus mensajes a través de nuestro formulario de contacto son vitales!
+        Nos permiten abordar rápidamente tus necesidades, garantizando una
+        experiencia fluida y satisfactoria. Tu aportación directa moldea
+        nuestros servicios, resaltando nuestro compromiso con tu satisfacción.
+        Valoramos tu participación, ya que fortalece nuestra relación y nos
+        ayuda a servirte mejor.
       </p>
       <form action="contact" method="post">
         <div>
-          <Label htmlFor="#id-2" value="Your Name" className="text-sky-400"/>
+          <Label htmlFor="#id-2" value="Your Name" className="text-sky-400" />
           <TextInput
             id="#id-2"
             placeholder="Your Name"
@@ -43,7 +52,11 @@ const ContactPage = () => {
           />
         </div>
         <div>
-          <Label htmlFor="#id-2" value="Your Surname" className="text-sky-400" />
+          <Label
+            htmlFor="#id-2"
+            value="Your Surname"
+            className="text-sky-400"
+          />
           <TextInput
             id="#id-2"
             placeholder="Your Surname"
@@ -58,7 +71,6 @@ const ContactPage = () => {
             className="font-Inter font-bold text-sky-400"
             htmlFor="#id-2"
             value="Your Email"
-           
           />
           <TextInput
             id="#id-2"
@@ -72,7 +84,11 @@ const ContactPage = () => {
           />
         </div>
         <div>
-          <Label htmlFor="#id-2" value="Reason of your contact" className="text-sky-400"/>
+          <Label
+            htmlFor="#id-2"
+            value="Reason of your contact"
+            className="text-sky-400"
+          />
           <Dropdown
             label={option}
             size="sm"
@@ -80,20 +96,24 @@ const ContactPage = () => {
             dismissOnClick={true}
           >
             <Dropdown.Item onClick={() => setOption("Client Attention")}>
-              Client Attention
+              Atencion al Cliente
             </Dropdown.Item>
             <Dropdown.Item onClick={() => setOption("Refund")}>
-              Refund
+              Reembolsos
             </Dropdown.Item>
             <Dropdown.Item onClick={() => setOption("Delivery")}>
-              Delivery
+              Entrega de compras y codigos
             </Dropdown.Item>
             <Dropdown.Item onClick={() => setOption("Other")}>
-              Other
+              Otras consultas
             </Dropdown.Item>
           </Dropdown>
         </div>
-        <Label htmlFor="#id-2" value="Leave your comment" className="text-sky-400"/>
+        <Label
+          htmlFor="#id-2"
+          value="Leave your comment"
+          className="text-sky-400"
+        />
         <Textarea
           id="comment"
           placeholder="Leave a comment..."
@@ -103,10 +123,12 @@ const ContactPage = () => {
           rows={4}
         />
         <div className="flex mt-5 justify-around w-72">
-
-        <Button size="md" type="primary" onSubmit={SubmitForm}>Send Form</Button>
-        <Button type="reset" size="md" color="error">Reset Form</Button>
-      
+          <Button size="md" type="primary" onSubmit={SubmitForm}>
+            Enviar Formulario
+          </Button>
+          <Button type="reset" size="md" color="error">
+            Reiniciar formulario
+          </Button>
         </div>
       </form>
     </div>

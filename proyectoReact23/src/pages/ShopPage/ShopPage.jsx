@@ -57,11 +57,7 @@ const ShopPage = () => {
               CHECKOUT
             </h1>
             <p className={`lg:text-2xl font-Inter ${mode === "light" ? "text-gray-900" : "text-white"}`}>
-              To proceed with the purchase and facilitate the delivery of your
-              invoice and relevant information via email, please complete the
-              following form with the required details. This will ensure a
-              smooth transaction process and timely communication of important
-              documentation.{" "}
+            Para proceder con la compra y facilitar la entrega de tu factura e información relevante por correo electrónico, por favor completa el siguiente formulario con los detalles requeridos. Esto garantizará un proceso de transacción fluido y la comunicación oportuna de documentación importante.{" "}
             </p>
           </div>
 

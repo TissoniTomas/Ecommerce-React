@@ -46,9 +46,9 @@ const ProductsPage = () => {
           mode === "light" ? "text-gray-900" : "text-white"
         }`}
       >
-        PRODUCTS
+        PRODUCTOS
       </h1>
-      <div className="flex flex-col lg:flex-row items-center lg:justify-evenly w-full mt-20">
+      <div className="flex flex-col lg:flex-row items-center lg:justify-evenly xl:w-[50%] w-full mt-20">
         <label
           className={`font-Inter text-2xl font-bold ${
             mode === "light" ? "text-gray-900" : "text-white"
@@ -63,6 +63,7 @@ const ProductsPage = () => {
           id="filter"
           placeholder="Set a product"
           onChange={handleInput}
+          value={filtro}
           className={`${
             mode === "light"
               ? "bg-white text-gray-900"

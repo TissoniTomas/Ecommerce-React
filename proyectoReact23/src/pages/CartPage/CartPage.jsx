@@ -56,16 +56,16 @@ const CartPage = () => {
                 <span>{null}</span>
               </div>
               <div className="hidden lg:block">
-                <span>Title</span>
+                <span>Titulo</span>
               </div>
               <div className="hidden lg:block">
-                <span>Price in USD</span>
+                <span>Precio en USD</span>
               </div>
               <div className="hidden lg:block">
-                <span>Quantity</span>
+                <span>Cantidad</span>
               </div>
               <div className="hidden lg:block">
-                <span>Platform</span>
+                <span>Plataforma</span>
               </div>
               <div className="hidden lg:block">
                 <span>{null}</span>
@@ -166,7 +166,7 @@ const CartPage = () => {
           >
             <h2 className="text-4xl ">Resumen de la Compra</h2>
             <span className="text-2xl">Total: $ {totalCart}</span>
-            <span className="text-2xl">Items Quantity: {totalQuantity}</span>
+            <span className="text-2xl">Cantidad de Items: {totalQuantity}</span>
             <div className="flex flex-col items-center justify-evenly lg:flex-row lg:items-start w-full my-10">
               <Link to="/checkout">
                 <Button className="mb-10" size="md" pill={true} color="success">
@@ -185,24 +185,4 @@ const CartPage = () => {
 };
 
 export default CartPage;
-/**LIGHT MODE
- * 
- * Titulos : gray-900
- * Textos: gray-600 
- * Bg Botones: cyan-700
- * Texto botones : white font-medium
- * Hover Iconos : bg-gray-100
- * Sections : bg-gray-50
-   Iconos : gray-500
- * 
- * DARK MODE
- * 
- * BG: bg-gray-900
- * Titulos : white
- * Textos: gray-400
- * Bg Botones: cyan-700
- * Texto botones : white font-medium
- * Hover Iconos : bg-gray-700
- Iconos: gray-400
- * Sections : bg-gray-800
- */
+

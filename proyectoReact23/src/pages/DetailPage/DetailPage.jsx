@@ -140,7 +140,7 @@ const DetailPage = () => {
           {discountPrice ? (
             <div className="flex items-center mt-6">
               <s
-                className={`font-Montserrat text-3xl lg:text-4xl mr-4 ${
+                className={`font-Montserrat text-3xl lg:text-4xl xl:text-5xl mr-4 ${
                   mode === "light" ? "text-gray-400 " : "text-white"
                 } `}
               >
@@ -148,7 +148,7 @@ const DetailPage = () => {
                 $ {price}
               </s>
               <span
-                className={`font-Montserrat text-4xl xl:text-5xl text-sky-400 `}
+                className={`font-Montserrat text-4xl xl:text-6xl lg:text-5xl text-sky-400 `}
               >
                 $ {discountPrice}
               </span>
@@ -156,7 +156,7 @@ const DetailPage = () => {
           ) : (
             <div className="flex items-center justify-center my-6">
               <span
-                className={`font-Montserrat text-4xl lg:text-6xl mt-6 text-sky-500 `}
+                className={`font-Montserrat text-4xl lg:text-5xl xl:text-6xl mt-6 text-sky-500 `}
               >
                 $ {price}
               </span>
@@ -174,9 +174,9 @@ const DetailPage = () => {
               mode === "light" ? "text-gray-900" : "text-gray-400"
             }`}
           >
-            <li className="mx-10">Brand: {brand}</li>
-            <li className="mx-10">Release: {release}</li>
-            <li className="mx-10">Category: {category}</li>
+            <li className="mx-10">Marca: {brand}</li>
+            <li className="mx-10">Lanzamiento: {release}</li>
+            <li className="mx-10">Categoria: {category}</li>
           </ul>
 
           <form className="w-full flex flex-col items-center pb-20">
@@ -187,7 +187,7 @@ const DetailPage = () => {
                 }`}
                 htmlFor="quantity"
               >
-                Select Quantity
+                Seleccionar Cantidad
               </label>
               <input
                 className={`w-20 font-Montserrat lg:text-2xl focus:border-4 focus:rounded-lg focus:animate-fade-up focus:border-sky-500 focus:outline-none ${
@@ -243,7 +243,7 @@ const DetailPage = () => {
                 }`}
                 htmlFor="platform"
               >
-                Gaming Platform
+                Plataforma de Juego
               </label>
               <div className={`flex flex-col mb-20 justify-between  `}>
                 {consolasArray.map((consola, index) => (
@@ -276,7 +276,7 @@ const DetailPage = () => {
                   <NotificationComponent />
                 ) : (
                   <Button size="md" type="outlineGray">
-                    Add to Cart
+                    Agregar al Carrito
                   </Button>
                 )}
               </button>

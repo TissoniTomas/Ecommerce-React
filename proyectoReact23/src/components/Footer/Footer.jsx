@@ -43,7 +43,7 @@ const Footer = () => {
       </ul >
 
       <h2 className={`mt-20 ${mode === "light"? "text-gray-500" : "text-white"}`}>
-        Get the newsest information on our social medias
+        Obten la ultima informacion del sitio en nuestras redes sociales
       </h2>
       <ul className={`mt-20 flex justify-around ${mode === "light"? "text-gray-500" : "text-white"}`}>
         {mode === "light" ? < img className="w-10 h-10 m-10" src={FBLM} alt="facebook-lightmode" /> : <img className="w-10 h-10 m-10" src={FBDM} alt="facebook-darkmode" /> } 

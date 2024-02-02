@@ -112,7 +112,7 @@ const NavBar = () => {
               } lg:text-3xl `}
               onClick={openMenu}
             >
-              PRODUCTS
+              PRODUCTOS
             </li>
           </Link>
           <li
@@ -125,7 +125,7 @@ const NavBar = () => {
                 : "text-white hover:underline hover:decoration-white"
             } lg:text-3xl `}
           >
-            CATEGORIES
+            CATEGORIAS
           </li>
           {openCategories && (
             <ul
@@ -146,7 +146,7 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  ROCKSTAR GAMES MASTERPIECES
+                  ROCKSTAR GAMES OBRAS MAESTRAS
                 </li>
               </Link>
               <Link to="/categories/cod-saga">
@@ -161,7 +161,7 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  COD SAGA
+                  SAGA CALL OF DUTY
                 </li>
               </Link>
               <Link to="/categories/nfs-saga">
@@ -176,7 +176,7 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  NEED FOR SPEED SAGA
+                  SAGA NEED FOR SPEED
                 </li>
               </Link>
               <Link to="/categories/sports&others">
@@ -191,7 +191,7 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  SPORT WORLD & OTHERS
+                  DEPORTES Y MAS
                 </li>
               </Link>
             </ul>
@@ -206,7 +206,7 @@ const NavBar = () => {
               }  lg:text-3xl`}
               onClick={openMenu}
             >
-              CONTACT
+              CONTACTO
             </li>
           </Link>
 
@@ -318,7 +318,7 @@ const NavBar = () => {
                   }`}
                   to="/category/profile"
                 >
-                  MY PROFILE
+                  MI PERFIL
                 </li>
                 <li
                   className={`py-4 text-center w-full ${
@@ -327,7 +327,7 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  SETTINGS
+                  CONFIGURACION
                 </li>
                 <li
                   className={`py-4 text-center w-full ${
@@ -336,7 +336,7 @@ const NavBar = () => {
                       : "text-white hover:underline hover:decoration-white"
                   }`}
                 >
-                  LOG OUT
+                  CERRAR SESION
                 </li>
                 <li></li>
               </ul>

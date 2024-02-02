@@ -66,20 +66,20 @@ export const ModalComponent = ({
         show={showModal}
         position="center"
       >
-        <Modal.Header>Do you confirm this information?</Modal.Header>
+        <Modal.Header>¿Quieres confirmar la informacion ingresada??</Modal.Header>
         <Modal.Body>
           <div className="space-y-6">
             <p className="text-body-5 md:text-body-4 leading-relaxed text-metal-500">
-              Veracity of the information must be precise so we can send the information about your purchase.
+             La informacion brindada debe ser correcta y precisa para poder enviar la factura e informacion de los juegos via email.
             </p>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button type="outlineGray" onClick={onClickDecline}>
-            Cancel
+            Cancelar
           </Button>
           <Button type="primary" onClick={onClickConfirm}>
-            Confirm
+            Confirmar
           </Button>
         </Modal.Footer>
       </Modal>

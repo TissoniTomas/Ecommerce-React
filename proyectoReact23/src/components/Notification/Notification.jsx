@@ -18,7 +18,7 @@ export const NotificationComponent = () => {
   return (
     <div>
       <Button onClick={onDismiss} className='bg-sky-500 text-white hover:text-blue-600' >
-        Add To Cart
+        Agregar al Carrito
       </Button>
       <Notification dismiss={showNotification} >
         <Notification.Body>

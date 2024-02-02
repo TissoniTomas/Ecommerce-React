@@ -73,7 +73,7 @@ export const CheckoutForm = ({ confirm }) => {
           } `}
           htmlFor="name"
         >
-          Name
+          Nombre
         </label>
         <input
           value={formValues.name}
@@ -95,7 +95,7 @@ export const CheckoutForm = ({ confirm }) => {
           } `}
           htmlFor="surname"
         >
-          Surname
+          Apellido
         </label>
         <input
           value={formValues.surname}
@@ -139,7 +139,7 @@ export const CheckoutForm = ({ confirm }) => {
           } `}
           htmlFor="address"
         >
-          Address
+          Direccion
         </label>
         <input
           value={formValues.address}

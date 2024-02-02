@@ -60,7 +60,7 @@ const ConfirmationPage = () => {
         >
           {" "}
           Te acercamos la informacion de tu compra, la misma te estara llegando
-          por mail.{" "}
+          por mail. Gracias por confiar en The Last Store. ¡Hasta la proxima!{" "}
         </p>
       </div>
 
@@ -70,14 +70,14 @@ const ConfirmationPage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          Name: {purchaseInfo.name}
+          Nombre: {purchaseInfo.name}
         </li>
         <li
           className={`text-xl font-Inter my-4 font-bold ${
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          Surname: {purchaseInfo.surname}
+          Apellido: {purchaseInfo.surname}
         </li>
         <li
           className={`text-xl font-Inter my-4 font-bold ${
@@ -91,17 +91,17 @@ const ConfirmationPage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          Address: {purchaseInfo.address}
+          Direccion: {purchaseInfo.address}
         </li>
         <li className={`text-xl font-Montserrat my-4 text-sky-500`}>
-          Purchase ID: {purchaseID}
+          ID de compra: {purchaseID}
         </li>
         <li
           className={`text-xl font-Inter my-4 font-bold ${
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          Date: <span className="font-Montserrat">{formatedDate}</span>
+          Fecha: <span className="font-Montserrat">{formatedDate}</span>
         </li>
       </ul>
 
@@ -111,7 +111,7 @@ const ConfirmationPage = () => {
             mode === "light" ? "text-gray-900" : "text-white"
           }`}
         >
-          Summary
+          Resumen
         </h2>
         <ul className="flex flex-col lg:w-[1200px] w-screen px-6 ">
           {infoCart.map((item) => (
@@ -143,7 +143,7 @@ const ConfirmationPage = () => {
                 mode === "light" ? "text-gray-900" : "text-sky-500"
               } `}
             >
-              Discounts: ${(priceListCart - priceCart).toFixed(2)}
+              Descuentos: ${(priceListCart - priceCart).toFixed(2)}
             </span>
           ) : null}
 
@@ -152,14 +152,14 @@ const ConfirmationPage = () => {
               mode === "light" ? "text-gray-900" : "text-sky-500"
             } `}
           >
-            Total Cart: ${priceCart}
+            Precio Final: ${priceCart}
           </span>
           <span
             className={` text-xl lg:text-4xl font-Montserrat text-center my-10  ${
               mode === "light" ? "text-gray-900" : "text-sky-500"
             } `}
           >
-            Total Items: {quantityCart}
+            Items: {quantityCart}
           </span>
           <Link to="/">
           <Button className="mb-20" size="md" type="default">Back to Home</Button>
