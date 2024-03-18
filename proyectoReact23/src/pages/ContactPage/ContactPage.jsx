@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { ModeContext } from "../../context/modeContext";
 
-import { Label, TextInput } from "keep-react";
-import { Button } from "keep-react";
+import { Label, Input, Button } from "keep-react";
+
 
 import { Envelope } from "phosphor-react";
 import { Dropdown } from "keep-react";
@@ -42,7 +42,7 @@ const ContactPage = () => {
       <form action="contact" method="post">
         <div>
           <Label htmlFor="#id-2" value="Your Name" className="text-sky-400" />
-          <TextInput
+          <Input
             id="#id-2"
             placeholder="Your Name"
             color="info"
@@ -57,7 +57,7 @@ const ContactPage = () => {
             value="Your Surname"
             className="text-sky-400"
           />
-          <TextInput
+          <Input
             id="#id-2"
             placeholder="Your Surname"
             color="info"
@@ -72,7 +72,7 @@ const ContactPage = () => {
             htmlFor="#id-2"
             value="Your Email"
           />
-          <TextInput
+          <Input
             id="#id-2"
             placeholder="Your Email"
             color="info"

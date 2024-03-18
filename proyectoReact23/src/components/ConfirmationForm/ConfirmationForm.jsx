@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 
 // Componentes
 
-import { Modal, Button } from "keep-react";
+import { Modal, Button, Typography } from "keep-react";
 import { CloudArrowUp } from "phosphor-react";
 
 //Firestore
@@ -58,30 +58,34 @@ export const ModalComponent = ({
   };
   
 
-  return (
+  
+      return (
     <>
-      <Modal
-        icon={<CloudArrowUp size={28} color="#1B4DFF" />}
-        size="md"
-        show={showModal}
-        position="center"
-      >
-        <Modal.Header>¿Quieres confirmar la informacion ingresada??</Modal.Header>
-        <Modal.Body>
-          <div className="space-y-6">
-            <p className="text-body-5 md:text-body-4 leading-relaxed text-metal-500">
-             La informacion brindada debe ser correcta y precisa para poder enviar la factura e informacion de los juegos via email.
-            </p>
-          </div>
+      
+      <Modal isOpen={showModal} >
+        <Modal.Body className="space-y-3">
+          <Modal.Icon>
+            <CloudArrowUp size={28} color="#1B4DFF" />
+          </Modal.Icon>
+          <Modal.Content>
+            <Typography variant="div" className="!mb-6">
+              <Typography variant="h3" className="mb-2 text-body-1 font-medium text-metal-900">
+                ¿Confirmar Compra?
+              </Typography>
+              <Typography variant="p" className="text-body-4 font-normal text-metal-600">
+                Es extremadamente importante la veracidad de los datos ingresados a fin de enviarle la informacion de su compra por mail
+              </Typography>
+            </Typography>
+          </Modal.Content>
+          <Modal.Footer>
+            <Button onClick={onClickDecline} size="sm" variant="outline" color="secondary">
+              Cancel
+            </Button>
+            <Button onClick={onClickConfirm} size="sm" color="primary">
+              Confirm
+            </Button>
+          </Modal.Footer>
         </Modal.Body>
-        <Modal.Footer>
-          <Button type="outlineGray" onClick={onClickDecline}>
-            Cancelar
-          </Button>
-          <Button type="primary" onClick={onClickConfirm}>
-            Confirmar
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

@@ -16,7 +16,8 @@ import { Button } from "keep-react";
 const DetailPage = () => {
   let { id } = useParams();
   const { mode } = useContext(ModeContext);
-  const {shoppingCart, setShoppingCart, counterStock, setCounterStock} = useContext(ShoppingCartContext);
+  const { shoppingCart, setShoppingCart, counterStock, setCounterStock } =
+    useContext(ShoppingCartContext);
 
   const [gamesData, setGamesData] = useState({});
   const [spinner, setSpinner] = useState(true);
@@ -31,7 +32,7 @@ const DetailPage = () => {
     consolas,
     discountPrice,
   } = gamesData;
-  
+
   const [isFav, setIsFav] = useState(false);
 
   const [item, setItem] = useState({});
@@ -68,7 +69,7 @@ const DetailPage = () => {
         platform: platform,
         discountPrice: discountPrice,
       };
-      setItem(item);
+      setItem(newitem);
       e.preventDefault();
 
       const duplicatedItem = shoppingCart.findIndex(
@@ -85,14 +86,8 @@ const DetailPage = () => {
       } else {
         setShoppingCart((prevCart) => [...prevCart, newitem]);
       }
-
-      
     }
   };
-
-  useEffect(() => {
-    console.log(shoppingCart);
-  }, [shoppingCart]);
 
   const handleCounterUp = () => {
     setCounterStock(counterStock + 1);
@@ -128,7 +123,11 @@ const DetailPage = () => {
       } lg:mt-48 px-6 w-screen`}
     >
       <div className="flex flex-col lg:flex-row w-full items-center text-center">
-        <img className="w-auto md:h-[600px] lg:h-[600px]" src={img} alt={name} />
+        <img
+          className="w-auto md:h-[600px] lg:h-[600px]"
+          src={img}
+          alt={name}
+        />
         <div className="flex flex-col h-full  items-center">
           <h1
             className={`font-Montserrat text-3xl px-10 hover:bg-black hover:text-white mt-10 lg:text-5xl ${
@@ -270,12 +269,12 @@ const DetailPage = () => {
               <button
                 type="button"
                 className="hover:animate-pulse "
-                onMouseUp={handleShoppingCart}
+                onClick={handleShoppingCart}
               >
                 {counterStock > 0 && platform !== "" ? (
                   <NotificationComponent />
                 ) : (
-                  <Button size="md" type="outlineGray">
+                  <Button color="secondary" variant="outline">
                     Agregar al Carrito
                   </Button>
                 )}

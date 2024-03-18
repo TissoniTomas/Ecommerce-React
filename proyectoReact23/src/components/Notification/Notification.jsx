@@ -4,30 +4,24 @@ import { useState } from 'react'
 // Components
 import { Button, Notification } from 'keep-react'
 
+
+
 export const NotificationComponent = () => {
-  //Hooks
-  const [showNotification, setShowNotification] = useState(true)
-//Funciones
-  const onDismiss = () => {
-    setShowNotification(false)
-    
- setTimeout(()=>{
-     setShowNotification(true)
- },1500)
-  }
+  const [isOpen, setIsOpen] = useState(false)
+  const control = () => setIsOpen(!isOpen)
+
+  setTimeout(()=> setIsOpen(false),3000)
+
   return (
-    <div>
-      <Button onClick={onDismiss} className='bg-sky-500 text-white hover:text-blue-600' >
-        Agregar al Carrito
-      </Button>
-      <Notification dismiss={showNotification} >
+    <div className="px-5 py-3">
+      <Button onClick={control}>Agregar al Carrito</Button>
+      <Notification isOpen={isOpen} onClose={control}>
         <Notification.Body>
-          <Notification.Title>Producto Agregado con Exito</Notification.Title>
-       
-          <Notification.Container className="!mt-6 flex gap-3">
+          <Notification.Content>
+            <Notification.Title>Producto Agregado con Exito</Notification.Title>
            
-          
-          </Notification.Container>
+          </Notification.Content>
+         
         </Notification.Body>
       </Notification>
     </div>

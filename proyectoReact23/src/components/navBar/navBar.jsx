@@ -245,7 +245,7 @@ const NavBar = () => {
 
             <span
               className={` ${
-                mode === "light" ? "text-gray-900 " : "text-white "
+                mode === "light" ? "text-gray-900 " : "text-red-500 "
               } lg:text-3xl `}
             >
               {shoppingCart.length >= 1 ? shoppingCart.length : null}
